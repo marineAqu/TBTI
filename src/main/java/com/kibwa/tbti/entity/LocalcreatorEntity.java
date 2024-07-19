@@ -15,7 +15,7 @@ import lombok.Setter;
 @Setter
 @Getter
 @Table(name = "localcreator")
-public class localcreatorEntity {
+public class LocalcreatorEntity {
     @Id // pk 지정
     @GeneratedValue(strategy = GenerationType.IDENTITY) // auto_increment
     private int store_id;
