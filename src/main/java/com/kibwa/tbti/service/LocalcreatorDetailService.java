@@ -14,7 +14,7 @@ public class LocalcreatorDetailService {
     private final LocalcreatorRepository localcreatorRepository;
 
     public LocalcreatorDTO SearchByStoreId(int store_id) {
-        LocalcreatorEntity localcreatorEntity = localcreatorRepository.findByStore_id(store_id);
+        LocalcreatorEntity localcreatorEntity = localcreatorRepository.findByStoreId(store_id);
 
         LocalcreatorDTO localcreatorDTO = LocalcreatorDTO.toLocalcreatorDTO(localcreatorEntity);
 

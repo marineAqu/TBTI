@@ -7,5 +7,5 @@ import org.springframework.data.jpa.repository.JpaRepository;
  * 작성자: 김도연
  **/
 public interface LocalcreatorRepository extends JpaRepository<LocalcreatorEntity, Integer> {
-    LocalcreatorEntity findByStore_id(int store_id);
+    LocalcreatorEntity findByStoreId(int store_id);
 }

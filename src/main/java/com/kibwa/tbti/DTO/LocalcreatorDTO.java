@@ -30,13 +30,13 @@ public class LocalcreatorDTO {
         localcreatorDTO.setCategory(localcreatorEntity.getCategory());
         localcreatorDTO.setContact(localcreatorEntity.getContact());
         localcreatorDTO.setRating(localcreatorEntity.getRating());
-        localcreatorDTO.setStore_id(localcreatorEntity.getStore_id());
-        localcreatorDTO.setStore_name(localcreatorEntity.getStore_name());
+        localcreatorDTO.setStore_id(localcreatorEntity.getStoreId());
+        localcreatorDTO.setStore_name(localcreatorEntity.getStoreName());
         localcreatorDTO.setWebsite(localcreatorEntity.getWebsite());
-        localcreatorDTO.setHidden_category(localcreatorEntity.getHidden_category());
-        localcreatorDTO.setDetail_address(localcreatorEntity.getDetail_address());
-        localcreatorDTO.setAddress_category_2(localcreatorEntity.getAddress_category_2());
-        localcreatorDTO.setAddress_category_1(localcreatorDTO.getAddress_category_1());
+        localcreatorDTO.setHidden_category(localcreatorEntity.getHiddenCategory());
+        localcreatorDTO.setDetail_address(localcreatorEntity.getDetailAddress());
+        localcreatorDTO.setAddress_category_2(localcreatorEntity.getAddressCategory2());
+        localcreatorDTO.setAddress_category_1(localcreatorEntity.getAddressCategory1());
 
         return localcreatorDTO;
     }

@@ -18,13 +18,13 @@ import lombok.Setter;
 public class LocalcreatorEntity {
     @Id // pk 지정
     @GeneratedValue(strategy = GenerationType.IDENTITY) // auto_increment
-    private int store_id;
+    private int storeId;
 
     @Column
-    private String store_name;
+    private String storeName;
 
     @Column
-    private String detail_address;
+    private String detailAddress;
 
     @Column
     private String category;
@@ -36,14 +36,14 @@ public class LocalcreatorEntity {
     private String website;
 
     @Column
-    private String address_category_1;
+    private String addressCategory1;
 
     @Column
-    private String address_category_2;
+    private String addressCategory2;
 
     @Column
     private long rating;
 
     @Column
-    private char hidden_category;
+    private char hiddenCategory;
 }
