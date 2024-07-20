@@ -1,28 +1,26 @@
 package com.kibwa.tbti.controller;
 
+import com.kibwa.tbti.entity.LocalcreatorEntity;
+import com.kibwa.tbti.service.LocalcreatorDetailService;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 /**
  * 파일명: localcreatorDetailController
  * 작성자: 김도연
  **/
 @Controller
+@RequiredArgsConstructor
 public class LocalcreatorDetailController {
-
+    private final LocalcreatorDetailService localcreatorDetailService;
     @GetMapping("/api/localcreator_detail")
-    public String homePage(Model model) {
-//
-//        MemlistEntity user = memberService.findByMember(uid);
-//
-//        model.addAttribute("user", user);
-//
-//        //이하 김도연 작성: 날짜를 계산하여 하루 단위로 다른 오늘의 주제를 띄움
-//        long daysDifference = ChronoUnit.DAYS.between(LocalDate.of(2023, 11, 19), LocalDate.now());
-//
-//        TodaytopicEntity todaytopicEntity= todaytopicRepository.findByNo(daysDifference);
-//        model.addAttribute("topic", todaytopicEntity.getTopic());
+    public String homePage(@RequestParam("store_id") int store_id,
+                           Model model) {
+
+        model.addAttribute("localcreator", localcreatorDetailService.SearchByStoreId(store_id));
 
         return "localcreator_detail";
     }
