@@ -7,36 +7,41 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import lombok.*;
 
+/**
+ * 파일명: LocalcreatorDTO
+ * 작성자: 김도연
+ **/
+
 @Getter
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
 @ToString
 public class LocalcreatorDTO {
-    private int store_id;
-    private String store_name;
-    private String detail_address;
+    private int storeId;
+    private String storeName;
+    private String detailAddress;
     private String category;
     private String contact;
     private String website;
-    private String address_category_1;
-    private String address_category_2;
+    private String addressCategory1;
+    private String addressCategory2;
     private long rating;
-    private char hidden_category;
+    private char hiddenCategory;
 
     public static LocalcreatorDTO toLocalcreatorDTO(LocalcreatorEntity localcreatorEntity){
         LocalcreatorDTO localcreatorDTO = new LocalcreatorDTO();
 
+        localcreatorDTO.setStoreId(localcreatorEntity.getStoreId());
+        localcreatorDTO.setStoreName(localcreatorEntity.getStoreName());
+        localcreatorDTO.setDetailAddress(localcreatorEntity.getDetailAddress());
         localcreatorDTO.setCategory(localcreatorEntity.getCategory());
         localcreatorDTO.setContact(localcreatorEntity.getContact());
-        localcreatorDTO.setRating(localcreatorEntity.getRating());
-        localcreatorDTO.setStore_id(localcreatorEntity.getStoreId());
-        localcreatorDTO.setStore_name(localcreatorEntity.getStoreName());
         localcreatorDTO.setWebsite(localcreatorEntity.getWebsite());
-        localcreatorDTO.setHidden_category(localcreatorEntity.getHiddenCategory());
-        localcreatorDTO.setDetail_address(localcreatorEntity.getDetailAddress());
-        localcreatorDTO.setAddress_category_2(localcreatorEntity.getAddressCategory2());
-        localcreatorDTO.setAddress_category_1(localcreatorEntity.getAddressCategory1());
+        localcreatorDTO.setAddressCategory1(localcreatorEntity.getAddressCategory1());
+        localcreatorDTO.setAddressCategory2(localcreatorEntity.getAddressCategory2());
+        localcreatorDTO.setRating(localcreatorEntity.getRating());
+        localcreatorDTO.setHiddenCategory(localcreatorEntity.getHiddenCategory());
 
         return localcreatorDTO;
     }
