@@ -5,8 +5,14 @@ import com.kibwa.tbti.entity.LocalcreatorEntity;
 import com.kibwa.tbti.repository.LocalcreatorRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
-
+import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
+
+/**
+ * 파일명: LocalcreatorDetailService
+ * 작성자: 김도연
+ **/
 
 @Service
 @RequiredArgsConstructor
@@ -19,5 +25,15 @@ public class LocalcreatorDetailService {
         LocalcreatorDTO localcreatorDTO = LocalcreatorDTO.toLocalcreatorDTO(localcreatorEntity);
 
         return localcreatorDTO;
+    }
+
+    public List<LocalcreatorDTO> search_localcreator(String searchInput) {
+        List<LocalcreatorEntity> localcreatorEntity = localcreatorRepository.findByStoreNameLike(searchInput);
+
+        List<LocalcreatorDTO> mav = localcreatorEntity.stream()
+                .map(LocalcreatorDTO::toLocalcreatorDTO) //.map(entity -> LocalcreatorDTO.toLocalcreatorDTO(entity)) //람다를 메서드 참조로 바꿈
+                .toList();
+
+        return mav;
     }
 }
