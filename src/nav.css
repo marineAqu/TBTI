@@ -1,0 +1,151 @@
+.GNB {
+    background-color: #ffffff;
+    height: 115px;
+    position: relative;
+    width: 1440px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.GNB .LOGO {
+    left: 99px;
+    letter-spacing: 0;
+    line-height: normal;
+    position: absolute;
+    text-align: center;
+    top: 23px;
+    width:77px;
+    height:77px;
+}
+
+.GNB .LOGO .logo {
+    max-width: 100%;
+    max-height: 100%;
+}
+
+.GNB .frame {
+    align-items: center;
+    display: inline-flex;
+    gap: 59px;
+    justify-content: center;
+    left: 758px;
+    position: absolute;
+    top: 41px;
+}
+
+.GNB .text-wrapper {
+    color: #000000;
+    font-size: 22px;
+    font-weight: 600;
+    letter-spacing: 0;
+    line-height: normal;
+    margin-top: -1px;
+    position: relative;
+    width: fit-content;
+    text-decoration: none; /*링크 스타일*/
+}
+
+.GNB .text-wrapper:hover {
+    color: #a39c9c;
+}
+
+.GNB .group {
+    height: 66px;
+    left: 251px;
+    position: absolute;
+    top: 24px;
+    width: 427px;
+}
+
+.GNB .overlap-group {
+    background-color: #ffffff;
+    border: 1px solid;
+    border-color: #000000;
+    border-radius: 40px;
+    height: 66px;
+    position: relative;
+    width: 425px;
+}
+
+.GNB .loupe {
+    height: 40px;
+    left: 365px;
+    object-fit: cover;
+    position: absolute;
+    top: 12px;
+    width: 39px;
+}
+
+.GNB .text {
+    font-size: 20px;
+    font-weight: 400;
+    left: 37px;
+    letter-spacing: 0;
+    line-height: 30px;
+    position: absolute;
+    top: 19px;
+    width: 349px;
+}
+
+.GNB .div-wrapper {
+    align-items: center;
+    border: 1px solid;
+    border-color: #000000;
+    border-radius: 43px;
+    display: inline-flex;
+    gap: 10px;
+    justify-content: center;
+    left: 1225px;
+    padding: 3px 18px;
+    position: absolute;
+    top: 35px;
+}
+
+.GNB .div-wrapper .text-wrapper {
+    color: #000000;
+    font-size: 22px;
+    font-weight: 600;
+    letter-spacing: 0;
+    line-height: normal;
+    text-decoration: none; /* 링크 스타일 */
+}
+
+@media (max-width: 768px) {
+    .GNB {
+        flex-direction: column;
+        height: auto;
+        padding: 10px;
+    }
+
+    .GNB .LOGO,
+    .GNB .group,
+    .GNB .div-wrapper {
+        flex-basis: auto;
+    }
+
+    .GNB .frame {
+        flex-direction: column;
+        gap: 10px;
+        flex-basis: auto;
+    }
+
+    .GNB .text-wrapper {
+        font-size: 18px; /* 글자 크기 조정 */
+    }
+
+    .GNB .overlap-group {
+        width: auto;
+    }
+}
+
+@media (max-width: 480px) {
+    .GNB {
+        padding: 5px;
+    }
+
+    .GNB .text-wrapper {
+        font-size: 16px; /* 글자 크기 조정 */
+    }
+}
+
