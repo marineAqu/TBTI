@@ -1,5 +1,6 @@
 package com.kibwa.tbti.controller;
 
+import com.kibwa.tbti.DTO.LocalcreatorDTO;
 import com.kibwa.tbti.service.LocalcreatorDetailService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
@@ -16,20 +17,22 @@ import org.springframework.web.bind.annotation.RequestParam;
 public class LocalcreatorDetailController {
     private final LocalcreatorDetailService localcreatorDetailService;
     @GetMapping("/api/localcreator_detail")
-    public String localcreator_detail(@RequestParam("store_id") int store_id,
-                           Model model) {
+    public LocalcreatorDTO localcreator_detail(@RequestParam("storeId") int store_id) {
 
-        model.addAttribute("localcreator", localcreatorDetailService.SearchByStoreId(store_id));
+        LocalcreatorDTO localcreatorDTO = localcreatorDetailService.SearchByStoreId(store_id);
+        System.out.print(localcreatorDTO);
 
-        return "localcreator_detail";
+        return localcreatorDTO;
     }
 
+    /*
     @GetMapping("/api/search_localcreator")
     public String search_localcreator(@RequestParam("searchInput") String searchInput,
                            Model model) {
 
-        model.addAttribute("localcreator_list", localcreatorDetailService.search_localcreator(searchInput));
+        model.addAttribute("localcreatorList", localcreatorDetailService.search_localcreator(searchInput));
 
         return "search_localcreator";
     }
+     */
 }
