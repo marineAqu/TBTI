@@ -11,11 +11,13 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.HashMap;
+import java.util.List;
 
 /**
  * 파일명: localcreatorDetailController
  * 작성자: 김도연
  **/
+
 @RestController
 @RequiredArgsConstructor
 @CrossOrigin(origins = "http://localhost:3000")
@@ -35,14 +37,15 @@ public class LocalcreatorDetailController {
         return response;
     }
 
-    /*
+
     @GetMapping("/api/search_localcreator")
-    public String search_localcreator(@RequestParam("searchInput") String searchInput,
-                           Model model) {
+    public HashMap<String, Object> search_localcreator(@RequestParam("searchInput") String searchInput) {
 
-        model.addAttribute("localcreatorList", localcreatorDetailService.search_localcreator(searchInput));
+        List<LocalcreatorDTO> localcreatorDTOList = localcreatorDetailService.search_localcreator(searchInput);
+        HashMap<String, Object> response = new HashMap<>();
+        response.put("localcreatorDTOList", localcreatorDTOList);
 
-        return "search_localcreator";
+        return response;
     }
-     */
+
 }
