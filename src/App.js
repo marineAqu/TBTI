@@ -8,7 +8,7 @@ import Travel from "./pages/Travel";
 import Domestic from "./pages/Domestic";
 import Festival from "./pages/Festival";
 import Login from "./pages/login/Login";
-import Detail2 from "./pages/detail/detail";
+import Detail2 from "./pages/detail/detail2";
 
 function App() {
     return (
