@@ -1,3 +1,4 @@
+/*GNB CSS*/
 .GNB {
     background-color: #ffffff;
     height: 115px;
@@ -149,3 +150,69 @@
     }
 }
 
+/*FNB CSS*/
+.FNB {
+    background-color: #ffffff;
+    height: 60px;
+    width: 100%;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 -2px 5px rgba(0,0,0,0.1);
+    z-index: 1000;
+    transform: translateY(0%);
+}
+
+.FNB .content {
+    align-items: center;
+    display: flex;
+    gap: 32px;
+    width: 100%;
+    max-width: 1216px;
+    padding: 0 20px;
+    box-sizing: border-box;
+    justify-content: space-between;
+}
+
+.FNB .footer-text {
+    align-items: center;
+    color: #000000;
+    font-size: 16px;
+    font-weight: 600;
+    letter-spacing: 0;
+    /*margin-top: -1px;*/
+    position: relative;
+    flex: 1;
+}
+
+.FNB .icon {
+    width: 24px;
+    height: 24px;
+    position: relative;
+}
+
+/* 미디어 쿼리 */
+@media (max-width: 768px) {
+    .FNB {
+        height: auto;
+        padding: 10px 0;
+    }
+
+    .FNB .content {
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+    }
+
+    .FNB .footer-text {
+        font-size: 18px;
+        margin-bottom: 10px;
+    }
+
+    .FNB .icon {
+        margin-top: 10px;
+    }
+}

@@ -1,0 +1,113 @@
+.detailPage {
+    background-color: #ffffff;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    width: 100%;
+}
+
+.detailPage .div {
+    background-color: #ffffff;
+    height: 1024px;
+    position: relative;
+    width: 1440px;
+}
+
+.detailPage .Imgex {
+    background-size: cover; /* 이미지 비율 유지 */
+    height: 500px;
+    left: 136px;
+    position: absolute;
+    top: 240px;
+    width: 500px;
+    border: 2px solid black;
+}
+
+.detailPage .overlap-wrapper {
+    height: 60px;
+    position: absolute; /* 절대 위치로 변경 */
+    top: 421px;
+    left: 182px;
+    width: 139px;
+}
+
+.detailPage .overlap-2 {
+    height: 60px;
+    position: relative;
+    width: 137px;
+}
+
+.detailPage .rectangle {
+    background-color: #818181b2;
+    border-radius: 30px;
+    height: 40px;
+    width: 137px;
+    position: absolute;
+    top: 10px;
+    left: 0;
+}
+
+.detailPage .text-wrapper-2 {
+    color: #000000;
+    font-size: 30px;
+    font-weight: 400;
+    line-height: 60px;
+    position: absolute;
+    top: 0;
+    left: 49px;
+}
+
+.detailPage .overlap-group-wrapper {
+    height: 50px;
+    position: relative;
+    top: 141px;
+    left: 124px;
+    width: 100%;
+}
+
+.detailPage .overlap-group-2 {
+    display: flex;
+    align-items: center;
+    height: 50px;
+    width: 157px;
+}
+
+.detailPage .arrow {
+    height: 30px;
+    width: 30px;
+    margin-right: 10px;
+}
+
+.detailPage .text-wrapper-3 {
+    color: #000000;
+    font-size: 40px;
+    font-weight: 400;
+    line-height: 24.7px;
+}
+
+.detailPage .text-wrapper-4 {
+    color: #000000;
+    font-size: 40px;
+    font-weight: 700;
+    position: absolute;
+    top: 239px;
+    left: 686px;
+}
+
+.detailPage .link {
+    height: 41px;
+    position: absolute;
+    top: 229px;
+    left: 1257px;
+    width: 41px;
+}
+
+.detailPage .element-https {
+    color: #000000;
+    font-size: 24px;
+    font-weight: 400;
+    position: absolute;
+    top: 310px;
+    left: 709px;
+    line-height: 60px;
+}
