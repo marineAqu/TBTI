@@ -8,7 +8,8 @@ import Travel from "./pages/Travel";
 import Domestic from "./pages/Domestic";
 import Festival from "./pages/Festival";
 import Login from "./pages/login/Login";
-import Detail2 from "./pages/detail/detail2";
+import Detail from "./pages/detail/detail";
+import Main from "./pages/Main";
 
 function App() {
     return (
@@ -21,7 +22,8 @@ function App() {
                 <Route path="/domestic" element={<Domestic />} />
                 <Route path="/festival" element={<Festival />} />
                 <Route path="/login" element={<Login />} />
-                <Route path="/detail/:storeId" element={<Detail2 />} />
+                <Route path="/detail/:storeId" element={<Detail />} />
+                <Route path="/main" element={<Main />} />
             </Routes>
 
             <footer>
