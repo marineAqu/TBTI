@@ -1,6 +1,7 @@
 package com.kibwa.tbti.controller;
 
 import com.kibwa.tbti.DTO.LocalcreatorDTO;
+import com.kibwa.tbti.DTO.LocalcreatorSearchProjection;
 import com.kibwa.tbti.service.LocalcreatorDetailService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
@@ -32,7 +33,6 @@ public class LocalcreatorDetailController {
 
         HashMap<String, Object> response = new HashMap<>();
         response.put("localcreator", localcreatorDTO);
-        //response.put("temp", 1);
 
         return response;
     }
@@ -41,9 +41,9 @@ public class LocalcreatorDetailController {
     @GetMapping("/api/search_localcreator")
     public HashMap<String, Object> search_localcreator(@RequestParam("searchInput") String searchInput) {
 
-        List<LocalcreatorDTO> localcreatorDTOList = localcreatorDetailService.search_localcreator(searchInput);
+        List<LocalcreatorSearchProjection> localcreatorList = localcreatorDetailService.search_localcreator(searchInput);
         HashMap<String, Object> response = new HashMap<>();
-        response.put("localcreatorDTOList", localcreatorDTOList);
+        response.put("localcreatorList", localcreatorList);
 
         return response;
     }
