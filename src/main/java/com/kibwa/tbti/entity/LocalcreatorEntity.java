@@ -46,4 +46,7 @@ public class LocalcreatorEntity {
 
     @Column
     private char hiddenCategory;
+
+    @Column
+    private String business_hours;
 }
