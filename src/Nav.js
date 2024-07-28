@@ -8,7 +8,7 @@ export const Nav = () => {
 
             <div className="LOGO">
 
-                <Link to="/detail">
+                <Link to="/main">
                 <img className="logo" alt="logo" src="/image/logo.png" />
                 </Link>
 

@@ -1,39 +1,24 @@
-import React, { useEffect, useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import "./detail.css";
 
 const Detail = () => {
     const { storeId } = useParams();
-    const [data, setData] = useState(null);
-    const [loading, setLoading] = useState(true);
+    const [data, setData] = useState([]);
 
     useEffect(() => {
         const fetchData = async () => {
             try {
                 const response = await fetch(`/api/localcreator_detail?storeId=${storeId}`);
-                if (!response.ok) {
-                    throw new Error("Network response was not ok");
-                }
-                const jsonData = await response.json();
-                setData(jsonData);
-                console.log('API Response:', jsonData);
+                const result = await response.json();
+                setData(result.localcreator);
+                console.log('응답 데이터:', result);
             } catch (error) {
-                console.error('Error fetching JSON:', error);
-            } finally {
-                setLoading(false);
+                console.error('오류:', error);
             }
         };
-
         fetchData();
     }, [storeId]);
-
-    if (loading) {
-        return <div>Loading...</div>;
-    }
-
-    if (!data) {
-        return <div>No data found</div>;
-    }
 
     return (
         <div className="detailPage">
@@ -61,9 +46,9 @@ const Detail = () => {
                 <img className="link" alt="link" src="/image/link.png" id="website" />
 
                 <p className="element-https" id="contact">
-                    {data.contact ? data.contact : '연락처 정보 없음'}
+                    {data.contact}
                     <br />
-                    {data.website ? <a href={data.website} id="website">{data.website}</a> : '웹사이트 정보 없음'}
+                    {data.website}
                     <br />
                     {data.detailAddress}
                 </p>
