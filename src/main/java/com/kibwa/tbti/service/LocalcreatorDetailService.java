@@ -1,6 +1,7 @@
 package com.kibwa.tbti.service;
 
 import com.kibwa.tbti.DTO.LocalcreatorDTO;
+import com.kibwa.tbti.DTO.LocalcreatorSearchProjection;
 import com.kibwa.tbti.entity.LocalcreatorEntity;
 import com.kibwa.tbti.repository.LocalcreatorRepository;
 import lombok.RequiredArgsConstructor;
@@ -27,13 +28,9 @@ public class LocalcreatorDetailService {
         return localcreatorDTO;
     }
 
-    public List<LocalcreatorDTO> search_localcreator(String searchInput) {
-        List<LocalcreatorEntity> localcreatorEntity = localcreatorRepository.findByStoreNameLike(searchInput);
+    public List<LocalcreatorSearchProjection> search_localcreator(String searchInput) {
+        List<LocalcreatorSearchProjection> localcreatorList = localcreatorRepository.findByStoreNameLike(searchInput);
 
-        List<LocalcreatorDTO> mav = localcreatorEntity.stream()
-                .map(LocalcreatorDTO::toLocalcreatorDTO) //.map(entity -> LocalcreatorDTO.toLocalcreatorDTO(entity)) //람다를 메서드 참조로 바꿈
-                .toList();
-
-        return mav;
+        return localcreatorList;
     }
 }
