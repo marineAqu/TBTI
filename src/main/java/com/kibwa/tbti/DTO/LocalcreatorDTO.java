@@ -28,6 +28,7 @@ public class LocalcreatorDTO {
     private String addressCategory2;
     private long rating;
     private char hiddenCategory;
+    private String business_hours;
 
     public static LocalcreatorDTO toLocalcreatorDTO(LocalcreatorEntity localcreatorEntity){
         LocalcreatorDTO localcreatorDTO = new LocalcreatorDTO();
@@ -42,6 +43,7 @@ public class LocalcreatorDTO {
         localcreatorDTO.setAddressCategory2(localcreatorEntity.getAddressCategory2());
         localcreatorDTO.setRating(localcreatorEntity.getRating());
         localcreatorDTO.setHiddenCategory(localcreatorEntity.getHiddenCategory());
+        localcreatorDTO.setBusiness_hours(localcreatorEntity.getBusiness_hours());
 
         return localcreatorDTO;
     }
