@@ -17,8 +17,14 @@ public class ReviewEntity {
     private int reviewId;
 
     @Column
-    private String review_content;
+    private String reviewContent;
 
     @Column
     private double rate;
+
+    @Column
+    private int storeId;
+
+    @Column
+    private int memberId;
 }
