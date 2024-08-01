@@ -13,6 +13,7 @@ import java.util.stream.Collectors;
 /**
  * 파일명: LocalcreatorDetailService
  * 작성자: 김도연
+ * 설명: 로컬크리에이터 상세정보 서비스
  **/
 
 @Service
@@ -26,11 +27,5 @@ public class LocalcreatorDetailService {
         LocalcreatorDTO localcreatorDTO = LocalcreatorDTO.toLocalcreatorDTO(localcreatorEntity);
 
         return localcreatorDTO;
-    }
-
-    public List<LocalcreatorSearchProjection> search_localcreator(String searchInput) {
-        List<LocalcreatorSearchProjection> localcreatorList = localcreatorRepository.findByStoreNameLike(searchInput);
-
-        return localcreatorList;
     }
 }

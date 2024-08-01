@@ -4,12 +4,8 @@ import com.kibwa.tbti.DTO.LocalcreatorDTO;
 import com.kibwa.tbti.DTO.LocalcreatorSearchProjection;
 import com.kibwa.tbti.service.LocalcreatorDetailService;
 import lombok.RequiredArgsConstructor;
-import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.HashMap;
 import java.util.List;
@@ -17,6 +13,7 @@ import java.util.List;
 /**
  * 파일명: localcreatorDetailController
  * 작성자: 김도연
+ * 설명: 로컬크리에이터 상세 정보 페이지 api 컨트롤러
  **/
 
 @RestController
@@ -37,13 +34,17 @@ public class LocalcreatorDetailController {
         return response;
     }
 
+    @PostMapping("/api/post_review")
+    public HashMap<String, Object> post_review( //@AuthenticationPrincipal UserDetails userDetails,
+                                                @RequestParam("storeId") int store_id,
+                                               @RequestParam("reviewContent") String reviewContent,
+                                               @RequestParam("starPoint") double starPoint) {
 
-    @GetMapping("/api/search_localcreator")
-    public HashMap<String, Object> search_localcreator(@RequestParam("searchInput") String searchInput) {
+        //TODO: 로그인, 회원가입 기능 추가 후 AuthenticationPrincipal 주석 해제 및 userDetails.getUsername()으로 사용자 아이디 가져오기
 
-        List<LocalcreatorSearchProjection> localcreatorList = localcreatorDetailService.search_localcreator(searchInput);
+
         HashMap<String, Object> response = new HashMap<>();
-        response.put("localcreatorList", localcreatorList);
+        response.put("status", "success");
 
         return response;
     }
