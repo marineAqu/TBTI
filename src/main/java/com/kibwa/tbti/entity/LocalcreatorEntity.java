@@ -42,7 +42,7 @@ public class LocalcreatorEntity {
     private String addressCategory2;
 
     @Column
-    private long rating;
+    private double rating;
 
     @Column
     private char hiddenCategory;

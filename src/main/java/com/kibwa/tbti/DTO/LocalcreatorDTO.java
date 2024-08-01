@@ -26,7 +26,7 @@ public class LocalcreatorDTO {
     private String website;
     private String addressCategory1;
     private String addressCategory2;
-    private long rating;
+    private double rating;
     private char hiddenCategory;
     private String business_hours;
 
