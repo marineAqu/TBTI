@@ -19,14 +19,12 @@ public class SearchService {
     private final LocalcreatorRepository localcreatorRepository;
 
     public List<LocalcreatorSearchProjection> search_localcreator(String searchInput) {
-        List<LocalcreatorSearchProjection> localcreatorList = localcreatorRepository.findByStoreNameLike(searchInput);
 
-        return localcreatorList;
+        return localcreatorRepository.findByStoreNameLike(searchInput);
     }
 
     public List<LocalcreatorSearchProjection> search_region(String searchRegion) {
-        List<LocalcreatorSearchProjection> localcreatorList = localcreatorRepository.findByAddressCategory1Like(searchRegion);
 
-        return localcreatorList;
+        return localcreatorRepository.findByAddressCategory1Like(searchRegion);
     }
 }
