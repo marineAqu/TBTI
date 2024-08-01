@@ -7,9 +7,10 @@ package com.kibwa.tbti.DTO;
  **/
 
 public interface LocalcreatorSearchProjection {
+    int getStoreId();
     String getStoreName();
     String getDetailAddress();
     String getCategory();
-    String getPhone();
-    String getFirstAddress();
+    String getContact();
+    String getAddressCategory1();
 }
