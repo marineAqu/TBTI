@@ -10,6 +10,7 @@ import Festival from "./pages/Festival";
 import Login from "./pages/login/Login";
 import Detail from "./pages/detail/detail";
 import Main from "./pages/Main";
+import LocalSearch from "./pages/detail/LocalSearch";
 
 function App() {
     return (
@@ -18,12 +19,14 @@ function App() {
                 <Nav />
             </header>
             <Routes>
+                <Route path="/" element={<Main />} />
                 <Route path="/travel" element={<Travel />} />
                 <Route path="/domestic" element={<Domestic />} />
                 <Route path="/festival" element={<Festival />} />
                 <Route path="/login" element={<Login />} />
                 <Route path="/detail/:storeId" element={<Detail />} />
                 <Route path="/main" element={<Main />} />
+                <Route path="/LocalSearch" element={<LocalSearch />} />
             </Routes>
 
             <footer>

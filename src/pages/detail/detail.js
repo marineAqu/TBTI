@@ -13,12 +13,16 @@ const Detail = () => {
                 const result = await response.json();
                 setData(result.localcreator);
                 console.log('응답 데이터:', result);
+                // console.log('DescriptionEntity: '+ result.localcreator.description.description);
             } catch (error) {
                 console.error('오류:', error);
             }
         };
+
         fetchData();
+
     }, [storeId]);
+
 
     return (
         <div className="detailPage">
@@ -26,7 +30,7 @@ const Detail = () => {
                 <div className="Imgex">
                     <div className="overlap-wrapper">
                         <div className="overlap-2">
-                            <div className="rectangle" />
+                            <div className="rectangle"/>
                             <div className="text-wrapper-2">1/2</div>
                         </div>
                     </div>
@@ -34,7 +38,7 @@ const Detail = () => {
 
                 <div className="overlap-group-wrapper">
                     <div className="overlap-group-2">
-                        <img className="arrow" alt="left Arrow" src="/image/left-arrow.png" />
+                        <img className="arrow" alt="left Arrow" src="/image/left-arrow.png"/>
                         <div className="text-wrapper-3">{data.addressCategory1}</div>
                     </div>
                 </div>
@@ -43,15 +47,24 @@ const Detail = () => {
                     [{data.category}] {data.storeName}
                 </div>
 
-                <img className="link" alt="link" src="/image/link.png" id="website" />
+                <img className="link" alt="link" src="/image/link.png" id="website"/>
 
                 <p className="element-https" id="contact">
                     {data.contact}
-                    <br />
+                    <br/>
                     {data.website}
-                    <br />
+                    <br/>
                     {data.detailAddress}
                 </p>
+
+                <div className="review">
+                    <div className="reviewContent">
+                       리뷰 api 넣는 곳
+                    </div>
+                </div>
+
+
+
             </div>
         </div>
     );

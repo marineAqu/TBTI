@@ -1,17 +1,21 @@
 .detailPage {
     background-color: #ffffff;
     display: flex;
-    flex-direction: row;
-    justify-content: center;
-    width: 100%;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    min-height: 100vh;
+    overflow: auto;
+    padding-bottom: 100px;
 }
 
 .detailPage .div {
     background-color: #ffffff;
-    height: 1024px;
     position: relative;
-    width: 1440px;
+    width: 100%; /* 전체 너비 사용 */
+    max-width: 1440px; /* 최대 너비 설정 */
 }
+
 
 .detailPage .Imgex {
     background-size: cover; /* 이미지 비율 유지 */
@@ -110,4 +114,149 @@
     top: 310px;
     left: 709px;
     line-height: 60px;
+}
+
+.detailPage .review{
+    height:124px;
+    left:136px;
+    position:absolute;
+    top:777px;
+    width:1169px;
+    border: 1px solid;
+    border-radius: 20px;
+}
+
+.detailPage .reviewContent{
+    font-size: 24px;
+    font-weight:400;
+    left: 249px;
+    letter-spacing: 0;
+    line-height: 60px;
+    position: absolute;
+    top: 19px;
+
+}
+
+/*LocalSearch.js*/
+.container {
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+    position: relative;
+    width: 100%;
+    align-items: center;
+    justify-content: center;
+    top: 50px;
+    padding-bottom: 100px;
+}
+
+.container .area {
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    position: relative;
+    width: 1296px;
+}
+
+.container .category {
+    align-items: center;
+    display: flex;
+    flex: 0 0 auto;
+    position: relative;
+    gap: 10px;
+}
+
+.container .cate {
+    align-items: center;
+    border-radius: 8px;
+    display: inline-flex;
+    flex: 0 0 auto;
+    gap: 10px;
+    position: relative;
+    padding: 10px 16px;
+    font-size: 18px;
+    font-weight: 400;
+    letter-spacing: 0;
+    line-height: normal;
+    border: 1px solid;
+    border-color: #F1F1F3;
+    transition: background-color 0.3s ease;
+    cursor: pointer;
+}
+
+.container .cate:hover {
+    background-color: #c9c9c9; /* 회색으로 변경 */
+}
+
+.container .heading {
+    align-self: stretch;
+    font-size: 40px;
+    font-weight: 600;
+    letter-spacing: 0;
+    line-height: 60px;
+    margin-top: -1px;
+    position: relative;
+}
+
+.container .paragraph {
+    align-self: stretch;
+    font-size: 18px;
+    font-weight: 400;
+    letter-spacing: 0;
+    line-height: 27px;
+    position: relative;
+}
+
+.group {
+    height: 100%;
+    position: relative;
+    width: 1296px;
+}
+
+.box {
+    align-items: center;
+    border: 2px solid;
+    border-color: black;
+    display: flex;
+    flex-direction: column;
+    height: 531px;
+    left: 0;
+    padding: 21.73px;
+    position: relative; /* 위치를 relative로 수정 */
+    top: 50px;
+    width: 422px;
+}
+
+.image_box {
+    align-items: flex-start;
+    border: 2px solid;
+    display: flex;
+    flex-direction: column;
+    height: 300px;
+    width: 422px; /* position: absolute; 제거 */
+}
+
+.name {
+    align-items: flex-start;
+    display: flex;
+    flex-direction: column;
+    margin-top: 20px; /* 이미지 박스 아래로 밀어내기 위해 추가 */
+}
+
+.storename {
+    font-size: 25px;
+    font-weight: 700;
+    height: 25px;
+    letter-spacing: 1px;
+    line-height: 24.7px;
+    white-space: nowrap;
+}
+
+.store {
+    font-size: 19px;
+    font-weight: 400;
+    letter-spacing: 0;
+    line-height: 25.9px;
+    width: 364px;
 }
