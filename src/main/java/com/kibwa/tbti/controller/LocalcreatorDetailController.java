@@ -1,10 +1,9 @@
 package com.kibwa.tbti.controller;
 
 import com.kibwa.tbti.DTO.LocalcreatorDTO;
-import com.kibwa.tbti.DTO.LocalcreatorSearchProjection;
 import com.kibwa.tbti.service.LocalcreatorDetailService;
+import com.kibwa.tbti.service.StorageS3Service;
 import lombok.RequiredArgsConstructor;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.HashMap;
@@ -21,12 +20,16 @@ import java.util.List;
 @CrossOrigin(origins = "http://localhost:3000")
 public class LocalcreatorDetailController {
     private final LocalcreatorDetailService localcreatorDetailService;
+    private final StorageS3Service storageS3Service;
+
     @GetMapping("/api/localcreator_detail")
     public HashMap<String, Object> localcreator_detail(@RequestParam("storeId") int store_id) {
 
         LocalcreatorDTO localcreatorDTO = localcreatorDetailService.SearchByStoreId(store_id);
         System.out.print("localcreator_detail get api controller:");
         System.out.print(localcreatorDTO);
+
+        localcreatorDTO.setImg(storageS3Service.getImageURL(localcreatorDTO.getStoreName(), localcreatorDTO.getHiddenCategory()));
 
         HashMap<String, Object> response = new HashMap<>();
         response.put("localcreator", localcreatorDTO);
@@ -41,7 +44,7 @@ public class LocalcreatorDetailController {
                                                @RequestParam("starPoint") double starPoint) {
 
         //TODO: 로그인, 회원가입 기능 추가 후 AuthenticationPrincipal 주석 해제 및 userDetails.getUsername()으로 사용자 아이디 가져오기
-
+        localcreatorDetailService.postReview(store_id, reviewContent, starPoint);
 
         HashMap<String, Object> response = new HashMap<>();
         response.put("status", "success");
