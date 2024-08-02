@@ -1,7 +1,9 @@
 package com.kibwa.tbti.controller;
 
+import com.kibwa.tbti.DTO.LocalcreatorSearchDTO;
 import com.kibwa.tbti.DTO.LocalcreatorSearchProjection;
 import com.kibwa.tbti.service.SearchService;
+import com.kibwa.tbti.service.StorageS3Service;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -22,10 +24,12 @@ import java.util.List;
 @CrossOrigin(origins = "http://localhost:3000")
 public class SearchController {
     private final SearchService searchService;
+    private final StorageS3Service storageS3Service;
     @GetMapping("/api/search_localcreator")
     public HashMap<String, Object> search_localcreator(@RequestParam("searchInput") String searchInput) {
 
-        List<LocalcreatorSearchProjection> localcreatorList = searchService.search_localcreator(searchInput);
+        List<LocalcreatorSearchDTO> localcreatorList = searchService.search_localcreator(searchInput);
+
         HashMap<String, Object> response = new HashMap<>();
         response.put("localcreatorList", localcreatorList);
 
