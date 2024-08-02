@@ -13,4 +13,5 @@ public interface LocalcreatorSearchProjection {
     String getCategory();
     String getContact();
     String getAddressCategory1();
+    String[] getImg();
 }
