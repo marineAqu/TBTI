@@ -1,5 +1,6 @@
 package com.kibwa.tbti.DTO;
 
+import com.kibwa.tbti.entity.DescriptionEntity;
 import com.kibwa.tbti.entity.LocalcreatorEntity;
 import jakarta.persistence.Column;
 import jakarta.persistence.GeneratedValue;
@@ -26,8 +27,11 @@ public class LocalcreatorDTO {
     private String website;
     private String addressCategory1;
     private String addressCategory2;
-    private long rating;
+    private double rating;
     private char hiddenCategory;
+    private String business_hours;
+    private DescriptionEntity description;
+    private String[] img;
 
     public static LocalcreatorDTO toLocalcreatorDTO(LocalcreatorEntity localcreatorEntity){
         LocalcreatorDTO localcreatorDTO = new LocalcreatorDTO();
@@ -42,6 +46,8 @@ public class LocalcreatorDTO {
         localcreatorDTO.setAddressCategory2(localcreatorEntity.getAddressCategory2());
         localcreatorDTO.setRating(localcreatorEntity.getRating());
         localcreatorDTO.setHiddenCategory(localcreatorEntity.getHiddenCategory());
+        localcreatorDTO.setBusiness_hours(localcreatorEntity.getBusiness_hours());
+        localcreatorDTO.setDescription(localcreatorEntity.getDescription());
 
         return localcreatorDTO;
     }

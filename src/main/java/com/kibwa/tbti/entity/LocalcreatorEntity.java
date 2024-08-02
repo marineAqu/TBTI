@@ -42,8 +42,15 @@ public class LocalcreatorEntity {
     private String addressCategory2;
 
     @Column
-    private long rating;
+    private double rating;
 
     @Column
     private char hiddenCategory;
+
+    @Column
+    private String business_hours;
+
+    @ManyToOne
+    @JoinColumn(name = "storeId", referencedColumnName = "storeId", insertable = false, updatable = false)
+    private DescriptionEntity description;
 }
