@@ -27,4 +27,15 @@ public class ReviewEntity {
 
     @Column
     private int memberId;
+
+    public static ReviewEntity toReviewEntity(String reviewContent, double rate, int storeId, int memberId) {
+        ReviewEntity reviewEntity = new ReviewEntity();
+
+        reviewEntity.setReviewContent(reviewContent);
+        reviewEntity.setRate(rate);
+        reviewEntity.setStoreId(storeId);
+        reviewEntity.setMemberId(memberId);
+
+        return reviewEntity;
+    }
 }
