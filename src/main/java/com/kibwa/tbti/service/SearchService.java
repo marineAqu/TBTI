@@ -1,10 +1,12 @@
 package com.kibwa.tbti.service;
 
+import com.kibwa.tbti.DTO.LocalcreatorSearchDTO;
 import com.kibwa.tbti.DTO.LocalcreatorSearchProjection;
 import com.kibwa.tbti.repository.LocalcreatorRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.util.Collections;
 import java.util.List;
 
 /**
@@ -17,10 +19,20 @@ import java.util.List;
 @RequiredArgsConstructor
 public class SearchService {
     private final LocalcreatorRepository localcreatorRepository;
+    private final StorageS3Service storageS3Service;
 
-    public List<LocalcreatorSearchProjection> search_localcreator(String searchInput) {
+    public List<LocalcreatorSearchDTO> search_localcreator(String searchInput) {
 
-        return localcreatorRepository.findByStoreNameLike(searchInput);
+        List<LocalcreatorSearchProjection> localcreatorList = localcreatorRepository.findByStoreNameLike(searchInput);
+        List<LocalcreatorSearchDTO> localcreatorSearchDTO = localcreatorList.stream()
+                .map(projection -> {
+                    LocalcreatorSearchDTO dto = LocalcreatorSearchDTO.toLocalcreatorSearchDTO(projection);
+                    dto.setImg(storageS3Service.getImageURL(projection.getStoreName(), projection.getHiddenCategory()));
+                    return dto;
+                })
+                .toList();
+
+        return localcreatorSearchDTO;
     }
 
     public List<LocalcreatorSearchProjection> search_region(String searchRegion) {
