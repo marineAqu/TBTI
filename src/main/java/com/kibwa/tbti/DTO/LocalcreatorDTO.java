@@ -31,6 +31,7 @@ public class LocalcreatorDTO {
     private char hiddenCategory;
     private String business_hours;
     private DescriptionEntity description;
+    private String[] img;
 
     public static LocalcreatorDTO toLocalcreatorDTO(LocalcreatorEntity localcreatorEntity){
         LocalcreatorDTO localcreatorDTO = new LocalcreatorDTO();
