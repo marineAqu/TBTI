@@ -52,4 +52,17 @@ public class LocalcreatorDetailController {
         return response;
     }
 
+    @PostMapping("/api/save_like")
+    public HashMap<String, Object> save_like( //@AuthenticationPrincipal UserDetails userDetails,
+                                                @RequestParam("storeId") int store_id) {
+
+        //TODO: 로그인, 회원가입 기능 추가 후 AuthenticationPrincipal 주석 해제 및 userDetails.getUsername()으로 사용자 아이디 가져오기
+        localcreatorDetailService.save_like(store_id);
+
+        HashMap<String, Object> response = new HashMap<>();
+        response.put("status", "success");
+
+        return response;
+    }
+
 }

@@ -3,6 +3,9 @@ package com.kibwa.tbti.entity;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
+
+import java.sql.Timestamp;
+
 /**
  * 파일명: ReviewEntity
  * 작성자: 김도연
@@ -27,6 +30,9 @@ public class ReviewEntity {
 
     @Column
     private int memberId;
+
+    @Column
+    private Timestamp createAt;
 
     public static ReviewEntity toReviewEntity(String reviewContent, double rate, int storeId, int memberId) {
         ReviewEntity reviewEntity = new ReviewEntity();
