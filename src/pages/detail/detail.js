@@ -5,6 +5,7 @@ import "./detail.css";
 const Detail = () => {
     const { storeId } = useParams();
     const [data, setData] = useState([]);
+    // const [description, setDescription] = useState("");
 
     useEffect(() => {
         const fetchData = async () => {
@@ -12,6 +13,7 @@ const Detail = () => {
                 const response = await fetch(`/api/localcreator_detail?storeId=${storeId}`);
                 const result = await response.json();
                 setData(result.localcreator);
+                // setDescription(result.localcreator.description.description);
                 console.log('응답 데이터:', result);
                 // console.log('DescriptionEntity: '+ result.localcreator.description.description);
             } catch (error) {
@@ -59,7 +61,7 @@ const Detail = () => {
 
                 <div className="review">
                     <div className="reviewContent">
-                       리뷰 api 넣는 곳
+                        {/*{description}*/}dd
                     </div>
                 </div>
 
