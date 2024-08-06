@@ -29,6 +29,12 @@ public class LikesEntity {
     @Column
     private int memberId;
 
-    //@JoinColumn(name = "storeId", referencedColumnName = "storeId", insertable = false, updatable = false)
-    //private int storeId;
+    public static LikesEntity toLikesEntity(int storeId, int memberId) {
+        LikesEntity likesEntity = new LikesEntity();
+
+        likesEntity.setStoreId(storeId);
+        likesEntity.setMemberId(memberId);
+
+        return likesEntity;
+    }
 }
