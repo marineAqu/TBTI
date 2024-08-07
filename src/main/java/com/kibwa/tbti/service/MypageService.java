@@ -1,13 +1,10 @@
 package com.kibwa.tbti.service;
 
-import com.kibwa.tbti.DTO.LocalcreatorDTO;
-import com.kibwa.tbti.entity.LocalcreatorEntity;
 import com.kibwa.tbti.entity.ReviewEntity;
-import com.kibwa.tbti.repository.LocalcreatorRepository;
-import com.kibwa.tbti.repository.MembersRepository;
 import com.kibwa.tbti.repository.ReviewRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.HashMap;
 
@@ -19,6 +16,7 @@ import java.util.HashMap;
 
 @Service
 @RequiredArgsConstructor
+@Transactional
 public class MypageService {
     private final ReviewRepository reviewRepository;
 
