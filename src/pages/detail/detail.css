@@ -5,15 +5,16 @@
     justify-content: flex-start;
     align-items: center;
     min-height: 100vh;
-    overflow: auto;
     padding-bottom: 100px;
+    overflow-x: hidden;
+    overflow-y: auto;
 }
 
 .detailPage .div {
     background-color: #ffffff;
     position: relative;
-    width: 100%; /* 전체 너비 사용 */
-    max-width: 1440px; /* 최대 너비 설정 */
+    width: 100%;
+    max-width: 1440px;
 }
 
 
@@ -24,6 +25,7 @@
     position: absolute;
     top: 240px;
     width: 500px;
+    overflow: hidden;
     border: 2px solid black;
 }
 
@@ -36,29 +38,43 @@
 }
 
 .detailPage .overlap-2 {
-    height: 60px;
     position: relative;
-    width: 137px;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
-.detailPage .rectangle {
-    background-color: #818181b2;
-    border-radius: 30px;
-    height: 40px;
-    width: 137px;
-    position: absolute;
-    top: 10px;
-    left: 0;
+.detailPage .overlap-2 img {
+    position: relative;
+    width: 100%;
+    object-fit: cover;
 }
 
 .detailPage .text-wrapper-2 {
     color: #000000;
     font-size: 30px;
-    font-weight: 400;
+    font-weight: 700;
     line-height: 60px;
-    position: absolute;
-    top: 0;
-    left: 49px;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    background-color: rgba(255, 255, 255, 255);
+    border-radius: 30px;
+}
+
+.detailPage .arrow-button{
+    background-color: rgba(255, 255, 255, 255);
+    border: none;
+    align-items: center;
+    justify-content: center;
+    margin: 0 10px;
+    height: 35px;
+}
+
+.detailPage .arrow-button:hover {
+    background-color: #818181b2;
 }
 
 .detailPage .overlap-group-wrapper {
@@ -85,7 +101,7 @@
 .detailPage .text-wrapper-3 {
     color: #000000;
     font-size: 40px;
-    font-weight: 400;
+    font-weight: 700;
     line-height: 24.7px;
 }
 
@@ -96,6 +112,32 @@
     position: absolute;
     top: 239px;
     left: 686px;
+}
+
+.detailPage .description_box {
+    color: #000000;
+    font-size: 25px;
+    font-weight: 500;
+    margin-top: 10px;
+    overflow: hidden;
+
+}
+
+.detailPage .description.show-less {
+    max-height: none;
+    padding-bottom: 1em;
+}
+
+.detailPage .show-more-button {
+    background-color: #ffffff;
+    border: 1px solid #cccccc;
+    border-radius: 20px;
+    color: #000000;
+    cursor: pointer;
+    font-size: 20px;
+    font-weight: 400;
+    margin-top: 10px;
+    padding: 5px 10px;
 }
 
 .detailPage .link {
@@ -109,7 +151,7 @@
 .detailPage .element-https {
     color: #000000;
     font-size: 24px;
-    font-weight: 400;
+    font-weight: 700;
     position: absolute;
     top: 310px;
     left: 709px;
@@ -148,6 +190,12 @@
     justify-content: center;
     top: 50px;
     padding-bottom: 100px;
+}
+
+.search-result-text {
+    font-size: 40px;
+    font-weight: 600;
+    margin-bottom: 20px;
 }
 
 .container .area {
@@ -214,6 +262,12 @@
     width: 1296px;
 }
 
+.grid-container {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+}
+
 .box {
     align-items: center;
     border: 2px solid;
@@ -259,4 +313,33 @@
     letter-spacing: 0;
     line-height: 25.9px;
     width: 364px;
+}
+
+.pagination {
+    margin-top: 80px;
+    text-align: center;
+}
+
+.pagination button {
+    border: none;
+    background-color: #ddd;
+    padding: 10px;
+    margin: 0 5px;
+    cursor: pointer;
+    border-radius: 5px;
+}
+
+.pagination button.active {
+    background-color: #007bff;
+    color: white;
+}
+
+.pagination button:hover {
+    background-color: #bbb;
+}
+
+.no-results {
+    font-size: 40px;
+    font-weight: bold;
+
 }

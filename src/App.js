@@ -11,6 +11,7 @@ import Login from "./pages/login/Login";
 import Detail from "./pages/detail/detail";
 import Main from "./pages/Main";
 import LocalSearch from "./pages/detail/LocalSearch";
+// import Local from "./pages/detail/local";
 
 function App() {
     return (
@@ -26,7 +27,8 @@ function App() {
                 <Route path="/login" element={<Login />} />
                 <Route path="/detail/:storeId" element={<Detail />} />
                 <Route path="/main" element={<Main />} />
-                <Route path="/LocalSearch" element={<LocalSearch />} />
+                <Route path="/search" element={<LocalSearch />} />
+                {/*<Route path="/local" element={<Local />} />*/}
             </Routes>
 
             <footer>

@@ -69,6 +69,16 @@
     width: 425px;
 }
 
+.GNB .overlap-group input{
+    border: none;
+    border-radius: 40px;
+    height: 100%;
+    width: calc(90% - 50px);
+    font-size: 20px;
+    outline: none;
+    padding: 0 20px;
+}
+
 .GNB .loupe {
     height: 40px;
     left: 365px;
