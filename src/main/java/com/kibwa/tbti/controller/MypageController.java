@@ -21,12 +21,7 @@ public class MypageController {
     public HashMap<String, Object> getMyPage(
             //@AuthenticationPrincipal UserDetails userDetails
     ) {
-
-        //TODO: 스프링 시큐리티 적용
-        HashMap<String, Object> response = new HashMap<>();
-        //response.put("userDetails", userDetails);
-
-        return response;
+        return mypageService.getMyPage();
     }
 
     @PostMapping("/api/delete_review")
