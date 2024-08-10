@@ -10,22 +10,27 @@ const LocalSearch = () => {
     const navigate = useNavigate();
     const query = new URLSearchParams(location.search).get('query'); // 지역 필터링 쿼리 파라미터
 
+    const regions = ["강원특별자치도", "대전광역시", "전라남도", "부산광역시", "서울특별시", "인천광역시", "광주광역시", "경상북도", "대구광역시", "제주특별자치도", "충청남도", "충청북도", "경상남도", "경기도", "전북특별자치도", "세종특별자치시", "울산광역시"];
+
+
     useEffect(() => {
         const fetchData = async () => {
             if (query) {
                 try {
+                    const addCategory = regions.indexOf(query);
+
                     // API 요청 URL 점검: addressCategory1 쿼리 파라미터 사용
-                    const response = await fetch(`/api/search_region?addressCategory1=${query}`);
+                    const response = await fetch(`/api/search_region?addCategory=${addCategory+1}`);
                     const result = await response.json();
 
                     // 서버에서 받은 데이터로 상태 설정
-                    setData(result.localcreatorList);
+                    setData(result.localList);
 
                     // 검색어로 지역 이름 필터링
-                    const filtered = result.localcreatorList.filter(store =>
+                    /*const filtered = result.localcreatorList.filter(store =>
                         store.addressCategory1.includes(query)
-                    );
-                    setFilteredData(filtered);
+                    );*/
+                    setFilteredData(result.localList);
                     setPage(1); // 새로운 검색 시 페이지를 1로 초기화
                 } catch (error) {
                     console.error('데이터 가져오기 오류:', error);
