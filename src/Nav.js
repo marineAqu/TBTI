@@ -7,12 +7,14 @@ export const Nav = () => {
     const [addressCategory1, setAddressCategory1] = useState(""); // 새로운 상태 추가
     const [searchType, setSearchType] = useState("search"); // 검색 타입 상태 추가
     const navigate = useNavigate();
+    const regions = ["강원특별자치도", "대전광역시", "전라남도", "부산광역시", "서울특별시", "인천광역시", "광주광역시", "경상북도", "대구광역시", "제주특별자치도", "충청남도", "충청북도", "경상남도", "경기도", "전북특별자치도", "세종특별자치시", "울산광역시"];
 
     const handleSearch = () => {
         if (searchInput.trim()) {
-            const path = searchType === "search"
-                ? `/search?query=${searchInput}`
-                : `/search?query=${addressCategory1}`;
+            const path = regions.includes(searchInput.trim())
+                ? `/local?query=${searchInput}`
+                //: `/local?query=${regions.indexOf(searchInput.trim()) + 1}`;
+                : `/search?query=${searchInput}`;
             navigate(path);
         }
     };
