@@ -1,9 +1,10 @@
 import React, { useState, useEffect } from "react";
-import { useParams } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
 import "./detail.css";
 
 const Detail = () => {
     const { storeId } = useParams();
+    const navigate = useNavigate();
     const [data, setData] = useState({});
     const [description, setDescription] = useState("");
     const [currentImageIndex, setCurrentImageIndex] = useState(0);
@@ -38,6 +39,10 @@ const Detail = () => {
         setShowMore(!showMore);
     };
 
+    const handleBackNavigation = () => {
+        navigate(-1); // 이전 페이지로 이동합니다.
+    };
+
     // 60자까지만 표시하고, 더보기 버튼 클릭 시 전체 내용 표시
     const truncatedDescription = description.length > 60
         ? description.substring(0, 60) + "..."
@@ -62,7 +67,9 @@ const Detail = () => {
                 <div className="overlap-group-wrapper">
                     <div className="overlap-group-2">
                         <img className="arrow" alt="left Arrow" src="/image/left-arrow.png"/>
-                        <div className="text-wrapper-3">{data.addressCategory1}</div>
+                        <div className="text-wrapper-3" onClick={handleBackNavigation}>
+                            이전으로
+                        </div>
                     </div>
                 </div>
 
@@ -70,13 +77,15 @@ const Detail = () => {
                     [{data.category}] {data.storeName}
                 </div>
 
-                <img className="link" alt="link" src="/image/link.png" id="website"/>
+                {/*<img className="link" alt="link" src="/image/link.png" id="website"/>*/}
 
                 <p className="element-https" id="contact">
-                    {data.detailAddress}
+                    <p>{data.detailAddress}</p>
+                    <p>{data.business_hours}</p>
+                    <p>평점 : {data.rating}</p>
 
 
-                <div className="description_box">
+                    <div className="description_box">
                     <div className={`description ${showMore ? 'show-more' : 'show-less'}`}>
                         {showMore ? description : truncatedDescription}
                         {description.length > 60 && (
@@ -86,8 +95,7 @@ const Detail = () => {
                         )}
                     </div>
                 </div>
-
-                </p>
+            </p>
 
                 {/*<div className="review">*/}
                 {/*    <div className="reviewContent">*/}

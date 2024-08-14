@@ -47,7 +47,7 @@ export const Nav = () => {
                         value={searchInput}
                         onChange={(e) => setSearchInput(e.target.value)}
                         onKeyDown={handleKeyDown}
-                        placeholder="검색어를 입력하세요"
+                        placeholder="검색어를 입력해주세요."
                     />
                     <img
                         className="loupe"
@@ -67,9 +67,9 @@ export const Nav = () => {
                 {/*</select>*/}
             </div>
 
-            <div className="div-wrapper">
-                <Link to="/login" className="text-wrapper">로그인</Link>
-            </div>
+            {/*<div className="div-wrapper">*/}
+            {/*    <Link to="/login" className="text-wrapper">로그인</Link>*/}
+            {/*</div>*/}
 
         </div>
     );
