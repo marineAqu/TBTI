@@ -1,3 +1,5 @@
+// LocalSearch.js
+
 import React, { useState, useEffect } from 'react';
 import "./detail.css";
 import { useLocation, useNavigate } from "react-router-dom";
@@ -48,11 +50,6 @@ const LocalSearch = () => {
 
     return (
         <div className="container">
-            {/*{query && (*/}
-            {/*    <div className="search-result-text">*/}
-            {/*        "{query}" 을/를 검색한 결과입니다.*/}
-            {/*    </div>*/}
-            {/*)}*/}
             <div className="grid-container">
                 {displayedData.length > 0 ? (
                     displayedData.map((store) => (
@@ -79,9 +76,11 @@ const LocalSearch = () => {
                         </div>
                     ))
                 ) : (
-                    <p className="no-results">검색 결과가 없습니다.</p>)}
+                    <p className="no-results">검색 결과가 없습니다.</p>
+                )}
             </div>
-            {filteredData.length > 0 && (
+
+            {filteredData.length > itemsPerPage && (
                 <div className="pagination">
                     {Array.from({ length: totalPages }, (_, index) => (
                         <button

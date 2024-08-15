@@ -12,6 +12,7 @@ import Detail from "./pages/detail/detail";
 import Main from "./pages/Main";
 import LocalSearch from "./pages/detail/LocalSearch";
 import Local from "./pages/detail/local";
+import Mypage from "./pages/login/Mypage";
 
 function App() {
     return (
@@ -19,22 +20,23 @@ function App() {
             <header>
                 <Nav />
             </header>
-            <Routes>
-                <Route path="/" element={<Main />} />
-                <Route path="/travel" element={<Travel />} />
-                <Route path="/domestic" element={<Domestic />} />
-                <Route path="/festival" element={<Festival />} />
-                <Route path="/login" element={<Login />} />
-                <Route path="/detail/:storeId" element={<Detail />} />
-                <Route path="/main" element={<Main />} />
-                <Route path="/search" element={<LocalSearch />} />
-                {<Route path="/local" element={<Local/>} />}
-            </Routes>
-
-            <footer>
-                <Fnb />
-            </footer>
-
+            <main>
+                <Routes>
+                    <Route path="/" element={<Main />} />
+                    <Route path="/travel" element={<Travel />} />
+                    <Route path="/domestic" element={<Domestic />} />
+                    <Route path="/festival" element={<Festival />} />
+                    <Route path="/login" element={<Login />} />
+                    <Route path="/detail/:storeId" element={<Detail />} />
+                    <Route path="/main" element={<Main />} />
+                    <Route path="/search" element={<LocalSearch />} />
+                    <Route path="/local" element={<Local />} />
+                    <Route path="/mypage" element={<Mypage />} />
+                </Routes>
+            </main>
+            {/*<footer>*/}
+            {/*    <Fnb />*/}
+            {/*</footer>*/}
         </Router>
     );
 }

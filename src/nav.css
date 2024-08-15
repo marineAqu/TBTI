@@ -1,23 +1,22 @@
 /*GNB CSS*/
 .GNB {
     background-color: #ffffff;
-    height: 115px;
+    height: 80px; /* 높이 축소 */
     position: relative;
-    width: 1440px;
+    width: 80%; /*GNB 가운데 정렬*/
     display: flex;
     justify-content: center;
     align-items: center;
+    padding: 0 50px;
+    box-sizing: border-box;
 }
 
 .GNB .LOGO {
-    left: 99px;
-    letter-spacing: 0;
-    line-height: normal;
+    left: 90px; /* 위치 조정 */
     position: absolute;
-    text-align: center;
-    top: 23px;
-    width:77px;
-    height:77px;
+    top: 15px; /* 위치 조정 */
+    width: 60px; /* 크기 축소 */
+    height: 60px; /* 크기 축소 */
 }
 
 .GNB .LOGO .logo {
@@ -27,24 +26,21 @@
 
 .GNB .frame {
     align-items: center;
-    display: inline-flex;
-    gap: 59px;
+    display: flex;
+    gap: 40px; /* 간격 축소 */
     justify-content: center;
-    left: 758px;
+    left: 600px; /* 위치 조정 */
     position: absolute;
-    top: 41px;
+    top: 30px; /* 위치 조정 */
 }
 
 .GNB .text-wrapper {
     color: #000000;
-    font-size: 22px;
+    font-size: 18px; /* 글자 크기 축소 */
     font-weight: 600;
-    letter-spacing: 0;
-    line-height: normal;
-    margin-top: -1px;
     position: relative;
     width: fit-content;
-    text-decoration: none; /*링크 스타일*/
+    text-decoration: none; /* 링크 스타일 */
 }
 
 .GNB .text-wrapper:hover {
@@ -52,75 +48,70 @@
 }
 
 .GNB .group {
-    height: 66px;
-    left: 251px;
+    height: 50px; /* 크기 축소 */
+    left: 200px; /* 위치 조정 */
     position: absolute;
-    top: 24px;
-    width: 427px;
+    align-items: center;
+    top: 15px; /* 위치 조정 */
+    width: 350px; /* 크기 축소 */
 }
 
 .GNB .overlap-group {
     background-color: #ffffff;
-    border: 1px solid;
-    border-color: #000000;
-    border-radius: 40px;
-    height: 66px;
+    border: 1px solid #000000;
+    border-radius: 30px; /* 크기 축소 */
+    height: 50px; /* 크기 축소 */
     position: relative;
-    width: 425px;
+    width: 350px; /* 크기 축소 */
 }
 
-.GNB .overlap-group input{
+.GNB .overlap-group input {
     border: none;
-    border-radius: 40px;
+    border-radius: 30px; /* 크기 축소 */
     height: 100%;
-    width: calc(90% - 50px);
-    font-size: 20px;
+    width: calc(90% - 40px); /* 크기 축소 */
+    font-size: 18px; /* 글자 크기 축소 */
     outline: none;
-    padding: 0 20px;
+    padding: 0 15px; /* 패딩 축소 */
 }
 
 .GNB .loupe {
-    height: 40px;
-    left: 365px;
+    height: 30px; /* 크기 축소 */
+    left: 300px; /* 위치 조정 */
     object-fit: cover;
     position: absolute;
-    top: 12px;
-    width: 39px;
+    top: 10px; /* 위치 조정 */
+    width: 30px; /* 크기 축소 */
 }
 
 .GNB .text {
-    font-size: 20px;
-    font-weight: 400;
-    left: 37px;
-    letter-spacing: 0;
-    line-height: 30px;
+    font-size: 18px; /* 글자 크기 축소 */
+    font-weight: 700;
     position: absolute;
-    top: 19px;
-    width: 349px;
+    top: 15px; /* 위치 조정 */
+    width: 300px; /* 크기 축소 */
 }
 
 .GNB .div-wrapper {
     align-items: center;
-    border: 1px solid;
-    border-color: #000000;
-    border-radius: 43px;
+    border: 1px solid #000000;
+    border-radius: 35px; /* 크기 축소 */
     display: inline-flex;
-    gap: 10px;
+    gap: 8px; /* 간격 축소 */
     justify-content: center;
-    left: 1225px;
-    padding: 3px 18px;
+    left: 1000px; /* 위치 조정 */
+    padding: 3px 15px; /* 패딩 축소 */
     position: absolute;
-    top: 35px;
+    top: 25px; /* 위치 조정 */
 }
 
 .GNB .div-wrapper .text-wrapper {
     color: #000000;
-    font-size: 22px;
+    font-size: 18px; /* 글자 크기 축소 */
     font-weight: 600;
-    letter-spacing: 0;
-    line-height: normal;
     text-decoration: none; /* 링크 스타일 */
 }
+
 
 @media (max-width: 768px) {
     .GNB {
