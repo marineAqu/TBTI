@@ -2,143 +2,151 @@
     background-color: #ffffff;
     display: flex;
     flex-direction: column;
-    justify-content: flex-start;
     align-items: center;
     min-height: 100vh;
-    padding-bottom: 50px;
+    padding-bottom: 100px;
     overflow-x: hidden;
     overflow-y: hidden;
 }
 
-.detailPage .div {
-    background-color: #ffffff;
-    position: relative;
-    width: 100%;
-    max-width: 1440px;
+.header {
+    display: flex;
+    align-items: center;
+    width: 70%;
+    justify-content: flex-start;
+    padding: 20px;
+    box-sizing: border-box;
 }
 
+.arrow {
+    height: 30px;
+    width: 30px;
+    margin-right: 5px;
+}
 
-.detailPage .Imgex {
-    background-size: cover; /* 이미지 비율 유지 */
-    height: 500px;
-    left: 136px;
-    position: absolute;
-    top: 240px;
-    width: 500px;
+.before {
+    color: #000000;
+    font-size: 30px;
+    font-weight: 400;
+}
+
+.imageContainer {
+    display: flex; /* Flexbox로 자식 요소를 가로로 배치 */
+    justify-content: flex-start; /* 왼쪽 정렬 */
+    align-items: flex-start; /* 상단 정렬 */
+    width: 100%;
+    max-width: 1000px; /* 전체 너비 조정 */
+    margin: 20px 0; /* 위아래 여백 조정 */
+    box-sizing: border-box;
+}
+
+.imgBox {
+    position: relative;
+    width: 400px;
+    height: 400px;
     overflow: hidden;
     border: 2px solid black;
 }
 
-.detailPage .overlap-wrapper {
-    height: 60px;
-    position: absolute; /* 절대 위치로 변경 */
-    top: 421px;
-    left: 182px;
-    width: 139px;
-}
-
-.detailPage .overlap-2 {
-    position: relative;
+.imgBox img {
+    position: absolute;
     width: 100%;
-    height: 100%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-
-.detailPage .overlap-2 img {
-    position: relative;
-    width: 100%;
+    height: auto;
+    top: 50%;
+    left: 50%;
+    max-width: 100%;
+    max-height: 100%;
     object-fit: cover;
+    transform: translate(-50%, -50%);
 }
 
-.detailPage .text-wrapper-2 {
-    color: #000000;
-    font-size: 30px;
-    font-weight: 700;
-    line-height: 60px;
-    align-items: center;
+.arrowBox {
+    display: flex;
     justify-content: center;
-    text-align: center;
-    background-color: rgba(255, 255, 255, 255);
+    margin-top: 20px;
+    position: absolute;
+    left: 50%;
+    bottom: 0;
+    transform: translateX(-50%);
+    width: 30%;
     border-radius: 30px;
+    font-size: 20px;
+    background-color: white;
 }
 
-.detailPage .arrow-button{
-    background-color: rgba(255, 255, 255, 255);
+.arrow-button {
+    background-color: rgba(255, 255, 255, 0);
     border: none;
-    align-items: center;
-    justify-content: center;
+    font-size: 25px;
     margin: 0 10px;
+    cursor: pointer;
     height: 35px;
 }
 
-.detailPage .arrow-button:hover {
+.arrow-button:hover {
+    color: #818181;
+}
+
+.storeInfo {
+    text-align: left;
+    width: calc(100% - 420px); /* 이미지 박스 너비를 제외한 나머지 공간 */
+    max-width: 800px;
+    box-sizing: border-box;
+    padding-left: 50px;
+}
+
+.storeName {
+    color: #000000;
+    font-size: 35px;
+    font-weight: 700;
+    margin-bottom: 10px;
+}
+
+.contactInfo {
+    color: #000000;
+    font-size: 25px;
+    font-weight: 400;
+}
+
+.hours, .rating {
+    font-size: 20px;
+    line-height: 20px;
+    width: 40%;
+}
+
+.descriptionBox {
+    margin-top: 5px;
+    line-height: 25px;
+}
+
+.description {
+    overflow: hidden;
+    white-space: pre-wrap;
+}
+
+.description.show-less {
+    max-height: 60px;
+}
+
+.description.show-more {
+    max-height: none;
+}
+
+.show-more-button {
+    background-color: #ffffff;
+    border: 1px solid #cccccc;
+    border-radius: 15px;
+    color: #000000;
+    cursor: pointer;
+    font-size: 15px;
+    padding: 3px 10px;
+    margin-top: 10px;
+}
+
+.show-more-button:hover {
     background-color: #818181b2;
 }
 
-.detailPage .overlap-group-wrapper {
-    height: 30px;
-    position: relative;
-    top: 141px;
-    left: 124px;
-    width: 100%;
-}
-
-.detailPage .overlap-group-2 {
-    display: flex;
-    align-items: center;
-    height: 50px;
-    width: 600px;
-}
-
-.detailPage .arrow {
-    height: 30px;
-    width: 30px;
-    margin-right: 10px;
-}
-
-.detailPage .text-wrapper-3 {
-    color: #000000;
-    font-size: 35px;
-    font-weight: 400;
-    line-height: 10px;
-}
-
-.detailPage .text-wrapper-4 {
-    color: #000000;
-    font-size: 40px;
-    font-weight: 700;
-    position: absolute;
-    top: 239px;
-    left: 686px;
-}
-
-.detailPage .description_box {
-    color: #000000;
-    font-size: 25px;
-    font-weight: 500;
-    margin-top: 10px;
-    overflow: hidden;
-
-}
-
-.detailPage .description.show-less {
-    max-height: none;
-    padding-bottom: 1em;
-}
-
-.detailPage .show-more-button {
-    background-color: #ffffff;
-    border: 1px solid #cccccc;
-    border-radius: 20px;
-    color: #000000;
-    cursor: pointer;
-    font-size: 20px;
-    font-weight: 400;
-    margin-top: 10px;
-    padding: 5px 10px;
-}
 
 .detailPage .link {
     height: 41px;
@@ -148,15 +156,6 @@
     width: 41px;
 }
 
-.detailPage .element-https {
-    color: #000000;
-    font-size: 24px;
-    font-weight: 700;
-    position: absolute;
-    top: 310px;
-    left: 709px;
-    line-height: 60px;
-}
 
 .detailPage .review{
     height:124px;
@@ -357,4 +356,10 @@
     font-size: 20px;
     font-weight: bold;
 
+}
+
+.region {
+    height: 200px;
+    width: 60%;
+    text-align: left;
 }

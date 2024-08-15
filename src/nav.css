@@ -59,43 +59,43 @@
 .GNB .overlap-group {
     background-color: #ffffff;
     border: 1px solid #000000;
-    border-radius: 30px; /* 크기 축소 */
-    height: 50px; /* 크기 축소 */
+    /*border-radius: 30px 30px 0 0;*/
+    height: 50px;
     position: relative;
-    width: 350px; /* 크기 축소 */
+    width: 350px;
 }
 
 .GNB .overlap-group input {
     border: none;
-    border-radius: 30px; /* 크기 축소 */
+    border-radius: 30px;
     height: 100%;
-    width: calc(90% - 40px); /* 크기 축소 */
-    font-size: 18px; /* 글자 크기 축소 */
+    width: calc(100% - 45px);
+    font-size: 18px;
     outline: none;
-    padding: 0 15px; /* 패딩 축소 */
+    padding: 0 15px;
 }
 
 .GNB .loupe {
-    height: 30px; /* 크기 축소 */
-    left: 300px; /* 위치 조정 */
+    height: 30px;
+    left: 300px;
     object-fit: cover;
     position: absolute;
-    top: 10px; /* 위치 조정 */
-    width: 30px; /* 크기 축소 */
+    top: 10px;
+    width: 30px;
 }
 
 .GNB .text {
-    font-size: 18px; /* 글자 크기 축소 */
+    font-size: 18px;
     font-weight: 700;
     position: absolute;
-    top: 15px; /* 위치 조정 */
-    width: 300px; /* 크기 축소 */
+    top: 15px;
+    width: 300px;
 }
 
 .GNB .div-wrapper {
     align-items: center;
     border: 1px solid #000000;
-    border-radius: 35px; /* 크기 축소 */
+    border-radius: 35px;
     display: inline-flex;
     gap: 8px; /* 간격 축소 */
     justify-content: center;
@@ -110,6 +110,31 @@
     font-size: 18px; /* 글자 크기 축소 */
     font-weight: 600;
     text-decoration: none; /* 링크 스타일 */
+}
+
+.group{
+    position: relative;
+}
+
+.suggestions {
+    position: absolute;
+    top: 100%; /* 입력 필드 바로 아래 */
+    left: 0;
+    width: 100%;
+    background-color: white;
+    border: 1px solid #000000;
+    /*border-radius: 0 0 30px 30px;*/
+    z-index: 10;
+}
+
+.suggestion-item {
+    padding: 10px;
+    cursor: pointer;
+}
+
+.suggestion-item:hover,
+.suggestion-item.selected {
+    background-color: #f0f0f0;
 }
 
 
