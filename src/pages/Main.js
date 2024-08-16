@@ -6,7 +6,7 @@ const Main = () => {
             <h1>메인페이지</h1>
             <iframe
                 src="/map_data.html"
-                width="700"
+                width="800"
                 height="1000"
                 title="index page"
                 style={{border: 'none'}}
