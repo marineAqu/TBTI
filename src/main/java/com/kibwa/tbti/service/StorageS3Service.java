@@ -23,6 +23,7 @@ public class StorageS3Service {
 
         if(hiddenCategory == '1') category = "nowlocal/";
         else if(hiddenCategory == '2') category = "kstartup/";
+        else if(hiddenCategory == '3') category = "kstartup/";
 
         System.out.print("category: "+category + ", hiddenCategory: "+hiddenCategory);
 
