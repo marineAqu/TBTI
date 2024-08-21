@@ -19,21 +19,21 @@ public class StorageS3Service {
 
     public String[] getImageURL(String imgName, char hiddenCategory) {
         String[] imgList = new String[3];
-        String category = "";
 
+        /*
         if(hiddenCategory == '1') category = "nowlocal/";
         else if(hiddenCategory == '2') category = "kstartup/";
         else if(hiddenCategory == '3') category = "kstartup/";
+*/
+        System.out.print("hiddenCategory: "+hiddenCategory);
 
-        System.out.print("category: "+category + ", hiddenCategory: "+hiddenCategory);
-
-        URL url = s3Client.getUrl("tbti-s3-image", (category+imgName+"_1.jpg"));
+        URL url = s3Client.getUrl("tbti-s3-image", (imgName+"_1.jpg"));
         imgList[0] = ""+url;
 
-        url = s3Client.getUrl("tbti-s3-image", (category+imgName+"_2.jpg"));
+        url = s3Client.getUrl("tbti-s3-image", (imgName+"_2.jpg"));
         imgList[1] = ""+url;
 
-        url = s3Client.getUrl("tbti-s3-image", (category+imgName+"_3.jpg"));
+        url = s3Client.getUrl("tbti-s3-image", (imgName+"_3.jpg"));
         imgList[2] = ""+url;
 
         return imgList;
