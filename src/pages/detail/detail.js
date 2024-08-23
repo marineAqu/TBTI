@@ -56,8 +56,20 @@ const Detail = () => {
             </div>
 
             <div className="imageContainer">
+
                 <div className="imgBox">
                     <img src={data.img ? data.img[currentImageIndex] : ''} alt="Detail" className="image"/>
+                    <div className="arrowBox">
+                        <button className="arrow-button" onClick={handlePrevImage}>
+                            &#9664; {/* 좌측 화살표 문자 */}
+                        </button>
+                        <div className="page-info">
+                            <span>{currentImageIndex + 1} / {data.img ? data.img.length : 1}</span> {/* 페이지 번호 */}
+                        </div>
+                        <button className="arrow-button" onClick={handleNextImage}>
+                            &#9654; {/* 우측 화살표 문자 */}
+                        </button>
+                    </div>
                 </div>
 
                 <div className="storeInfo">

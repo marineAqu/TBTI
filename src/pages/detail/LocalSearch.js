@@ -1,5 +1,4 @@
-// LocalSearch.js
-
+//가게 검색
 import React, { useState, useEffect } from 'react';
 import "./detail.css";
 import { useLocation, useNavigate } from "react-router-dom";
@@ -7,6 +6,8 @@ import { useLocation, useNavigate } from "react-router-dom";
 const LocalSearch = () => {
     const [data, setData] = useState([]);
     const [filteredData, setFilteredData] = useState([]);
+    const [categories, setCategories] = useState([]); // 카테고리 목록 상태
+    const [selectedCategory, setSelectedCategory] = useState(''); // 선택된 카테고리 상태
     const [page, setPage] = useState(1);
     const location = useLocation();
     const navigate = useNavigate();
@@ -20,9 +21,14 @@ const LocalSearch = () => {
                     const result = await response.json();
                     setData(result.localcreatorList);
 
-                    // 검색어로 가게 이름 필터링
+                    // 고유한 카테고리 목록 생성
+                    const uniqueCategories = [...new Set(result.localcreatorList.map(store => store.category))];
+                    setCategories(uniqueCategories);
+
+                    // 검색어와 선택된 카테고리로 필터링
                     const filtered = result.localcreatorList.filter(store =>
-                        store.storeName.includes(query)
+                        store.storeName.includes(query) &&
+                        (!selectedCategory || store.category === selectedCategory)
                     );
                     setFilteredData(filtered);
                     setPage(1); // 새로운 검색 시 페이지를 1로 초기화
@@ -33,7 +39,12 @@ const LocalSearch = () => {
         };
 
         fetchData();
-    }, [query]);
+    }, [query, selectedCategory]); // selectedCategory가 변경될 때도 다시 데이터를 필터링하도록 함
+
+    const handleCategoryChange = (category) => {
+        setSelectedCategory(category);
+        setPage(1);
+    };
 
     const handlePageChange = (newPage) => {
         setPage(newPage);
@@ -50,6 +61,33 @@ const LocalSearch = () => {
 
     return (
         <div className="container">
+
+            <div className="local-search-container">
+
+                <div className="category-buttons">
+
+                <button
+                    className={selectedCategory === '' ? 'active' : ''}
+                    onClick={() => handleCategoryChange('')}
+                >
+                    전체
+                </button>
+
+
+                {categories.map((category) => (
+
+                    <button
+                        key={category}
+                        className={selectedCategory === category ? 'active' : ''}
+                        onClick={() => handleCategoryChange(category)}
+                    >{category}
+
+                    </button>
+                ))}
+
+                </div>
+            </div>
+
             <div className="grid-container">
                 {displayedData.length > 0 ? (
                     displayedData.map((store) => (
@@ -59,7 +97,7 @@ const LocalSearch = () => {
                             onClick={() => handleBoxClick(store.storeId)}
                         >
                             {store.img && store.img.length > 0 ? (
-                                <img className="image_box" alt="img" src={store.img[0]} />
+                                <img className="image_box" alt="이미지 없음" src={store.img[0]} />
                             ) : (
                                 <div className="no-image">이미지 없음</div>
                             )}

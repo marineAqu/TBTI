@@ -66,7 +66,7 @@ export const Nav = () => {
     return (
         <div className="GNB">
             <div className="LOGO">
-                <Link to="/main">
+                <Link to="/">
                     <img className="logo" alt="logo" src="/image/logo.png" />
                 </Link>
             </div>

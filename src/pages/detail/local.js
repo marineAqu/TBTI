@@ -5,12 +5,16 @@ import { useLocation, useNavigate } from "react-router-dom";
 const LocalSearch = () => {
     const [data, setData] = useState([]);
     const [filteredData, setFilteredData] = useState([]);
-    const [regionName, setRegionName] = useState(""); // 지역 이름 상태
-    const [regionIntro, setRegionIntro] = useState(""); // 지역 한 줄 소개 상태
+    const [regionName, setRegionName] = useState("");
+    const [regionIntro, setRegionIntro] = useState("");
+    const [categories, setCategories] = useState([]);
+    const [selectedCategory, setSelectedCategory] = useState('');
     const [page, setPage] = useState(1);
+    const [viewMode, setViewMode] = useState('info');
+
     const location = useLocation();
     const navigate = useNavigate();
-    const query = new URLSearchParams(location.search).get('query'); // 지역 필터링 쿼리 파라미터
+    const query = new URLSearchParams(location.search).get('query');
 
     const regions = ["강원특별자치도", "대전광역시", "전라남도", "부산광역시", "서울특별시", "인천광역시", "광주광역시", "경상북도", "대구광역시", "제주특별자치도", "충청남도", "충청북도", "경상남도", "경기도", "전북특별자치도", "세종특별자치시", "울산광역시"];
 
@@ -20,19 +24,18 @@ const LocalSearch = () => {
                 try {
                     const addCategory = regions.indexOf(query);
 
-                    // API 요청 URL 점검: addressCategory1 쿼리 파라미터 사용
                     const response = await fetch(`/api/search_region?addCategory=${addCategory + 1}`);
                     const result = await response.json();
 
-                    // 서버에서 받은 데이터로 상태 설정
                     setData(result.localList);
-
-                    // 지역 이름과 소개 상태 설정
                     setRegionName(query);
                     setRegionIntro(result.domInt || "소개 정보 없음");
 
+                    const uniqueCategories = [...new Set(result.localList.map(store => store.category))];
+                    setCategories(uniqueCategories);
+
                     setFilteredData(result.localList);
-                    setPage(1); // 새로운 검색 시 페이지를 1로 초기화
+                    setPage(1);
                 } catch (error) {
                     console.error('데이터 가져오기 오류:', error);
                     alert('데이터를 가져오는 데 문제가 발생했습니다.');
@@ -43,6 +46,21 @@ const LocalSearch = () => {
         fetchData();
     }, [query]);
 
+    useEffect(() => {
+        if (selectedCategory) {
+            const filtered = data.filter(store => store.category === selectedCategory);
+            setFilteredData(filtered);
+        } else {
+            setFilteredData(data);
+        }
+        setPage(1);
+    }, [selectedCategory, data]);
+
+    const handleCategoryChange = (category) => {
+        setSelectedCategory(category);
+        setPage(1);
+    };
+
     const handlePageChange = (newPage) => {
         setPage(newPage);
     };
@@ -51,17 +69,69 @@ const LocalSearch = () => {
         navigate(`/detail/${storeId}`);
     };
 
+    const handleViewModeChange = () => {
+        setViewMode((prevMode) => (prevMode === 'map' ? 'info' : 'map'));
+    };
+
+
     const itemsPerPage = 9;
     const startIndex = (page - 1) * itemsPerPage;
     const displayedData = filteredData.slice(startIndex, startIndex + itemsPerPage);
     const totalPages = Math.ceil(filteredData.length / itemsPerPage);
 
     return (
-        <div className="container">
+        <div className={`container ${viewMode === 'map' ? 'map-active' : ''}`}>
 
-            <div className="region">
-                <h1>{regionName}</h1>
-                <p>{regionIntro}</p>
+            <div className="region-container">
+                <div className="region">
+                    <h1>{regionName}</h1>
+                    <p>{regionIntro}</p>
+                </div>
+
+                <div className="view-toggle">
+                    <button onClick={handleViewModeChange}>
+                        {viewMode === 'map' ? '지도 보기 해제' : '지도 보기'}
+                    </button>
+                </div>
+            </div>
+
+
+            <div className={`map-container ${viewMode === 'map' ? 'visible' : ''}`}>
+                {viewMode === 'map' && (
+                    <>
+                        {regionName === "경기도" ? (
+                            <img src={'/image/img.png'} alt="경기도 지도" style={{width: '100%', height: '450px'}}/>
+                        ) : (
+                            <iframe
+                                src={`https://www.google.com/maps/embed/v1/place?key=YOUR_API_KEY&q=${regionName}`}
+                                width="100%"
+                                height="450"
+                                allowFullScreen
+                                loading="lazy"
+                                title="지역 지도"
+                            />
+                        )}
+                    </>
+                )}
+            </div>
+
+            <div className="category-buttons">
+                <button
+                    className={selectedCategory === '' ? 'active' : ''}
+                    onClick={() => handleCategoryChange('')}
+                >
+                    전체
+                </button>
+
+                {categories.map((category) => (
+                    <button
+                        key={category}
+                        className={selectedCategory === category ? 'active' : ''}
+                        onClick={() => handleCategoryChange(category)}
+                    >
+                        {category}
+                    </button>
+                ))}
             </div>
 
             <div className="grid-container">
@@ -73,7 +143,7 @@ const LocalSearch = () => {
                             onClick={() => handleBoxClick(store.storeId)}
                         >
                             {store.img && store.img.length > 0 ? (
-                                <img className="image_box" alt="img" src={store.img[0]} />
+                                <img className="image_box" alt="이미지 없음" src={store.img[0]}/>
                             ) : (
                                 <div className="no-image">이미지 없음</div>
                             )}
@@ -81,9 +151,9 @@ const LocalSearch = () => {
                                 <p className="storename">{store.storeName}</p>
                                 <p className="store">
                                     {store.addressCategory1}
-                                    <br />
+                                    <br/>
                                     {store.detailAddress}
-                                    <br />
+                                    <br/>
                                     {store.contact}
                                 </p>
                             </div>
@@ -96,7 +166,7 @@ const LocalSearch = () => {
 
             {totalPages > 1 && (
                 <div className="pagination">
-                    {Array.from({ length: totalPages }, (_, index) => (
+                    {Array.from({length: totalPages}, (_, index) => (
                         <button
                             key={index + 1}
                             onClick={() => handlePageChange(index + 1)}
