@@ -1,6 +1,8 @@
+//지역검색페이지
 import React, { useState, useEffect } from 'react';
-import "./detail.css";
 import { useLocation, useNavigate } from "react-router-dom";
+import "./detail.css";
+import CanvasMap from './Canvas';
 
 const LocalSearch = () => {
     const [data, setData] = useState([]);
@@ -73,6 +75,11 @@ const LocalSearch = () => {
         setViewMode((prevMode) => (prevMode === 'map' ? 'info' : 'map'));
     };
 
+    const handleRegionClick = (region) => {
+        setRegionName(region); // 클릭된 지역 이름을 설정
+        // 필요한 경우 해당 지역에 대해 추가 데이터를 가져오는 로직을 작성
+    };
+
 
     const itemsPerPage = 9;
     const startIndex = (page - 1) * itemsPerPage;
@@ -95,25 +102,19 @@ const LocalSearch = () => {
                 </div>
             </div>
 
-
             <div className={`map-container ${viewMode === 'map' ? 'visible' : ''}`}>
                 {viewMode === 'map' && (
-                    <>
-                        {regionName === "경기도" ? (
-                            <img src={'/image/img.png'} alt="경기도 지도" style={{width: '100%', height: '450px'}}/>
-                        ) : (
-                            <iframe
-                                src={`https://www.google.com/maps/embed/v1/place?key=YOUR_API_KEY&q=${regionName}`}
-                                width="100%"
-                                height="450"
-                                allowFullScreen
-                                loading="lazy"
-                                title="지역 지도"
-                            />
-                        )}
-                    </>
+                    <CanvasMap onRegionClick={handleRegionClick}/> // CanvasMap 컴포넌트를 삽입
                 )}
             </div>
+
+
+            {/*<div className={`map-container ${viewMode === 'map' ? 'visible' : ''}`}>*/}
+            {/*    {viewMode === 'map' && (*/}
+            {/*        <img src={'/image/img.png'} alt="경기도 지도" style={{width: '100%', height: '450px'}}/>*/}
+            {/*    )}*/}
+
+            {/*</div>*/}
 
             <div className="category-buttons">
                 <button

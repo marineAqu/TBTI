@@ -11,7 +11,7 @@ import Detail from "./pages/detail/detail";
 import Main from "./pages/Main";
 import LocalSearch from "./pages/detail/LocalSearch";
 import Local from "./pages/detail/local";
-// import Chat from "./pages/Chat";
+// import Check from "./pages/detail/dd.";
 // import Mypage from "./pages/login/Mypage";
 
 function App() {
@@ -33,7 +33,7 @@ function App() {
                     {/*<Route path="/mypage" element={<Mypage />} />*/}
                 </Routes>
 
-                {/*<Chat />*/}
+                {/*<Check />*/}
             </main>
             {/* <footer> */}
             {/*     <Fnb /> */}

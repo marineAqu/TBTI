@@ -418,8 +418,8 @@
 }
 
 .map-container.visible {
-    height: 450px;
-    margin-bottom: 20px; /* 지도 아래 여백 추가 */
+    height: 480px;
+    margin-bottom: 5px; /* 지도 아래 여백 추가 */
 }
 
 
