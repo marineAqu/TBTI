@@ -7,7 +7,7 @@ const CanvasMap = ({ onRegionClick }) => {
     const navigate = useNavigate();
 
     const regions = {
-        '인천광역시': [ //TODO: 인천광역시는 category1이 인천광역시임
+        '인천광역시': [
             { x: 138, y: 98 },
             { x: 159, y: 59 },
             { x: 204, y: 6 },
