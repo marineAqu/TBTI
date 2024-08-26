@@ -152,4 +152,20 @@ public class SearchService {
 
         return response;
     }
+
+    public HashMap<String, Object> search_add2region(String region) {
+        HashMap<String, Object> response = new HashMap<>();
+
+        List<LocalcreatorSearchProjection> localcreatorList = localcreatorRepository.findByAddressCategory2Like(region);
+        List<LocalcreatorSearchDTO> localcreatorSearchDTO = localcreatorList.stream()
+                .map(projection -> {
+                    LocalcreatorSearchDTO dto = LocalcreatorSearchDTO.toLocalcreatorSearchDTO(projection);
+                    dto.setImg(storageS3Service.getImageURL(projection.getStoreName(), projection.getHiddenCategory()));
+                    return dto;
+                }).toList();
+
+        response.put("localList", localcreatorSearchDTO);
+
+        return response;
+    }
 }

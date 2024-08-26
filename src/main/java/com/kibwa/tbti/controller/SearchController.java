@@ -39,4 +39,10 @@ public class SearchController {
 
         return searchService.search_region(regionCode);
     }
+
+    @GetMapping("api/search_add2region")
+    public HashMap<String, Object> search_add2region(@RequestParam("region") String region) {
+
+        return searchService.search_add2region(region);
+    }
 }

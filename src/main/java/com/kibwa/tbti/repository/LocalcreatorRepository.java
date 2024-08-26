@@ -22,4 +22,6 @@ public interface LocalcreatorRepository extends JpaRepository<LocalcreatorEntity
     List<LocalcreatorSearchProjection> findByStoreNameLike(@Param("keyword") String keyword);
 
     List<LocalcreatorSearchProjection> findByAddressCategory1Like(@Param("addressCategory1") String addressCategory1);
+
+    List<LocalcreatorSearchProjection> findByAddressCategory2Like(@Param("addressCategory2") String addressCategory2);
 }
