@@ -25,8 +25,17 @@ const LocalSearch = () => {
             if (query) {
                 try {
                     const addCategory = regions.indexOf(query);
+                    let response = null;
 
-                    const response = await fetch(`/api/search_region?addCategory=${addCategory + 1}`);
+                    console.log("addcategory: "+addCategory);
+                    if(addCategory === -1){
+                        response = await fetch(`/api/search_add2region?region=${query}`);
+                    }
+                    else{
+                        response = await fetch(`/api/search_region?addCategory=${addCategory + 1}`);
+                    }
+
+
                     const result = await response.json();
 
                     setData(result.localList);
