@@ -1,21 +1,53 @@
 import React, { useState, useRef, useEffect } from "react";
 import './main.css';
-import { data } from './data';
 
 function Chat() {
     const [input, setInput] = useState("");
     const [messages, setMessages] = useState([]);
+    const [places, setPlaces] = useState([]); // 여행지 데이터 상태
+    const [itinerary, setItinerary] = useState(""); // 여행 일정 상태
+    const [reservationMessage, setReservationMessage] = useState(""); // 예약 메시지 상태
     const chatBoxRef = useRef(null);
-    const cardContainerRef = useRef(null);
 
-    useEffect(() => { // 새 메시지가 추가될 때마다 아래로 이동
+    useEffect(() => {
+        const fetchData = async () => {
+            try {
+                const response = await fetch(`http://localhost:8001`);
+                const result = await response.json();
+
+                // 응답 처리
+                const responseData = JSON.parse(result.response); // JSON 문자열을 객체로 변환
+
+                // 각 경우에 따라 상태 업데이트
+                if (responseData.answer) {
+                    // 여행지 추천일 경우
+                    if (responseData.place) {
+                        setPlaces(responseData.place);
+                    } else {
+                        setItinerary(responseData.answer);
+                    }
+                } else {
+                    // 예약 리다이렉션일 경우
+                    setReservationMessage(responseData.answer);
+                    setPlaces(responseData.place);
+                }
+
+            } catch (error) {
+                console.error('Error:', error);
+            }
+        };
+
+        fetchData();
+    }, []); // 컴포넌트가 마운트될 때 한 번 실행
+
+    useEffect(() => {
         if (chatBoxRef.current) {
             chatBoxRef.current.scrollTop = chatBoxRef.current.scrollHeight;
         }
     }, [messages]);
 
     const sendMessage = async () => {
-        if (!input) return; // 빈 메시지 보내지 않기
+        if (!input) return;
 
         const newMessage = { sender: "user", text: input };
         setMessages((prevMessages) => [...prevMessages, newMessage]);
@@ -29,11 +61,11 @@ function Chat() {
                 body: JSON.stringify({ sender: "user", message: input }),
             });
 
-            const data = await res.text(); // 응답 텍스트 받기
-            const aiMessage = { sender: "ai", text: data }; // AI 응답 객체 생성
+            const data = await res.text();
+            const aiMessage = { sender: "ai", text: data };
             setMessages((prevMessages) => [...prevMessages, aiMessage]);
         } catch (error) {
-            console.error("메시지 전송 중 오류 발생:", error);
+            console.error("Error sending message:", error);
             const errorMessage = { sender: "ai", text: "서버와의 통신 중 오류가 발생했습니다." };
             setMessages((prevMessages) => [...prevMessages, errorMessage]);
         } finally {
@@ -43,11 +75,11 @@ function Chat() {
 
     const handleKeyDown = (e) => {
         if (e.key === "Enter") {
-            if (e.shiftKey) { // shift + enter = 줄 바꿈
+            if (e.shiftKey) {
                 setInput((prevInput) => prevInput + "\n");
             } else {
                 e.preventDefault();
-                sendMessage(); // enter 키로 메시지 전송
+                sendMessage();
             }
         }
     };
@@ -66,23 +98,53 @@ function Chat() {
                 ))}
             </div>
 
-
-
+            {/* 여행지 추천 또는 여행 일정 또는 예약 출력 섹션 */}
             <div className="card-section">
-                <div className="card-container" ref={cardContainerRef}>
-                    {data.place.map((place, index) => (
-                        <div key={index} className="card">
-                            <div className="placeName">{place.place_name}</div>
-                            <div className="location">{place.location}</div>
-                            <div className="category">{place.category}</div>
-                            <div className="description">{place.description}</div>
-                            <div className="descriptionURL">
-                                <a href={place.redirection_url} target="_blank" rel="noopener noreferrer">
-                                    링크
-                                </a>
+                <div className="card-container">
+                    {/* 여행지 추천일 경우 */}
+                    {places.length > 0 && !itinerary && !reservationMessage && (
+                        places.map((place, index) => (
+                            <div key={index} className="card">
+                                <div className="placeName">{place.place_name}</div>
+                                <div className="location">{place.location}</div>
+                                <div className="category">{place.category}</div>
+                                <div className="description">{place.description}</div>
+                                <div className="descriptionURL">
+                                    <a href={place.redirection_url} target="_blank" rel="noopener noreferrer">
+                                        링크
+                                    </a>
+                                </div>
                             </div>
+                        ))
+                    )}
+
+                    {/* 여행 일정일 경우 */}
+                    {itinerary && (
+                        <div className="itinerary">
+                            <h3>여행 일정:</h3>
+                            <div dangerouslySetInnerHTML={{ __html: itinerary }} />
                         </div>
-                    ))}
+                    )}
+
+                    {/* 예약 리다이렉션일 경우 */}
+                    {reservationMessage && (
+                        <div className="reservation">
+                            <p>{reservationMessage}</p>
+                            {places.map((place, index) => (
+                                <div key={index} className="card">
+                                    <div className="placeName">{place.place_name}</div>
+                                    <div className="location">{place.location}</div>
+                                    <div className="category">{place.category}</div>
+                                    <div className="description">{place.description}</div>
+                                    <div className="descriptionURL">
+                                        <a href={place.redirection_url} target="_blank" rel="noopener noreferrer">
+                                            링크
+                                        </a>
+                                    </div>
+                                </div>
+                            ))}
+                        </div>
+                    )}
                 </div>
             </div>
 

@@ -151,21 +151,21 @@ button:hover {
 }
 
 .card-section {
-    position: relative; /* 상대 위치 설정 */
-    margin: 10px 0; /* 카드 섹션 마진 추가 */
+    position: relative;
+    margin: 10px 0;
 }
 
 .card-container {
-    display: flex; /* 카드들을 가로로 나열 */
-    overflow-x: auto; /* 수평 스크롤 가능 */
-    scroll-behavior: smooth; /* 스크롤 부드럽게 */
-    padding-bottom: 10px; /* 하단 패딩 추가 */
+    display: flex;
+    overflow-x: auto;
+    scroll-behavior: smooth;
+    padding-bottom: 10px;
 }
 
 .card {
-    flex: 0 0 auto; /* 카드 크기를 자동으로 조정 */
-    width: 200px; /* 카드의 너비 설정 */
-    margin-right: 10px; /* 카드 간 간격 */
+    flex: 0 0 auto;
+    width: 200px;
+    margin-right: 10px;
     padding: 10px;
     border: 1px solid #ccc;
     border-radius: 8px;
@@ -173,7 +173,7 @@ button:hover {
 }
 
 .card-scroll {
-    height: 10px; /* 스크롤바의 높이 */
-    background-color: #f0f0f0; /* 스크롤바 배경색 */
-    border-radius: 5px; /* 스크롤바의 경계 반경 */
+    height: 10px;
+    background-color: #f0f0f0;
+    border-radius: 5px;
 }
