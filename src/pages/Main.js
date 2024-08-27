@@ -8,13 +8,18 @@ const Main = () => {
         <div className="main">
             <iframe
                 src="/map_data.html"
-                width="400"
-                height="600"
                 title="index page"
-                style={{ border: '2px solid #ccc', overflow: 'hidden'}}
+                style={{
+                    width: '600px',
+                    height: 'auto',
+                    border: 'none',
+                    marginLeft: '10px'
+                }}
             />
 
-            <Chat />
+            <div style={{marginLeft: '-100px'}}> {/* 간격을 줄이기 위한 margin-left 설정 */}
+                <Chat/>
+            </div>
 
         </div>
     );

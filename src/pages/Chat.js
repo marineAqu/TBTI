@@ -1,58 +1,24 @@
-import React, { useState, useRef, useEffect } from "react";
+import React, { useState, useRef } from "react";
+import PlaceSlider from "./PlaceSlider"; // PlaceSlider 컴포넌트 추가
 import './main.css';
 
 function Chat() {
     const [input, setInput] = useState("");
     const [messages, setMessages] = useState([]);
-    const [places, setPlaces] = useState([]); // 여행지 데이터 상태
-    const [itinerary, setItinerary] = useState(""); // 여행 일정 상태
-    const [reservationMessage, setReservationMessage] = useState(""); // 예약 메시지 상태
+    const [places, setPlaces] = useState([]); // 장소 정보를 저장할 상태 추가
     const chatBoxRef = useRef(null);
 
-    useEffect(() => {
-        const fetchData = async () => {
-            try {
-                const response = await fetch(`http://localhost:8001`);
-                const result = await response.json();
-
-                // 응답 처리
-                const responseData = JSON.parse(result.response); // JSON 문자열을 객체로 변환
-
-                // 각 경우에 따라 상태 업데이트
-                if (responseData.answer) {
-                    // 여행지 추천일 경우
-                    if (responseData.place) {
-                        setPlaces(responseData.place);
-                    } else {
-                        setItinerary(responseData.answer);
-                    }
-                } else {
-                    // 예약 리다이렉션일 경우
-                    setReservationMessage(responseData.answer);
-                    setPlaces(responseData.place);
-                }
-
-            } catch (error) {
-                console.error('Error:', error);
-            }
-        };
-
-        fetchData();
-    }, []); // 컴포넌트가 마운트될 때 한 번 실행
-
-    useEffect(() => {
-        if (chatBoxRef.current) {
-            chatBoxRef.current.scrollTop = chatBoxRef.current.scrollHeight;
-        }
-    }, [messages]);
-
     const sendMessage = async () => {
-        if (!input) return;
+        if (!input) return; // 빈 메시지를 전송하지 않도록 방지
 
+        // 새로운 메시지 객체 생성
         const newMessage = { sender: "user", text: input };
         setMessages((prevMessages) => [...prevMessages, newMessage]);
 
-        try {
+        console.log("보낸 메시지:", newMessage); // 사용자가 보낸 메시지 콘솔에 출력
+
+
+        try { //서버에 메시지 전송
             const res = await fetch("/chat/message", {
                 method: "POST",
                 headers: {
@@ -61,15 +27,39 @@ function Chat() {
                 body: JSON.stringify({ sender: "user", message: input }),
             });
 
-            const data = await res.text();
-            const aiMessage = { sender: "ai", text: data };
+            if (!res.ok) {
+                throw new Error('네트워크 응답이 좋지 않습니다.');
+            }
+
+            const data = await res.json(); // AI의 응답 텍스트 받기
+            // const text = await res.text();
+            // const data = JSON.parse(text);
+            console.log(data)
+
+
+            const answer = data.answer; //ai 답변
+            const placesData = data.place; // 장소 데이터 저장
+
+            console.log(answer)
+            console.log(placesData)
+
+            //ai 응답 메시지를 메시지 배열에 추가
+            const aiMessage = { sender: "ai", text: answer };
             setMessages((prevMessages) => [...prevMessages, aiMessage]);
+
+            // place가 null 일 때,
+            if (placesData && placesData.length > 0) {
+                setPlaces(placesData);
+            } else {
+                setPlaces([]); // 장소가 없을 경우 빈 배열로 설정
+            }
+
         } catch (error) {
-            console.error("Error sending message:", error);
+            console.error("메시지 전송 중 오류 발생:", error);
             const errorMessage = { sender: "ai", text: "서버와의 통신 중 오류가 발생했습니다." };
             setMessages((prevMessages) => [...prevMessages, errorMessage]);
         } finally {
-            setInput("");
+            setInput(""); // 메시지를 전송한 후 입력창 비우기
         }
     };
 
@@ -96,56 +86,9 @@ function Chat() {
                         ))}
                     </div>
                 ))}
-            </div>
 
-            {/* 여행지 추천 또는 여행 일정 또는 예약 출력 섹션 */}
-            <div className="card-section">
-                <div className="card-container">
-                    {/* 여행지 추천일 경우 */}
-                    {places.length > 0 && !itinerary && !reservationMessage && (
-                        places.map((place, index) => (
-                            <div key={index} className="card">
-                                <div className="placeName">{place.place_name}</div>
-                                <div className="location">{place.location}</div>
-                                <div className="category">{place.category}</div>
-                                <div className="description">{place.description}</div>
-                                <div className="descriptionURL">
-                                    <a href={place.redirection_url} target="_blank" rel="noopener noreferrer">
-                                        링크
-                                    </a>
-                                </div>
-                            </div>
-                        ))
-                    )}
-
-                    {/* 여행 일정일 경우 */}
-                    {itinerary && (
-                        <div className="itinerary">
-                            <h3>여행 일정:</h3>
-                            <div dangerouslySetInnerHTML={{ __html: itinerary }} />
-                        </div>
-                    )}
-
-                    {/* 예약 리다이렉션일 경우 */}
-                    {reservationMessage && (
-                        <div className="reservation">
-                            <p>{reservationMessage}</p>
-                            {places.map((place, index) => (
-                                <div key={index} className="card">
-                                    <div className="placeName">{place.place_name}</div>
-                                    <div className="location">{place.location}</div>
-                                    <div className="category">{place.category}</div>
-                                    <div className="description">{place.description}</div>
-                                    <div className="descriptionURL">
-                                        <a href={place.redirection_url} target="_blank" rel="noopener noreferrer">
-                                            링크
-                                        </a>
-                                    </div>
-                                </div>
-                            ))}
-                        </div>
-                    )}
-                </div>
+                {/* 장소가 있을 경우 PlaceSlider 컴포넌트 렌더링 */}
+                {places.length > 0 && <PlaceSlider places={places} />}
             </div>
 
             <div className="introduce">
