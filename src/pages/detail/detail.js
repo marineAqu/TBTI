@@ -77,6 +77,7 @@ const Detail = () => {
                     <div className="storeName">
                         [{data.category}] {data.storeName}
                     </div>
+
                     <div className="contactInfo">
                         <p className="detailAddress">{data.detailAddress}</p>
                         <p className="hours">{data.business_hours}</p>
@@ -85,14 +86,20 @@ const Detail = () => {
                     <div className="descriptionBox">
                         <div className={`description ${showMore ? 'show-more' : 'show-less'}`}>
                             {showMore ? description : truncatedDescription}
-                            {description.length > 60 && (
-                                <button className="show-more-button" onClick={handleShowMore}>
-                                    {showMore ? '접기' : '더보기'}
-                                </button>
-                            )}
                         </div>
+                        {description.length > 60 && (
+                            <button className="show-more-button" onClick={handleShowMore}>
+                                {showMore ? '접기' : '더보기'}
+                            </button>
+                        )}
+
+                    </div>
+
+                    <div className="reservation">
+                        <button className="reservation-button">예약하기</button>
                     </div>
                 </div>
+
             </div>
 
         </div>

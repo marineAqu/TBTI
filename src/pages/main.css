@@ -1,18 +1,18 @@
 .main {
     display: flex;
-    gap: 100px;
+    gap: 40px;
     padding: 20px;
     justify-content: center;
-    width: 85%;
+    width: 90%;
 }
-
 .iframe{
     border: 2px solid #ccc;
     overflow:hidden;
 }
 
+/*chat.js*/
 .chat-container {
-    width: 500px;
+    width: 350px;
     margin: 0;
     padding: 20px;
     border: 1px solid #ccc;
@@ -21,53 +21,92 @@
 }
 
 .chat-name {
-    padding-bottom: 20px;
+    padding-bottom: 10px;
     font-weight: 700;
 }
 
 .chat-box {
-    height: 620px;
+    height: 390px;
     overflow-y: scroll;
     margin-bottom: 10px;
     padding: 10px;
     border-radius: 8px;
     background-color: #F3F3F3;
+    display: flex; /* Flexbox를 사용하여 자식 요소를 정렬 */
+    flex-direction: column; /* 세로 방향으로 배치 */
+    align-items: flex-start; /* 기본적으로 왼쪽 정렬 */
 }
 
 .message {
     margin-bottom: 10px;
     padding: 8px;
     border-radius: 4px;
-    max-width: 80%;
+    font-size: 13px;
+    max-width: 90%; /* 전체 메시지의 최대 너비 */
 }
 
 .message.user {
     background-color: #cf96e6;
     color: white;
-    align-self: flex-end;
+    align-self: flex-end; /* 오른쪽 정렬 */
     text-align: right;
+    font-size: 13px;
     border-radius: 15px 15px 0 15px;
     padding: 8px;
     margin-bottom: 10px;
-    max-width: 80%;
+    width: auto; /* 입력한 글자 수에 따라 자동 조정 */
+    display: inline-block; /* 메시지 크기를 텍스트에 맞게 조정 */
+    word-wrap: break-word; /* 긴 단어는 줄 바꿈 처리 */
 }
 
 .message.ai {
     background-color: #ffffff;
-    align-self: flex-start;
+    align-self: flex-start; /* 왼쪽 정렬 */
     text-align: left;
+    font-weight: bold;
+
 }
+
+.introduce {
+    display: flex;
+    /*justify-content: center;*/
+    margin-top: 20px;
+    margin-bottom: 10px;
+}
+
+.introduce-button {
+    padding: 5px 10px;
+    background-color: #cf96e6;
+    font-size: 11px;
+    color: white;
+    border: none;
+    border-radius: 15px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    margin: 0 5px;
+}
+
+.introduce-button:hover {
+    background-color: #a96add; /* 마우스 오버 시 배경색 변화 */
+}
+
 
 .input-box {
     display: flex;
     gap: 10px;
+    align-items: flex-start; /* 텍스트 박스와 버튼을 수직 정렬 */
 }
 
-input[type="text"] {
-    flex: 1;
+textarea {
+    flex: 1; /* 가능한 공간을 모두 차지 */
     padding: 8px;
     border-radius: 4px;
     border: 1px solid #ccc;
+    height: auto; /* 자동으로 높이 조정 */
+    min-height: 40px; /* 최소 높이 설정 */
+    resize: none; /* 사용자가 크기 조정 불가능 */
+    line-height: 25px;
+    font-weight: bold;
 }
 
 button {
@@ -86,6 +125,55 @@ button:hover {
 }
 
 .send-icon {
-    width: 24px;
-    height: 24px;
+    width: 30px;
+    height: 30px;
+}
+
+.introduce {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    margin: 10px 0;
+}
+
+.introduce-button {
+    padding: 5px 10px;
+    border: none;
+    background-color: #cf96e6;
+    color: white;
+    border-radius: 15px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.introduce-button:hover {
+    background-color: #995eb5;
+}
+
+.card-section {
+    position: relative; /* 상대 위치 설정 */
+    margin: 10px 0; /* 카드 섹션 마진 추가 */
+}
+
+.card-container {
+    display: flex; /* 카드들을 가로로 나열 */
+    overflow-x: auto; /* 수평 스크롤 가능 */
+    scroll-behavior: smooth; /* 스크롤 부드럽게 */
+    padding-bottom: 10px; /* 하단 패딩 추가 */
+}
+
+.card {
+    flex: 0 0 auto; /* 카드 크기를 자동으로 조정 */
+    width: 200px; /* 카드의 너비 설정 */
+    margin-right: 10px; /* 카드 간 간격 */
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    background-color: #fff;
+}
+
+.card-scroll {
+    height: 10px; /* 스크롤바의 높이 */
+    background-color: #f0f0f0; /* 스크롤바 배경색 */
+    border-radius: 5px; /* 스크롤바의 경계 반경 */
 }

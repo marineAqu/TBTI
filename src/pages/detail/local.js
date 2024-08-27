@@ -13,6 +13,7 @@ const LocalSearch = () => {
     const [selectedCategory, setSelectedCategory] = useState('');
     const [page, setPage] = useState(1);
     const [viewMode, setViewMode] = useState('info');
+    const [showDescription, setShowDescription] = useState(false); // 소개글 표시 상태 추가
 
     const location = useLocation();
     const navigate = useNavigate();
@@ -82,6 +83,13 @@ const LocalSearch = () => {
 
     const handleViewModeChange = () => {
         setViewMode((prevMode) => (prevMode === 'map' ? 'info' : 'map'));
+        if (viewMode === 'map') {
+            setViewMode('default');
+            setShowDescription(false); // '지도 보기 해제'를 누르면 소개글을 표시
+        } else {
+            setViewMode('map');
+            setShowDescription(true); // '지도 보기'를 누르면 소개글을 숨김
+        }
     };
 
     const handleRegionClick = (region) => {
@@ -109,6 +117,15 @@ const LocalSearch = () => {
                         {viewMode === 'map' ? '지도 보기 해제' : '지도 보기'}
                     </button>
                 </div>
+
+                {showDescription && (
+                    <div className="bubble">
+                        각 지역을 선택하면 해당 지역의 가게들만 보입니다.
+                    </div>
+                )}
+
+
+
             </div>
 
             <div className={`map-container ${viewMode === 'map' ? 'visible' : ''}`}>

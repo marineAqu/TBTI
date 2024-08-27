@@ -12,21 +12,21 @@
 .header {
     display: flex;
     align-items: center;
-    width: 60%;
+    width: 65%;
     justify-content: flex-start;
     padding: 20px;
     box-sizing: border-box;
 }
 
 .arrow {
-    height: 30px;
-    width: 30px;
+    height: 25px;
+    width: 25px;
     margin-right: 5px;
 }
 
 .before {
     color: #000000;
-    font-size: 30px;
+    font-size: 25px;
     font-weight: 400;
 }
 
@@ -38,8 +38,7 @@
     display: flex; /* Flexbox로 자식 요소를 가로로 배치 */
     justify-content: flex-start;
     align-items: flex-start;
-    width: 70%;
-    max-width: 900px;
+    width: 800px;
     margin: 20px 0;
     box-sizing: border-box;
 }
@@ -92,6 +91,29 @@
 
 }
 
+.reservation {
+    margin-top: 20px; /* imgBox 아래에 공간 추가 */
+    text-align: center; /* 버튼을 가로 중앙에 배치 */
+    width: 100%;
+}
+
+.reservation-button {
+    padding: 10px 100px; /* 좌우 패딩을 늘려 버튼을 가로로 긴 형태로 만듦 */
+    background-color: black;
+    font-size: 20px;
+    /*font-weight: 25;*/
+    color: white;
+    border: none;
+    border-radius: 15px;
+    cursor: pointer;
+    transition: background-color 0.5s;
+    margin: 0 5px;
+}
+
+.reservation-button:hover{
+    background-color: #616161;
+}
+
 .page-info {
     display: flex;
     flex-direction: column;
@@ -109,24 +131,24 @@
     width: calc(100% - 420px);
     max-width: 800px;
     box-sizing: border-box;
-    padding-left: 50px;
+    padding-left: 40px;
 }
 
 .storeName {
     color: #000000;
-    font-size: 35px;
+    font-size: 25px;
     font-weight: 700;
     margin-bottom: 10px;
 }
 
 .contactInfo {
     color: #000000;
-    font-size: 25px;
+    font-size: 17px;
     font-weight: 400;
 }
 
 .hours, .rating {
-    font-size: 20px;
+    font-size: 15px;
     line-height: 20px;
     width: 40%;
 }
@@ -134,11 +156,16 @@
 .descriptionBox {
     margin-top: 5px;
     line-height: 25px;
+    width: 100%;
+    position: relative;
 }
 
 .description {
     overflow: hidden;
     white-space: pre-wrap;
+    display: -webkit-box; /* For Safari */
+    -webkit-line-clamp: 2; /* Limits the number of lines to show */
+    -webkit-box-orient: vertical;
 }
 
 .description.show-less {
@@ -146,6 +173,7 @@
 }
 
 .description.show-more {
+    display: block;
     max-height: none;
 }
 
@@ -195,7 +223,7 @@
 
 }
 
-/*LocalSearch.js*/
+/*local.js/localsearch.js*/
 .container {
     display: flex;
     flex-direction: column;
@@ -386,6 +414,8 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
+    width: 780px;
+    position: relative; /* bubble 위치를 조정하기 위해 relative로 변경 */
 }
 
 .region {
@@ -395,20 +425,33 @@
 }
 
 .view-toggle {
-    margin-left: 20px;
+    margin-right: 100px;
 }
 
-.view-toggle button{
+.view-toggle button {
     font-size: 14px;
     border-radius: 5px;
     color: black;
-    border-color: #b6b6b6;
+    border-color: #000000;
     background-color: white;
-    padding: 6px 7px;
+    padding: 8px 10px;
 }
 
-.view-toggle button:hover{
+.view-toggle button:hover {
     background-color: #f0f0f0;
+}
+
+.bubble {
+    position: absolute;
+    top: 100%;
+    right: 0;
+    width: 300px;
+    padding: 10px;
+    background-color: #f9f9f9;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    z-index: 10;
 }
 
 .map-container {
@@ -421,19 +464,6 @@
     height: 480px;
     margin-bottom: 5px; /* 지도 아래 여백 추가 */
 }
-
-
-/*.map-container iframe {*/
-/*    width: 100%;*/
-/*    height: 100%;*/
-/*    border: 0;*/
-/*}*/
-/*.map-container {*/
-/*    margin-top: 20px;*/
-/*    border: 1px solid #ccc;*/
-/*    border-radius: 5px;*/
-/*    overflow: hidden;*/
-/*}*/
 
 .category-buttons {
     margin-bottom: 20px;
