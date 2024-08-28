@@ -4,7 +4,7 @@ public class ChatResponse {
     private String response;
 
     // 기본 생성자
-    public ChatResponse() {}
+    //public ChatResponse() {}
 
     // 파라미터가 있는 생성자
     public ChatResponse(String response) {

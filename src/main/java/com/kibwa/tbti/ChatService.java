@@ -22,18 +22,20 @@ public class ChatService {
 
         try {
             // FastAPI 서버로 요청
-            Mono<ChatResponse> responseMono = webClient.post()
+            Mono<String> responseMono = webClient.post()
                     .uri("/ask-ai/")
                     .contentType(MediaType.APPLICATION_JSON)
                     .bodyValue(request)
                     .retrieve()
-                    .bodyToMono(ChatResponse.class);
+                    .bodyToMono(String.class);
 
+            String response = responseMono.block();
+            ChatResponse chatResponse = new ChatResponse(response);
             // 응답을 동기적으로 기다리고 반환
-            ChatResponse response = responseMono.block();
-            return response.getResponse();
+            //ChatResponse response = responseMono.block();
+            System.out.println(chatResponse.getResponse());
+            return chatResponse.getResponse();
         } catch (Exception e) {
-            e.printStackTrace();
             return "FastAPI 서버와 연결할 수 없습니다.";
         }
     }
@@ -56,15 +58,15 @@ public class ChatService {
     }
 
     // ChatResponse 클래스
-    public static class ChatResponse {
-        private String response;
-
-        public String getResponse() {
-            return response;
-        }
-
-        public void setResponse(String response) {
-            this.response = response;
-        }
-    }
+//    public static class ChatResponse {
+//        private String response;
+//
+//        public String getResponse() {
+//            return response;
+//        }
+//
+//        public void setResponse(String response) {
+//            this.response = response;
+//        }
+//    }
 }

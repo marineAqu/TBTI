@@ -149,9 +149,13 @@ button:hover {
     background-color: #995eb5;
 }
 
-.card-section {
-    position: relative;
-    margin: 10px 0;
+.card-section { /*카드css*/
+    margin-top: 10px;
+    padding-top: 10px;
+    border-top:1px solid #ccc;
+    width: 100%;
+    /*position: relative;*/
+    /*margin: 10px 0;*/
 }
 
 .card-container {
@@ -180,42 +184,44 @@ button:hover {
 /* PlaceSlider.css */
 .place-slider {
     display: flex;
-    justify-content: center; /* 가로 중앙 정렬 */
-    align-items: center; /* 세로 중앙 정렬 */
-    padding: 20px; /* 상하 여백 추가 */
-    overflow-x: auto; /* 수평 스크롤 허용 */
+    justify-content: center;
+    align-items: center;
+    padding: 10px 0;
 }
 
 .place-slider-container {
     display: flex;
-    flex-wrap: nowrap; /* 아이템을 한 줄로 나열 */
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    scroll-behavior: smooth;
 }
 
 .place-item {
-    background-color: #f9f9f9; /* 배경 색상 */
-    border: 1px solid #ddd; /* 테두리 색상 */
-    border-radius: 8px; /* 모서리 둥글게 */
-    padding: 15px; /* 내부 여백 */
-    margin: 10px; /* 외부 여백 */
-    text-align: center; /* 텍스트 가운데 정렬 */
-    cursor: pointer; /* 마우스 포인터를 손가락 모양으로 변경 */
-    flex: 0 0 auto; /* 자동 크기 조절, 가로 방향으로 늘어남 */
-    max-width: 200px; /* 아이템 최대 너비 설정 */
+    background-color: #f9f9f9;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    padding: 10px;
+    margin: 5px;
+    text-align: center;
+    cursor: pointer;
+    flex: 0 0 auto;
+    width: 200px;
+    transition: background-color 0.3s;
 }
 
 .place-item:hover {
-    background-color: #e0e0e0; /* 호버 시 배경 색상 변경 */
-    transition: background-color 0.3s; /* 부드러운 전환 효과 */
+    background-color: #e0e0e0;
 }
 
-.place-slider-container.place-item h3 {
-    margin: 0; /* 제목의 기본 여백 제거 */
-    font-size: 1.2rem; /* 제목 크기 조정 */
+.place-item h3 {
+    margin: 0;
+    font-size: 1rem;
 }
 
-.place-slider-container.place-item p {
-    margin: 5px 0; /* 문단의 상하 여백 */
-    font-size: 0.9rem; /* 문단 크기 조정 */
+.place-item p {
+    margin: 3px 0;
+    font-size: 0.8rem;
 }
+
 
 
