@@ -1,19 +1,25 @@
 import React, { useState, useRef } from "react";
 import PlaceSlider from "./PlaceSlider";
+import ReactMarkdown from "react-markdown";
 import './main.css';
 
 function Chat() {
-    const [input, setInput] = useState(""); // 입력된 메시지를 관리하는 상태
-    const [messages, setMessages] = useState([]); // 채팅 메시지들을 관리하는 상태
-    const [places, setPlaces] = useState([]); // 장소 정보를 저장하는 상태
+    const [input, setInput] = useState(""); // 입력 메시지 상태
+    const [messages, setMessages] = useState([]); // 채팅 메시지 상태
+    const [places, setPlaces] = useState([]); // 장소 정보 상태
     const chatBoxRef = useRef(null); // 채팅 박스에 대한 참조
 
+    const scrollToBottom = () => {
+        if (chatBoxRef.current) {
+            chatBoxRef.current.scrollTop = chatBoxRef.current.scrollHeight; // 스크롤을 가장 아래로 이동
+        }
+    };
+
     const sendMessage = async () => {
-        if (!input) return; // 입력된 메시지가 없으면 전송하지 않음
+        if (!input) return; // 입력이 없으면 반환
 
         const newMessage = { sender: "user", text: input };
         setMessages((prevMessages) => [...prevMessages, newMessage]);
-        console.log("보낸 메시지:", newMessage);
 
         try {
             const res = await fetch("/chat/message", {
@@ -30,52 +36,40 @@ function Chat() {
 
             let data;
             try {
-                data = await res.json(); // 서버 응답을 JSON 형식으로 파싱
+                data = await res.json(); // 서버 응답을 JSON으로 변환
             } catch (jsonError) {
                 console.error("JSON 파싱 오류:", jsonError);
                 throw new Error("서버 응답이 올바르지 않습니다.");
             }
 
-            console.log(data); // 파싱된 데이터를 콘솔에 출력
-
-            const answer = data.answer; // AI 응답 메시지
+            const answer = data.answer; // AI의 응답
             const placesData = data.place; // 장소 데이터
 
-            console.log(answer); // AI 응답 메시지를 콘솔에 출력
-            console.log(placesData); // 장소 데이터를 콘솔에 출력
-
-            // AI 응답 메시지를 메시지 배열에 추가
             const aiMessage = { sender: "ai", text: answer };
             setMessages((prevMessages) => [...prevMessages, aiMessage]);
+            scrollToBottom(); // 새 메시지가 추가된 후 스크롤
 
-            // 장소 데이터가 존재할 경우에만 상태 업데이트
             if (placesData && placesData.length > 0) {
                 setPlaces(placesData);
+                scrollToBottom(); // 장소가 업데이트된 후 스크롤
             } else {
                 setPlaces([]); // 장소 데이터가 없으면 빈 배열로 설정
             }
-
-            // 장소 데이터가 없고 AI 응답 메시지만 있을 경우
-            // if (!placesData || placesData.length === 0) {
-            //     setMessages((prevMessages) => [
-            //         ...prevMessages,
-            //         { sender: "ai", text: "장소 정보가 없습니다." },
-            //     ]);
-            // }
 
         } catch (error) {
             console.error("메시지 전송 중 오류 발생:", error);
             const errorMessage = { sender: "ai", text: "서버와의 통신 중 오류가 발생했습니다." };
             setMessages((prevMessages) => [...prevMessages, errorMessage]);
+            scrollToBottom(); // 오류 발생 시에도 스크롤
         } finally {
-            setInput(""); // 메시지를 전송한 후 입력창을 비움
+            setInput(""); // 입력창 비우기
         }
     };
 
     const handleKeyDown = (e) => {
         if (e.key === "Enter") {
             if (e.shiftKey) {
-                setInput((prevInput) => prevInput + "\n"); // Shift+Enter는 줄 바꿈 처리
+                setInput((prevInput) => prevInput + "\n"); // Shift+Enter로 줄 바꿈
             } else {
                 e.preventDefault();
                 sendMessage(); // Enter 키로 메시지 전송
@@ -90,14 +84,17 @@ function Chat() {
             <div className="chat-box" ref={chatBoxRef}>
                 {messages.map((message, index) => (
                     <div key={index} className={`message ${message.sender}`}>
-                        {message.text.split('\n').map((line, idx) => (
-                            <div key={idx}>{line}</div>
-                        ))}
+                        {/* Conditionally render ReactMarkdown for AI messages only */}
+                        {message.sender === "ai" ? (
+                            <ReactMarkdown>{message.text}</ReactMarkdown>
+                        ) : (
+                            <div>{message.text}</div>
+                        )}
                     </div>
                 ))}
 
                 {/* 장소 데이터가 있을 경우 PlaceSlider 컴포넌트를 렌더링 */}
-                {places.length > 0 && <PlaceSlider places={places} />}
+                {places.length > 0 && <PlaceSlider places={places}/>}
             </div>
 
             <div className="introduce">
@@ -113,10 +110,10 @@ function Chat() {
                     onChange={(e) => setInput(e.target.value)}
                     onKeyDown={handleKeyDown}
                     placeholder="AI에게 물어보세요~"
-                    style={{ resize: 'none' }}
+                    style={{resize: 'none'}}
                 />
                 <button onClick={sendMessage}>
-                    <img src={'./image/send.png'} alt="전송" className="send-icon" />
+                    <img src={'./image/send.png'} alt="전송" className="send-icon"/>
                 </button>
             </div>
         </div>
