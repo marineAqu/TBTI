@@ -200,14 +200,22 @@ button:hover {
     background-color: #f9f9f9;
     border: 1px solid #ddd;
     border-radius: 8px;
-    padding: 10px;
-    margin: 5px;
+    padding: 8px; /* 패딩 줄임 */
+    margin: 4px;  /* 마진 줄임 */
     text-align: center;
     cursor: pointer;
     flex: 0 0 auto;
-    width: 200px;
+    width: 170px;  /* 너비 줄임 */
     transition: background-color 0.3s;
 }
+
+.place-item img {
+    width: 100px; /* 고정된 이미지 너비 */
+    height: 100px; /* 고정된 이미지 높이 */
+    border-radius: 5px; /* 이미지 모서리 둥글게 */
+    object-fit: cover; /* 이미지가 박스에 맞게 잘리도록 설정 */
+}
+
 
 .place-item:hover {
     background-color: #e0e0e0;

@@ -1,4 +1,3 @@
-//상세페이지
 import React, { useState, useEffect } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import "./detail.css";
@@ -42,24 +41,26 @@ const Detail = () => {
         navigate(-1);
     };
 
+    const handleReservationClick = () => {
+        window.open("https://map.naver.com/p/entry/place/1705838287?c=15.00,0,0,0,dh", "_blank");
+    };
+
     const truncatedDescription = description.length > 60
         ? description.substring(0, 60) + "..."
         : description;
 
     return (
-
         <div className="detailPage">
             <div className="header">
-                <img className="arrow" alt="left Arrow" src="/image/left-arrow.png"/>
+                <img className="arrow" alt="left Arrow" src="/image/left-arrow.png" />
                 <div className="before" onClick={handleBackNavigation}>
                     이전으로
                 </div>
             </div>
 
             <div className="imageContainer">
-
                 <div className="imgBox">
-                    <img src={data.img ? data.img[currentImageIndex] : ''} alt="Detail" className="image"/>
+                    <img src={data.img ? data.img[currentImageIndex] : ''} alt="Detail" className="image" />
                     <div className="arrowBox">
                         <button className="arrow-button" onClick={handlePrevImage}>
                             &#9664; {/* 좌측 화살표 문자 */}
@@ -92,18 +93,16 @@ const Detail = () => {
                                 {showMore ? '접기' : '더보기'}
                             </button>
                         )}
-
                     </div>
 
                     <div className="reservation">
-                        <button className="reservation-button">예약하기</button>
+                        <button className="reservation-button" onClick={handleReservationClick}>
+                            예약하기
+                        </button>
                     </div>
                 </div>
-
             </div>
-
         </div>
-
     );
 };
 
