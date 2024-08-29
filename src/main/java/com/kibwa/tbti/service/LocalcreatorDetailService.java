@@ -10,6 +10,8 @@ import com.kibwa.tbti.repository.ReviewRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 /**
  * 파일명: LocalcreatorDetailService
  * 작성자: 김도연
@@ -50,5 +52,9 @@ public class LocalcreatorDetailService {
             LikesEntity likesEntity = LikesEntity.toLikesEntity(store_id, 1);
             likesRepository.save(likesEntity);
         }
+    }
+
+    public List<ReviewEntity> getReview(int store_id) {
+        return reviewRepository.findByStoreId(store_id);
     }
 }

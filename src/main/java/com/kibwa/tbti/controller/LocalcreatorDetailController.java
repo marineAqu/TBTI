@@ -1,6 +1,7 @@
 package com.kibwa.tbti.controller;
 
 import com.kibwa.tbti.DTO.LocalcreatorDTO;
+import com.kibwa.tbti.entity.ReviewEntity;
 import com.kibwa.tbti.service.LocalcreatorDetailService;
 import com.kibwa.tbti.service.StorageS3Service;
 import lombok.RequiredArgsConstructor;
@@ -51,6 +52,18 @@ public class LocalcreatorDetailController {
 
         return response;
     }
+
+    @GetMapping("/api/get_review")
+    public HashMap<String, Object> get_review(@RequestParam("storeId") int store_id) {
+        List<ReviewEntity> reviewEntityList = localcreatorDetailService.getReview(store_id);
+
+        System.out.print("get_review get api controller:"+reviewEntityList.toString());
+        HashMap<String, Object> response = new HashMap<>();
+        response.put("reviewEntityList", reviewEntityList);
+
+        return response;
+    }
+
 
     @PostMapping("/api/save_like")
     public HashMap<String, Object> save_like( //@AuthenticationPrincipal UserDetails userDetails,
