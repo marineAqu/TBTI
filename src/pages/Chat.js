@@ -79,9 +79,15 @@ function Chat() {
 
     return (
         <div className="chat-container">
-            <div className="chat-name">대화제목</div>
+            <div className="chat-name">TBTI</div>
 
             <div className="chat-box" ref={chatBoxRef}>
+
+                <div className="guide-message">
+                    "TBTI 테스트 시작" 을 입력하면 <br/> 당신의 여행 유형을 파악해드립니다.
+                </div>
+
+                {/* 기존 메시지 렌더링 */}
                 {messages.map((message, index) => (
                     <div key={index} className={`message ${message.sender}`}>
                         {/* Conditionally render ReactMarkdown for AI messages only */}
@@ -94,7 +100,7 @@ function Chat() {
                 ))}
 
                 {/* 장소 데이터가 있을 경우 PlaceSlider 컴포넌트를 렌더링 */}
-                {places.length > 0 && <PlaceSlider places={places}/>}
+                {places.length > 0 && <PlaceSlider places={places} />}
             </div>
 
             <div className="introduce">
@@ -110,10 +116,10 @@ function Chat() {
                     onChange={(e) => setInput(e.target.value)}
                     onKeyDown={handleKeyDown}
                     placeholder="AI에게 물어보세요~"
-                    style={{resize: 'none'}}
+                    style={{ resize: 'none' }}
                 />
                 <button onClick={sendMessage}>
-                    <img src={'./image/send.png'} alt="전송" className="send-icon"/>
+                    <img src={'./image/send.png'} alt="전송" className="send-icon" />
                 </button>
             </div>
         </div>
