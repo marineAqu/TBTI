@@ -1,4 +1,4 @@
-import React, { useState, useRef } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import PlaceSlider from "./PlaceSlider";
 import ReactMarkdown from "react-markdown";
 import './main.css';
@@ -14,6 +14,11 @@ function Chat() {
             chatBoxRef.current.scrollTop = chatBoxRef.current.scrollHeight; // 스크롤을 가장 아래로 이동
         }
     };
+
+    // useEffect를 사용하여 messages 배열이 업데이트될 때마다 스크롤
+    useEffect(() => {
+        scrollToBottom();
+    }, [messages]);
 
     const sendMessage = async () => {
         if (!input) return; // 입력이 없으면 반환
@@ -47,11 +52,9 @@ function Chat() {
 
             const aiMessage = { sender: "ai", text: answer };
             setMessages((prevMessages) => [...prevMessages, aiMessage]);
-            scrollToBottom(); // 새 메시지가 추가된 후 스크롤
 
             if (placesData && placesData.length > 0) {
                 setPlaces(placesData);
-                scrollToBottom(); // 장소가 업데이트된 후 스크롤
             } else {
                 setPlaces([]); // 장소 데이터가 없으면 빈 배열로 설정
             }
@@ -60,7 +63,6 @@ function Chat() {
             console.error("메시지 전송 중 오류 발생:", error);
             const errorMessage = { sender: "ai", text: "서버와의 통신 중 오류가 발생했습니다." };
             setMessages((prevMessages) => [...prevMessages, errorMessage]);
-            scrollToBottom(); // 오류 발생 시에도 스크롤
         } finally {
             setInput(""); // 입력창 비우기
         }
@@ -84,7 +86,7 @@ function Chat() {
             <div className="chat-box" ref={chatBoxRef}>
 
                 <div className="guide-message">
-                    "TBTI 테스트 시작" 을 입력하면 <br/> 당신의 여행 유형을 파악해드립니다.
+                    "TBTI 테스트 시작" 을 입력하면 <br /> 당신의 여행 유형을 파악해드립니다.
                 </div>
 
                 {/* 기존 메시지 렌더링 */}

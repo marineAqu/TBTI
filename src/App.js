@@ -11,6 +11,7 @@ import Detail from "./pages/detail/detail";
 import Main from "./pages/Main";
 import LocalSearch from "./pages/detail/LocalSearch";
 import Local from "./pages/detail/local";
+
 // import Check from "./pages/detail/dd.";
 // import Mypage from "./pages/login/Mypage";
 

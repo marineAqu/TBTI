@@ -9,6 +9,8 @@ const Detail = () => {
     const [description, setDescription] = useState("");
     const [currentImageIndex, setCurrentImageIndex] = useState(0);
     const [showMore, setShowMore] = useState(false);
+    const [reviewText, setReviewText] = useState(""); // 리뷰 입력 상태
+    const [reviews, setReviews] = useState([]); // 리뷰 목록 상태
 
     useEffect(() => {
         const fetchData = async () => {
@@ -17,6 +19,7 @@ const Detail = () => {
                 const result = await response.json();
                 setData(result.localcreator);
                 setDescription(result.localcreator.description.description);
+                // 기존 리뷰를 로드할 수도 있습니다.
             } catch (error) {
                 console.error('오류:', error);
             }
@@ -41,13 +44,47 @@ const Detail = () => {
         navigate(-1);
     };
 
-    const handleReservationClick = () => {
+    const handleReservationClick = () => { //예약하기 버튼 링크 연결
         window.open("https://map.naver.com/p/entry/place/1705838287?c=15.00,0,0,0,dh", "_blank");
     };
 
     const truncatedDescription = description.length > 60
         ? description.substring(0, 60) + "..."
         : description;
+
+    const handleReviewChange = (e) => {
+        setReviewText(e.target.value);
+    };
+
+    const handleReviewSubmit = async (e) => { //리뷰 api
+        e.preventDefault();
+        if (reviewText.trim()) {
+            try {
+                const response = await fetch('/api/post_review', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({
+                        storeId: storeId,
+                        review: reviewText.trim(),
+                    }),
+                });
+
+                if (!response.ok) {
+                    throw new Error('리뷰 제출에 실패했습니다.');
+                }
+
+                const result = await response.json();
+
+                // 리뷰 목록 업데이트
+                setReviews([...reviews, reviewText.trim()]);
+                setReviewText(""); // 입력 필드 초기화
+            } catch (error) {
+                console.error('리뷰 제출 오류:', error);
+            }
+        }
+    };
 
     return (
         <div className="detailPage">
@@ -63,13 +100,13 @@ const Detail = () => {
                     <img src={data.img ? data.img[currentImageIndex] : ''} alt="Detail" className="image" />
                     <div className="arrowBox">
                         <button className="arrow-button" onClick={handlePrevImage}>
-                            &#9664; {/* 좌측 화살표 문자 */}
+                            &#9664;
                         </button>
                         <div className="page-info">
-                            <span>{currentImageIndex + 1} / {data.img ? data.img.length : 1}</span> {/* 페이지 번호 */}
+                            <span>{currentImageIndex + 1} / {data.img ? data.img.length : 1}</span>
                         </div>
                         <button className="arrow-button" onClick={handleNextImage}>
-                            &#9654; {/* 우측 화살표 문자 */}
+                            &#9654;
                         </button>
                     </div>
                 </div>
@@ -84,6 +121,7 @@ const Detail = () => {
                         <p className="hours">{data.business_hours}</p>
                         <p className="rating">평점 : {data.rating}</p>
                     </div>
+
                     <div className="descriptionBox">
                         <div className={`description ${showMore ? 'show-more' : 'show-less'}`}>
                             {showMore ? description : truncatedDescription}
@@ -99,6 +137,33 @@ const Detail = () => {
                         <button className="reservation-button" onClick={handleReservationClick}>
                             예약하기
                         </button>
+                    </div>
+
+                    <div className="review">
+                        <form className="reviewForm" onSubmit={handleReviewSubmit}>
+                            <textarea
+                                className="reviewInput"
+                                value={reviewText}
+                                onChange={handleReviewChange}
+                                placeholder="리뷰를 작성하세요"
+                                rows="2"
+
+
+                            />
+                            <button type="submit" className="submitReviewButton">리뷰 작성</button>
+                        </form>
+
+                        <div className="reviewList">
+                            {reviews.length > 0 ? (
+                                reviews.map((review, index) => (
+                                    <div key={index} className="reviewItem">
+                                        {review}
+                                    </div>
+                                ))
+                            ) : (
+                                <p className="noReviews">아직 작성된 리뷰가 없습니다.</p>
+                            )}
+                        </div>
                     </div>
                 </div>
             </div>

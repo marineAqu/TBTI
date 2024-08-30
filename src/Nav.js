@@ -5,7 +5,7 @@ import "./nav.css";
 export const Nav = () => {
     const [searchInput, setSearchInput] = useState("");
     const [filteredRegions, setFilteredRegions] = useState([]);
-    const [selectedIndex, setSelectedIndex] = useState(-1); // 현재 선택된 인덱스
+    const [selectedIndex, setSelectedIndex] = useState(-1);
     const inputRef = useRef(null);
     const navigate = useNavigate();
 
