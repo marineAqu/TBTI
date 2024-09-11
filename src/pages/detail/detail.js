@@ -75,7 +75,7 @@ const Detail = () => {
                     throw new Error('리뷰 제출에 실패했습니다.');
                 }
 
-                const result = await response.json();
+                // const result = await response.json();
 
                 // 리뷰 목록 업데이트
                 setReviews([...reviews, reviewText.trim()]);

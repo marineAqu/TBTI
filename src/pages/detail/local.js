@@ -93,8 +93,8 @@ const LocalSearch = () => {
     };
 
     const handleRegionClick = (region) => {
-        setRegionName(region); // 클릭된 지역 이름을 설정
-        // 필요한 경우 해당 지역에 대해 추가 데이터를 가져오는 로직을 작성
+        setRegionName(region);
+
     };
 
 
@@ -134,13 +134,6 @@ const LocalSearch = () => {
                 )}
             </div>
 
-
-            {/*<div className={`map-container ${viewMode === 'map' ? 'visible' : ''}`}>*/}
-            {/*    {viewMode === 'map' && (*/}
-            {/*        <img src={'/image/img.png'} alt="경기도 지도" style={{width: '100%', height: '450px'}}/>*/}
-            {/*    )}*/}
-
-            {/*</div>*/}
 
             <div className="category-buttons">
                 <button

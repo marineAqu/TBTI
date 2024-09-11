@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import "./main.css";
 import Chat from "./Chat";
 
+
 const Main = () => {
 
     return (
@@ -20,6 +21,7 @@ const Main = () => {
             <div style={{marginLeft: '-100px'}}> {/* 간격을 줄이기 위한 margin-left 설정 */}
                 <Chat/>
             </div>
+
 
         </div>
     );

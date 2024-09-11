@@ -12,7 +12,8 @@ import Main from "./pages/Main";
 import LocalSearch from "./pages/detail/LocalSearch";
 import Local from "./pages/detail/local";
 
-// import Check from "./pages/detail/dd.";
+import Check from "./pages/detail/coordinate";
+
 // import Mypage from "./pages/login/Mypage";
 
 function App() {
@@ -34,7 +35,8 @@ function App() {
                     {/*<Route path="/mypage" element={<Mypage />} />*/}
                 </Routes>
 
-                {/*<Check />*/}
+                <Check />
+
             </main>
             {/* <footer> */}
             {/*     <Fnb /> */}
