@@ -3,7 +3,7 @@
     background-color: #ffffff;
     height: 60px; /* 높이 축소 */
     position: relative;
-    width: 80%; /*GNB 가운데 정렬*/
+    width: 85%; /*GNB 가운데 정렬*/
     display: flex;
     justify-content: center;
     align-items: center;
@@ -95,21 +95,20 @@
 .GNB .div-wrapper {
     align-items: center;
     border: 1px solid #000000;
-    border-radius: 35px;
+    border-radius: 20px;
     display: inline-flex;
-    gap: 8px; /* 간격 축소 */
     justify-content: center;
-    left: 1000px; /* 위치 조정 */
-    padding: 3px 15px; /* 패딩 축소 */
+    left: 850px;
+    padding: 3px 10px;
     position: absolute;
-    top: 25px; /* 위치 조정 */
+    top: 25px;
 }
 
 .GNB .div-wrapper .text-wrapper {
     color: #000000;
-    font-size: 18px; /* 글자 크기 축소 */
+    font-size: 15px;
     font-weight: 600;
-    text-decoration: none; /* 링크 스타일 */
+    text-decoration: none;
 }
 
 .group{

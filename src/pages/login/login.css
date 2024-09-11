@@ -1,0 +1,211 @@
+.login {
+    display: flex;
+    height: 100vh;
+    justify-content: center;
+    align-items: center;
+    background-color: #F3F3F3;
+}
+
+.image {
+    width: 50%;
+    height: 100vh;
+}
+
+.loginForm {
+    width: 50%;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 40px;
+}
+
+.title {
+    font-size: 2rem;
+    font-weight: bold;
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+.form {
+    margin-bottom: 20px;
+}
+
+.input {
+    font-size: 1rem;
+    font-weight: bold;
+    margin-bottom: 5px;
+}
+
+.input-field {
+    display: flex;
+    align-items: center;
+    padding: 20px;
+    border-radius: 5px;
+    background-color: #fafafa;
+}
+
+.input-field input {
+    flex: 1;
+    font-size: 15px;
+    border: none;
+    outline: none;
+    background: transparent;
+    color: #333;
+}
+
+.text {
+    color: #999;
+}
+
+.password-text {
+    color: #999;
+}
+
+.icon {
+    margin-left: auto;
+    width: 20px;
+    height: 20px;
+}
+
+.text-button {
+    color: #000000;
+    cursor: pointer;
+    margin-bottom: 15px;
+    text-align: right;
+}
+
+.checkbox {
+    display: flex;
+    align-items: center;
+    margin-bottom: 30px;
+}
+
+.checkbox input {
+    width: 20px; /* 체크박스 크기 */
+    height: 20px; /* 체크박스 크기 */
+    cursor: pointer; /* 체크박스 클릭 가능하게 설정 */
+}
+
+.checkbox-text {
+    margin-left: 10px;
+}
+
+.loginButton {
+    background-color: #000000;
+    color: white;
+    font-size: 1.2rem;
+    padding: 10px 0;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-bottom: 20px;
+}
+
+.loginButton:hover {
+    background-color: #818181;
+}
+
+.signButton {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 10px 0;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.signText {
+    margin-right: 10px;
+}
+
+.signGo {
+    width: 20px;
+    height: 20px;
+}
+
+.footer-text {
+    font-size: 0.8rem;
+    color: #777;
+    text-align: center;
+    margin-top: 20px;
+}
+
+/*Sign.js css*/
+
+.sign {
+    display: flex;
+    height: 100vh;
+    justify-content: center;
+    align-items: center;
+    background-color: #F3F3F3;
+}
+
+.signForm {
+    width: 50%;
+    max-width: 500px;
+    padding: 40px;
+    border-radius: 10px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.inputInfo {
+    width: 100%;
+    margin-bottom: 20px;
+}
+
+.name {
+    font-size: 1rem;
+    font-weight: bold;
+    margin-bottom: 5px;
+    text-align: left;
+}
+
+.name-field {
+    display: flex;
+    align-items: center;
+    padding: 10px;
+    width: 500px;
+    border-radius: 5px;
+    background-color: #fafafa;
+    border: 1px solid #ccc;
+}
+
+.name-field .text {
+    color: #999;
+    flex: 1;
+}
+
+.name-field input {
+    flex: 1;
+    border: none;
+    outline: none;
+    background: transparent;
+    color: #333;
+    padding: 5px;
+}
+
+.loginButton {
+    background-color: #000000;
+    color: white;
+    font-size: 1.2rem;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-top: 20px;
+    width: 100%;
+}
+
+.loginButton:hover {
+    background-color: #818181;
+}
+
+.success-message {
+    color: green;
+    font-size: 0.9rem;
+    margin-top: 5px;
+}
+

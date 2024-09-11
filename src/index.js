@@ -4,13 +4,15 @@ import './index.css';
 import App from './App';
 import './nav.css';
 import reportWebVitals from './reportWebVitals';
-
+import { BrowserRouter as Router } from 'react-router-dom'; // Router 추가
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
-  <React.StrictMode>
-      <App />
-  </React.StrictMode>
+    <React.StrictMode>
+        <Router>  {/* App을 Router로 감싸기 */}
+            <App />
+        </Router>
+    </React.StrictMode>
 );
 
 // If you want to start measuring performance in your app, pass a function

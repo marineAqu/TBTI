@@ -1,5 +1,5 @@
 import React from "react";
-import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
+import { BrowserRouter as Router, Route, Routes, useLocation } from "react-router-dom";
 import './App.css';
 import { Nav } from "./Nav";
 
@@ -11,17 +11,18 @@ import Detail from "./pages/detail/detail";
 import Main from "./pages/Main";
 import LocalSearch from "./pages/detail/LocalSearch";
 import Local from "./pages/detail/local";
-
-import Check from "./pages/detail/coordinate";
-
-// import Mypage from "./pages/login/Mypage";
+import Sign from "./pages/login/Sign";
 
 function App() {
+    const location = useLocation();  // 현재 경로 가져오기
+
     return (
-        <Router>
-            <header>
-                <Nav />
-            </header>
+        <div>
+            {location.pathname !== "/login" && location.pathname !== "/sign" && (
+                <header>
+                    <Nav />
+                </header>
+            )}
             <main>
                 <Routes>
                     <Route path="/" element={<Main />} />
@@ -32,16 +33,11 @@ function App() {
                     <Route path="/detail/:storeId" element={<Detail />} />
                     <Route path="/search" element={<LocalSearch />} />
                     <Route path="/local" element={<Local />} />
-                    {/*<Route path="/mypage" element={<Mypage />} />*/}
+                    <Route path="/sign" element={<Sign />} />
+
                 </Routes>
-
-                <Check />
-
             </main>
-            {/* <footer> */}
-            {/*     <Fnb /> */}
-            {/* </footer> */}
-        </Router>
+        </div>
     );
 }
 

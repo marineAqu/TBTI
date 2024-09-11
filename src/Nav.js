@@ -67,7 +67,7 @@ export const Nav = () => {
         <div className="GNB">
             <div className="LOGO">
                 <Link to="/">
-                    <img className="logo" alt="logo" src="/image/logo.png" />
+                    <img className="logo" alt="logo" src="/image/logo.png"/>
                 </Link>
             </div>
 
@@ -75,6 +75,11 @@ export const Nav = () => {
                 <Link to="/travel" className="text-wrapper">여행 분야</Link>
                 <Link to="/domestic" className="text-wrapper">국내 지역</Link>
                 <Link to="/festival" className="text-wrapper">지역 축제</Link>
+
+            </div>
+
+            <div className="div-wrapper">
+                <Link to="/login" className="text-wrapper">로그인</Link>
             </div>
 
             <div className="group">
@@ -92,7 +97,7 @@ export const Nav = () => {
                         alt="loupe"
                         src="/image/loupe.png"
                         onClick={handleSearch}
-                        style={{ cursor: 'pointer' }}
+                        style={{cursor: 'pointer'}}
                     />
                 </div>
                 {filteredRegions.length > 0 && (
@@ -109,7 +114,10 @@ export const Nav = () => {
                         ))}
                     </div>
                 )}
+
             </div>
+
+
         </div>
     );
 };
