@@ -27,8 +27,6 @@ public class LocalcreatorDetailController {
     public HashMap<String, Object> localcreator_detail(@RequestParam("storeId") int store_id) {
 
         LocalcreatorDTO localcreatorDTO = localcreatorDetailService.SearchByStoreId(store_id);
-        System.out.print("localcreator_detail get api controller:");
-        System.out.print(localcreatorDTO);
 
         localcreatorDTO.setImg(storageS3Service.getImageURL(localcreatorDTO.getStoreName(), localcreatorDTO.getHiddenCategory()));
 
