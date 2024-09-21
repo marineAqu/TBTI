@@ -17,11 +17,41 @@
     border: 1px solid #ccc;
     border-radius: 8px;
     background-color: #F3F3F3;
+    /*background-color: #99CC99;*/
+}
+
+.main-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 10px;
+    height: 50px;
+    position: relative;
+}
+
+.main-arrow {
+    height: 15px;
+    width: 15px;
+    cursor: pointer;
+}
+
+.chat-name {
+    flex: 1;
+    font-weight: 700;
+    text-align: center;
+}
+
+.main-home {
+    height: 20px;
+    width: 20px;
+    cursor: pointer; /* 클릭 가능하게 */
 }
 
 .chat-name {
     padding-bottom: 10px;
     font-weight: 700;
+    text-align: center;
+    align-items: center;
 }
 
 .chat-box {
@@ -73,9 +103,17 @@
     margin-bottom: 10px;
 }
 
-.introduce-button {
+.button-group {
+    display: flex;
+    justify-content: center;
+    margin-top: 10px;
+}
+
+.button-group .button {
     padding: 5px 10px;
     background-color: #cf96e6;
+    /*background-color: #99CC99;*/
+
     font-size: 11px;
     color: white;
     border: none;
@@ -85,8 +123,10 @@
     margin: 0 5px;
 }
 
-.introduce-button:hover {
-    background-color: #a96add; /* 마우스 오버 시 배경색 변화 */
+.button-group .button:hover {
+    background-color: #a96add;
+    /*background-color: #719871;*/
+
 }
 
 
@@ -200,20 +240,20 @@ button:hover {
     background-color: #f9f9f9;
     border: 1px solid #ddd;
     border-radius: 8px;
-    padding: 8px; /* 패딩 줄임 */
-    margin: 4px;  /* 마진 줄임 */
+    padding: 8px;
+    margin: 4px;
     text-align: center;
     cursor: pointer;
     flex: 0 0 auto;
-    width: 170px;  /* 너비 줄임 */
+    width: 170px;
     transition: background-color 0.3s;
 }
 
 .place-item img {
-    width: 100px; /* 고정된 이미지 너비 */
-    height: 100px; /* 고정된 이미지 높이 */
-    border-radius: 5px; /* 이미지 모서리 둥글게 */
-    object-fit: cover; /* 이미지가 박스에 맞게 잘리도록 설정 */
+    width: 100px;
+    height: 100px;
+    border-radius: 5px;
+    object-fit: cover;
 }
 
 

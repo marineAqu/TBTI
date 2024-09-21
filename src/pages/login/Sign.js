@@ -77,31 +77,31 @@ const Login = () => {
                         {userNameCheck === "ok" && <div className="success-message">사용 가능한 닉네임입니다.</div>}
                     </div>
 
-                    <div className="inputInfo">
-                        <div className="name">전화번호</div>
-                        <div className="name-field">
-                            <input
-                                type="text"
-                                className="text"
-                                value={phone}
-                                onChange={(e) => setPhone(e.target.value)}
-                                placeholder="전화번호를 입력하세요."
-                            />
-                        </div>
-                    </div>
+                    {/*<div className="inputInfo">*/}
+                    {/*    <div className="name">전화번호</div>*/}
+                    {/*    <div className="name-field">*/}
+                    {/*        <input*/}
+                    {/*            type="text"*/}
+                    {/*            className="text"*/}
+                    {/*            value={phone}*/}
+                    {/*            onChange={(e) => setPhone(e.target.value)}*/}
+                    {/*            placeholder="전화번호를 입력하세요."*/}
+                    {/*        />*/}
+                    {/*    </div>*/}
+                    {/*</div>*/}
 
-                    <div className="inputInfo">
-                        <div className="name">이메일</div>
-                        <div className="name-field">
-                            <input
-                                type="email"
-                                className="text"
-                                value={email}
-                                onChange={(e) => setEmail(e.target.value)}
-                                placeholder="이메일을 입력하세요."
-                            />
-                        </div>
-                    </div>
+                    {/*<div className="inputInfo">*/}
+                    {/*    <div className="name">이메일</div>*/}
+                    {/*    <div className="name-field">*/}
+                    {/*        <input*/}
+                    {/*            type="email"*/}
+                    {/*            className="text"*/}
+                    {/*            value={email}*/}
+                    {/*            onChange={(e) => setEmail(e.target.value)}*/}
+                    {/*            placeholder="이메일을 입력하세요."*/}
+                    {/*        />*/}
+                    {/*    </div>*/}
+                    {/*</div>*/}
 
                     <div className="inputInfo">
                         <div className="name">비밀번호</div>

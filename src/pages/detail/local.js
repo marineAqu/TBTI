@@ -98,7 +98,7 @@ const LocalSearch = () => {
     };
 
 
-    const itemsPerPage = 9;
+    const itemsPerPage = 12; // 9개에서 12개로 변경
     const startIndex = (page - 1) * itemsPerPage;
     const displayedData = filteredData.slice(startIndex, startIndex + itemsPerPage);
     const totalPages = Math.ceil(filteredData.length / itemsPerPage);

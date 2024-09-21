@@ -38,7 +38,7 @@
     display: flex; /* Flexbox로 자식 요소를 가로로 배치 */
     justify-content: flex-start;
     align-items: flex-start;
-    width: 800px;
+    width: 700px;
     margin: 20px 0;
     box-sizing: border-box;
 }
@@ -92,27 +92,26 @@
 }
 
 .reservation {
-    margin-top: 20px; /* imgBox 아래에 공간 추가 */
-    text-align: center; /* 버튼을 가로 중앙에 배치 */
-    width: 100%;
+    margin-top: 50px;
+    width: 280px;
+    height: 200px;
+
+    /*border: 1px solid;*/
+    display: flex;
+
 }
 
-.reservation-button {
-    padding: 10px 100px; /* 좌우 패딩을 늘려 버튼을 가로로 긴 형태로 만듦 */
-    background-color: black;
-    font-size: 20px;
-    /*font-weight: 25;*/
-    color: white;
-    border: none;
-    border-radius: 15px;
-    cursor: pointer;
-    transition: background-color 0.5s;
-    margin: 0 5px;
+.naver-button {
+    width: 180px;
+    height: 30px;
 }
 
-.reservation-button:hover{
-    background-color: #616161;
+.naver-button img {
+    width: 30px;
+    height: 30px;
+    margin-right: 10px;
 }
+
 
 .page-info {
     display: flex;
@@ -134,6 +133,12 @@
     padding-left: 40px;
 }
 
+.Category{
+    font-size: 20px;
+    font-weight: 700;
+    margin-bottom: 10px;
+}
+
 .storeName {
     color: #000000;
     font-size: 25px;
@@ -145,52 +150,50 @@
     color: #000000;
     font-size: 17px;
     font-weight: 400;
+    margin-top: 50px;
 }
 
-.hours, .rating {
-    font-size: 15px;
+.rating {
+    font-size: 17px;
     line-height: 20px;
     width: 40%;
 }
 
 .descriptionBox {
-    margin-top: 5px;
+    margin-top: 20px;
     line-height: 25px;
-    width: 100%;
-    position: relative;
 }
 
 .description {
     overflow: hidden;
     white-space: pre-wrap;
-    display: -webkit-box; /* For Safari */
-    -webkit-line-clamp: 2; /* Limits the number of lines to show */
-    -webkit-box-orient: vertical;
+    display: -webkit-box;
+
 }
 
-.description.show-less {
-    max-height: 60px;
-}
+/*.description.show-less {*/
+/*    max-height: 60px;*/
+/*}*/
 
-.description.show-more {
-    display: block;
-    max-height: none;
-}
+/*.description.show-more {*/
+/*    display: block;*/
+/*    max-height: none;*/
+/*}*/
 
-.show-more-button {
-    background-color: #ffffff;
-    border: 1px solid #cccccc;
-    border-radius: 15px;
-    color: #000000;
-    cursor: pointer;
-    font-size: 15px;
-    padding: 3px 10px;
-    margin-top: 10px;
-}
+/*.show-more-button {*/
+/*    background-color: #ffffff;*/
+/*    border: 1px solid #cccccc;*/
+/*    border-radius: 15px;*/
+/*    color: #000000;*/
+/*    cursor: pointer;*/
+/*    font-size: 15px;*/
+/*    padding: 3px 10px;*/
+/*    margin-top: 10px;*/
+/*}*/
 
-.show-more-button:hover {
-    background-color: #818181b2;
-}
+/*.show-more-button:hover {*/
+/*    background-color: #818181b2;*/
+/*}*/
 
 
 .detailPage .link {
@@ -201,19 +204,54 @@
     width: 41px;
 }
 
+.infoContent{
+    align-items: center;
+    text-align: center;
+    flex-direction: column;
+    display: flex;
+    width: 80%;
+    margin-top: 80px;
+
+}
+
+.hours{
+    font-size: 15px;
+    line-height: 20px;
+    width: 20%;
+}
+
+.infoName{
+    font-size: 20px;
+    font-weight: 700;
+    width: 80%;
+}
+
+.tabButtons {
+    display: flex;
+    justify-content: center;
+    margin-top: 30px;
+    width: 100%;
+}
+
+.tabButton {
+    padding: 15px 40px;
+    font-size: 15px;
+    background-color: white;
+    border: 1px solid #cccccc;
+    /*border-radius: 5px;*/
+    margin: 0;
+    cursor: pointer;
+    transition: background-color 0.3s, color 0.3s;
+}
+
+.tabButton.active {
+    background-color: black;
+    color: white;
+}
 
 .review {
-    height: 80px;
-    left: 50%;
-    transform: translateX(-50%);
-    position: absolute;
-    top: 730px;
-    width: 50%;
-    border: 1px solid;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: space-between;
+    margin-top: 50px;
+    width: 60%;
 }
 
 .reviewForm {
@@ -221,11 +259,12 @@
     flex-direction: column;
     width: 100%;
     align-items: center;
+    border: 1px solid;
 }
 
 .reviewInput {
-    width: 90%;
-    height: 80%;
+    width: 95%;
+    height: 70%;
     margin-top: 10px;
     border: none;
 }
@@ -243,6 +282,10 @@
 
 .submitReviewButton:hover {
     background-color: #616161;
+}
+
+.noReviews{
+    margin-top: 30px;
 }
 
 /*local.js/localsearch.js*/
@@ -330,8 +373,27 @@
 
 .grid-container {
     display: grid;
-    grid-template-columns: repeat(4, 1fr);
+    grid-template-columns: repeat(4, 1fr); /* 기본 4개의 열 */
     gap: 20px;
+}
+
+/* 화면 크기가 작을 때 열 개수 줄이기 */
+@media (max-width: 1200px) {
+    .grid-container {
+        grid-template-columns: repeat(3, 1fr); /* 열 개수를 3개로 줄임 */
+    }
+}
+
+@media (max-width: 768px) {
+    .grid-container {
+        grid-template-columns: repeat(2, 1fr); /* 열 개수를 2개로 줄임 */
+    }
+}
+
+@media (max-width: 480px) {
+    .grid-container {
+        grid-template-columns: 1fr; /* 작은 화면에서는 한 개의 열 */
+    }
 }
 
 .box {
