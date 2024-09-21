@@ -24,9 +24,15 @@ const Login = () => {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-        
-        const formData = new FormData();
+        const formData = {
+            uid, // 아이디
+            password, // 패스워드
+            user_name, // 유저 닉네임
+            phone, // 전화번호
+            email, // 이메일
+        };
 
+        const formData = new FormData();
         formData.append('uid', uid);
         formData.append('user_name', user_name);
         formData.append('password', password);
@@ -34,8 +40,10 @@ const Login = () => {
         await fetch('/api/sign-up', {
             method: 'POST',
             headers: {
+                'Content-Type': 'application/json',
                 'Accept': 'application/json'
             },
+            body: JSON.stringify(formData),
             body: formData
         });
     };
@@ -76,31 +84,31 @@ const Login = () => {
                         {userNameCheck === "ok" && <div className="success-message">사용 가능한 닉네임입니다.</div>}
                     </div>
 
-                    {/*<div className="inputInfo">*/}
-                    {/*    <div className="name">전화번호</div>*/}
-                    {/*    <div className="name-field">*/}
-                    {/*        <input*/}
-                    {/*            type="text"*/}
-                    {/*            className="text"*/}
-                    {/*            value={phone}*/}
-                    {/*            onChange={(e) => setPhone(e.target.value)}*/}
-                    {/*            placeholder="전화번호를 입력하세요."*/}
-                    {/*        />*/}
-                    {/*    </div>*/}
-                    {/*</div>*/}
+                    <div className="inputInfo">
+                        <div className="name">전화번호</div>
+                        <div className="name-field">
+                            <input
+                                type="text"
+                                className="text"
+                                value={phone}
+                                onChange={(e) => setPhone(e.target.value)}
+                                placeholder="전화번호를 입력하세요."
+                            />
+                        </div>
+                    </div>
 
-                    {/*<div className="inputInfo">*/}
-                    {/*    <div className="name">이메일</div>*/}
-                    {/*    <div className="name-field">*/}
-                    {/*        <input*/}
-                    {/*            type="email"*/}
-                    {/*            className="text"*/}
-                    {/*            value={email}*/}
-                    {/*            onChange={(e) => setEmail(e.target.value)}*/}
-                    {/*            placeholder="이메일을 입력하세요."*/}
-                    {/*        />*/}
-                    {/*    </div>*/}
-                    {/*</div>*/}
+                    <div className="inputInfo">
+                        <div className="name">이메일</div>
+                        <div className="name-field">
+                            <input
+                                type="email"
+                                className="text"
+                                value={email}
+                                onChange={(e) => setEmail(e.target.value)}
+                                placeholder="이메일을 입력하세요."
+                            />
+                        </div>
+                    </div>
 
                     <div className="inputInfo">
                         <div className="name">비밀번호</div>
