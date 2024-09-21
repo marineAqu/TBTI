@@ -31,9 +31,7 @@ const Login = () => {
             const result = await response.json();
 
             result.message === "Login successful" ? navigate("/") : alert("아이디 또는 비밀번호가 일치하지 않습니다.");
-            /*
 
-             */
         }catch (error){
             console.error('로그인 오류:', error);
         }
