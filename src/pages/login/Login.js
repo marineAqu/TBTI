@@ -9,8 +9,35 @@ const Login = () => {
     const [rememberMe, setRememberMe] = useState(false); // 체크박스 상태
     const navigate = useNavigate(); // 페이지 이동을 위한 navigate
 
-    const handleLogin = () => {
+    const handleLogin = async () => {
         // 로그인 로직 (예: API 호출) 추가
+        // 김도연 작성
+        try{
+            const formData = new FormData();
+
+            formData.append('uid', username);
+            formData.append('password', password);
+
+            const response = await fetch('http://localhost:8080/login_process', {
+                method: 'POST',
+                headers: {
+                    'Accept': 'application/json'
+                },
+                body: formData,
+                withCredentials: true,
+                credentials: 'include',
+            });
+
+            const result = await response.json();
+
+            result.message === "Login successful" ? navigate("/") : alert("아이디 또는 비밀번호가 일치하지 않습니다.");
+            /*
+
+             */
+        }catch (error){
+            console.error('로그인 오류:', error);
+        }
+
     };
 
     const handleCheckboxChange = () => {
