@@ -33,8 +33,6 @@ public class SearchService {
                 })
                 .toList();
 
-        System.out.print(localcreatorSearchDTO);
-
         return localcreatorSearchDTO;
     }
 

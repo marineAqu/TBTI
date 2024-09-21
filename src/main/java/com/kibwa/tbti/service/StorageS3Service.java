@@ -25,7 +25,6 @@ public class StorageS3Service {
         else if(hiddenCategory == '2') category = "kstartup/";
         else if(hiddenCategory == '3') category = "kstartup/";
 */
-        System.out.print("hiddenCategory: "+hiddenCategory);
 
         URL url = s3Client.getUrl("tbti-s3-image", (imgName+"_1.jpg"));
         imgList[0] = ""+url;

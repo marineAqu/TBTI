@@ -3,6 +3,7 @@ package com.kibwa.tbti.service;
 import com.kibwa.tbti.entity.MembersEntity;
 import com.kibwa.tbti.repository.MembersRepository;
 import lombok.RequiredArgsConstructor;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 /**
@@ -14,13 +15,14 @@ import org.springframework.stereotype.Service;
 @Service
 @RequiredArgsConstructor
 public class MemberService {
+    private final PasswordEncoder passwordEncoder;
     private final MembersRepository membersRepository;
 
     public void newMemberSave(String uid, String password, String username) {
 
         MembersEntity membersEntity = new MembersEntity();
         membersEntity.setUid(uid);
-        membersEntity.setPassword(password);
+        membersEntity.setPassword(passwordEncoder.encode(password));
         membersEntity.setUserName(username);
         membersEntity.setIsActive('Y');
 

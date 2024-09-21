@@ -6,27 +6,49 @@ import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.authentication.configuration.AuthenticationConfiguration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
+import org.springframework.security.config.annotation.web.configurers.AbstractHttpConfigurer;
+import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
 import org.springframework.security.web.authentication.logout.LogoutSuccessHandler;
 import org.springframework.security.web.authentication.logout.SimpleUrlLogoutSuccessHandler;
+import org.springframework.web.cors.CorsConfiguration;
+import org.springframework.web.cors.CorsConfigurationSource;
+import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
+import java.util.Arrays;
+import java.util.List;
+
 @Configuration
 @EnableWebSecurity
 public class SecurityConfig {
+    @Bean
+    public CorsConfigurationSource corsConfigurationSource() {
+        CorsConfiguration config = new CorsConfiguration();
+        config.setAllowCredentials(true);
+        config.setAllowedOrigins(List.of("http://localhost:3000"));
+        config.setAllowedMethods(Arrays.asList("HEAD", "POST", "GET", "DELETE", "PUT"));
+        config.setAllowedHeaders(List.of("*"));
+
+        UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
+        source.registerCorsConfiguration("/**", config);
+        return source;
+    }
 
     @Bean
     SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
+        http.sessionManagement(session -> session
+                .sessionCreationPolicy(SessionCreationPolicy.ALWAYS));
 
-        http.authorizeHttpRequests((authorizeRequests) -> authorizeRequests
-                        // 마이페이지는 인증된 사용자만 허용 (접근 시 로그인 페이지로 돌아감)
-                        //.requestMatchers("/mypage").authenticated()
+        http.cors(corsCustomizer -> corsCustomizer.configurationSource(corsConfigurationSource()));
+
+        http.authorizeHttpRequests(authorizeRequests -> authorizeRequests
                         .anyRequest().permitAll())
-                .csrf(csrf -> csrf.disable()); // CSRF 보호 비활성화
+                .csrf(AbstractHttpConfigurer::disable);
 
         http.formLogin(login -> login
-                .loginPage("/api/login")
+                .loginPage("/login")
                 .usernameParameter("uid")
                 .passwordParameter("password")
                 .loginProcessingUrl("/login_process")
@@ -42,6 +64,11 @@ public class SecurityConfig {
     }
 
     @Bean
+    public PasswordEncoder passwordEncoder() {
+        return new BCryptPasswordEncoder();
+    }
+
+    @Bean
     public AuthenticationSuccessHandler loginSuccessHandler() {
         return new CustomAuthenticationSuccessHandler();
     }
@@ -53,10 +80,8 @@ public class SecurityConfig {
         return successHandler;
     }
 
-    /*@Bean
-    public PasswordEncoder passwordEncoder () {
-        return new BCryptPasswordEncoder(); //비밀번호 암호화
+    @Bean
+    public AuthenticationManager authenticationManagerBean(AuthenticationConfiguration authenticationConfiguration) throws Exception {
+        return authenticationConfiguration.getAuthenticationManager();
     }
-     */
-
 }
