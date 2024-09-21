@@ -24,27 +24,16 @@ const Login = () => {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-        const formData = {
-            uid, // 아이디
-            password, // 패스워드
-            user_name, // 유저 닉네임
-            phone, // 전화번호
-            email, // 이메일
-        };
-
         const formData = new FormData();
         formData.append('uid', uid);
         formData.append('user_name', user_name);
         formData.append('password', password);
+        formData.append('phone', phone); // Include phone
+        formData.append('email', email); // Include email
 
         await fetch('/api/sign-up', {
             method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-                'Accept': 'application/json'
-            },
-            body: JSON.stringify(formData),
-            body: formData
+            body: formData // Use only the formData here
         });
     };
 

@@ -833,10 +833,13 @@ const CanvasMap = ({ onRegionClick }) => {
                     ]
             },
             imagePath: '/image/map/gangwon.png'
+
         }
     };
     // 현재 query에 해당하는 지역 데이터를 가져옵니다.
-    const currentRegionData = regions[query] || regions['경기도']; // 기본값은 경기도로 설정
+    const currentRegionData = regions[query] || regions['강원도']; // 기본값 설정
+    console.log('Current Region Data:', currentRegionData);
+
 
     const isPointInPolygon = (x, y, polygon) => {
         let inside = false;
@@ -849,6 +852,8 @@ const CanvasMap = ({ onRegionClick }) => {
         }
         return inside;
     };
+
+
 
     const drawRegions = (ctx) => {
         ctx.clearRect(0, 0, ctx.canvas.width, ctx.canvas.height);
