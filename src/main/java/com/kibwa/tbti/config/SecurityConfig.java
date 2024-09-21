@@ -18,7 +18,6 @@ import org.springframework.security.web.authentication.logout.SimpleUrlLogoutSuc
 import org.springframework.web.cors.CorsConfiguration;
 import org.springframework.web.cors.CorsConfigurationSource;
 import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
-
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
@@ -44,8 +43,8 @@ public class SecurityConfig {
     @Bean
     SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
 
-        http.sessionManagement(session ->
-                session.sessionCreationPolicy(SessionCreationPolicy.IF_REQUIRED));
+        http.sessionManagement(session -> session
+                .sessionCreationPolicy(SessionCreationPolicy.ALWAYS));
 
         //cors 실행
         http.cors(corsCustomizer -> corsCustomizer.configurationSource(new CorsConfigurationSource() {
@@ -72,7 +71,8 @@ public class SecurityConfig {
                 .usernameParameter("uid")
                 .passwordParameter("password")
                 .loginProcessingUrl("/login_process")
-                .successHandler(loginSuccessHandler()));
+                .successHandler(loginSuccessHandler())
+                .permitAll());
 
         http.logout(logout -> logout
                 .logoutUrl("/api/logout")
