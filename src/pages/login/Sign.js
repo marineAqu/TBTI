@@ -4,8 +4,6 @@ import "./login.css";
 const Login = () => {
     const [uid, setUid] = useState(""); // 아이디
     const [user_name, setUserName] = useState(""); // 유저 닉네임
-    const [phone, setPhone] = useState(""); // 전화번호
-    const [email, setEmail] = useState(""); // 이메일
     const [password, setPassword] = useState(""); // 비밀번호
     const [uidCheck, setUidCheck] = useState(""); // 아이디 중복 확인 결과
     const [userNameCheck, setUserNameCheck] = useState(""); // 닉네임 중복 확인 결과
@@ -75,32 +73,6 @@ const Login = () => {
                     </div>
 
                     <div className="inputInfo">
-                        <div className="name">전화번호</div>
-                        <div className="name-field">
-                            <input
-                                type="text"
-                                className="text"
-                                value={phone}
-                                onChange={(e) => setPhone(e.target.value)}
-                                placeholder="전화번호를 입력하세요."
-                            />
-                        </div>
-                    </div>
-
-                    <div className="inputInfo">
-                        <div className="name">이메일</div>
-                        <div className="name-field">
-                            <input
-                                type="email"
-                                className="text"
-                                value={email}
-                                onChange={(e) => setEmail(e.target.value)}
-                                placeholder="이메일을 입력하세요."
-                            />
-                        </div>
-                    </div>
-
-                    <div className="inputInfo">
                         <div className="name">비밀번호</div>
                         <div className="name-field">
                             <input
@@ -112,6 +84,8 @@ const Login = () => {
                             />
                         </div>
                     </div>
+
+                    <br/> <br/>
 
                     <button className="loginButton" type="submit">
                         가입하기
