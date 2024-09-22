@@ -44,6 +44,8 @@ public class SecurityConfig {
         http.cors(corsCustomizer -> corsCustomizer.configurationSource(corsConfigurationSource()));
 
         http.authorizeHttpRequests(authorizeRequests -> authorizeRequests
+                // mypage 개발 완료 시 아래 주석 해제
+                        // .requestMatchers("/mypage").authenticated()
                         .anyRequest().permitAll())
                 .csrf(AbstractHttpConfigurer::disable);
 
