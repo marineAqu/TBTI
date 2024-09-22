@@ -28,12 +28,13 @@ const Login = () => {
         formData.append('uid', uid);
         formData.append('user_name', user_name);
         formData.append('password', password);
-        formData.append('phone', phone); // Include phone
-        formData.append('email', email); // Include email
 
         await fetch('/api/sign-up', {
             method: 'POST',
-            body: formData // Use only the formData here
+            headers: {
+                'Accept': 'application/json'
+            },
+            body: formData
         });
     };
 
