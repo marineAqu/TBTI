@@ -33,10 +33,9 @@ public class LocalcreatorDetailService {
         return localcreatorDTO;
     }
 
-    public void postReview(int store_id, String reviewContent, double starPoint) {
-        //TODO: 회원가입, 로그인 기능 추가 후 하드코딩된 memebrId 수정
+    public void postReview(int store_id, String reviewContent, double starPoint, int memberId) {
 
-        ReviewEntity reviewEntity = ReviewEntity.toReviewEntity(reviewContent, starPoint, store_id, 1);
+        ReviewEntity reviewEntity = ReviewEntity.toReviewEntity(reviewContent, starPoint, store_id, memberId);
 
         reviewRepository.save(reviewEntity);
     }
