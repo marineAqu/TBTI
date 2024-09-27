@@ -12,6 +12,7 @@ const Detail = () => {
     const [reviews, setReviews] = useState([]);
     const [activeTab, setActiveTab] = useState("info");
     const [errorMessage, setErrorMessage] = useState(null); // 오류 메시지 상태
+    const [myId, setMyId] = useState("로그인 후 이용해주세요.");
 
     useEffect(() => {
         const fetchData = async () => {
@@ -20,6 +21,7 @@ const Detail = () => {
                 const result = await response.json();
                 setData(result.localcreator);
                 setDescription(result.localcreator.description.description);
+                if(result.uid) setMyId(result.uid+"님 리뷰를 작성해보세요!");
             } catch (error) {
                 console.error('오류:', error);
                 setErrorMessage('데이터를 가져오는 데 실패했습니다.'); // 오류 메시지 설정
@@ -48,7 +50,7 @@ const Detail = () => {
 
     const handleReviewSubmit = async (e) => {
         e.preventDefault();
-        if (reviewText.trim()) {
+        if (reviewText.trim() && myId !== "로그인 후 이용해주세요.") {
             try {
                 const response = await fetch('/api/post_review', {
                     method: 'POST',
@@ -160,6 +162,7 @@ const Detail = () => {
 
             {activeTab === "review" && (
                 <div className="review">
+                    <span>{myId}</span>
                     <form className="reviewForm" onSubmit={handleReviewSubmit}>
                         <textarea
                             className="reviewInput"
