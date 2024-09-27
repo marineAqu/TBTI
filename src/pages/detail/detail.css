@@ -259,14 +259,14 @@
     flex-direction: column;
     width: 100%;
     align-items: center;
-    border: 1px solid;
 }
 
 .reviewInput {
     width: 95%;
     height: 70%;
     margin-top: 10px;
-    border: none;
+    border-radius: 0;
+    border: 1px solid;
 }
 
 .submitReviewButton {
