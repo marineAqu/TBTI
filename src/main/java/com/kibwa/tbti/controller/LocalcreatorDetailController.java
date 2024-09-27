@@ -2,9 +2,12 @@ package com.kibwa.tbti.controller;
 
 import com.kibwa.tbti.DTO.LocalcreatorDTO;
 import com.kibwa.tbti.entity.ReviewEntity;
+import com.kibwa.tbti.principal.PrincipalDetails;
 import com.kibwa.tbti.service.LocalcreatorDetailService;
 import com.kibwa.tbti.service.StorageS3Service;
 import lombok.RequiredArgsConstructor;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.HashMap;
@@ -24,26 +27,25 @@ public class LocalcreatorDetailController {
     private final StorageS3Service storageS3Service;
 
     @GetMapping("/api/localcreator_detail")
-    public HashMap<String, Object> localcreator_detail(@RequestParam("storeId") int store_id) {
+    public HashMap<String, Object> localcreator_detail(@RequestParam("storeId") int store_id, @AuthenticationPrincipal UserDetails userDetails) {
+        HashMap<String, Object> response = new HashMap<>();
 
         LocalcreatorDTO localcreatorDTO = localcreatorDetailService.SearchByStoreId(store_id);
-
         localcreatorDTO.setImg(storageS3Service.getImageURL(localcreatorDTO.getStoreName(), localcreatorDTO.getHiddenCategory()));
 
-        HashMap<String, Object> response = new HashMap<>();
         response.put("localcreator", localcreatorDTO);
+        if(userDetails != null) response.put("uid", userDetails.getUsername());
 
         return response;
     }
 
     @PostMapping("/api/post_review")
-    public HashMap<String, Object> post_review( //@AuthenticationPrincipal UserDetails userDetails,
+    public HashMap<String, Object> post_review(@AuthenticationPrincipal PrincipalDetails principalDetails,
                                                 @RequestParam("storeId") int store_id,
                                                @RequestParam("reviewContent") String reviewContent,
                                                @RequestParam("starPoint") double starPoint) {
 
-        //TODO: 로그인, 회원가입 기능 추가 후 AuthenticationPrincipal 주석 해제 및 userDetails.getUsername()으로 사용자 아이디 가져오기
-        localcreatorDetailService.postReview(store_id, reviewContent, starPoint);
+        localcreatorDetailService.postReview(store_id, reviewContent, starPoint, principalDetails.getId());
 
         HashMap<String, Object> response = new HashMap<>();
         response.put("status", "success");
