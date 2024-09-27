@@ -27,13 +27,28 @@ const Login = () => {
         formData.append('user_name', user_name);
         formData.append('password', password);
 
-        await fetch('/api/sign-up', {
-            method: 'POST',
-            headers: {
-                'Accept': 'application/json'
-            },
-            body: formData
-        });
+        if(!password) alert("비밀번호를 입력해 주세요.");
+        else if(uidCheck === "modify" || userNameCheck === "modify") alert("중복 확인 후 회원가입을 진행해 주세요.");
+        else if (uidCheck === "ok" && userNameCheck === "ok") {
+            await fetch('/api/sign-up', {
+                method: 'POST',
+                headers: {
+                    'Accept': 'application/json'
+                },
+                body: formData
+            });
+        }
+        else alert("아이디, 혹은 닉네임이 중복됩니다.");
+    };
+
+    const handleUsernameChange = (e) => {
+        setUserName(e.target.value);
+        setUserNameCheck("modify"); // 중복 확인 상태 초기화
+    };
+
+    const handleUidChange = (e) => {
+        setUid(e.target.value);
+        setUidCheck("modify"); // 중복 확인 상태 초기화
     };
 
     return (
@@ -47,7 +62,7 @@ const Login = () => {
                                 type="text"
                                 className="text"
                                 value={uid}
-                                onChange={(e) => setUid(e.target.value)}
+                                onChange={handleUidChange}
                                 placeholder="아이디를 입력하세요."
                             />
                             <button type="button" onClick={checkUidDuplication}>중복 확인</button>
@@ -63,7 +78,7 @@ const Login = () => {
                                 type="text"
                                 className="text"
                                 value={user_name}
-                                onChange={(e) => setUserName(e.target.value)}
+                                onChange={handleUsernameChange}
                                 placeholder="닉네임을 입력하세요."
                             />
                             <button type="button" onClick={checkUsernameDuplication}>중복 확인</button>
