@@ -13,6 +13,7 @@ const Detail = () => {
     const [activeTab, setActiveTab] = useState("info");
     const [errorMessage, setErrorMessage] = useState(null); // 오류 메시지 상태
     const [myId, setMyId] = useState("로그인 후 이용해주세요.");
+    const [rating, setRating] = useState(0); // 별점 상태 추가
 
     useEffect(() => {
         const fetchData = async () => {
@@ -50,29 +51,57 @@ const Detail = () => {
 
     const handleReviewSubmit = async (e) => {
         e.preventDefault();
+        const formData = new FormData();
+        formData.append('storeId', storeId);
+        formData.append('reviewContent', reviewText.trim());
+        formData.append('starPoint', rating);
+
         if (reviewText.trim() && myId !== "로그인 후 이용해주세요.") {
             try {
                 const response = await fetch('/api/post_review', {
                     method: 'POST',
                     headers: {
-                        'Content-Type': 'application/json',
+                        'Accept': 'application/json',
                     },
-                    body: JSON.stringify({
-                        storeId: storeId,
-                        review: reviewText.trim(),
-                    }),
+                    body: formData
                 });
 
                 if (!response.ok) {
-                    throw new Error('리뷰 제출에 실패했습니다.');
+                    throw new Error('리뷰 제출 실패');
                 }
 
                 setReviews([...reviews, reviewText.trim()]);
                 setReviewText("");
+
             } catch (error) {
                 console.error('리뷰 제출 오류:', error);
             }
         }
+        else alert("로그인 후 이용해주세요.");
+    };
+
+    const handleRatingChange = (newRating) => {
+        setRating(newRating);
+    };
+
+    const StarRating = ({ rating, onRatingChange }) => {
+        const handleClick = (newRating) => {
+            onRatingChange(newRating);
+        };
+
+        return (
+            <div className="star-rating">
+                {[1, 2, 3, 4, 5].map((star) => (
+                    <span
+                        key={star}
+                        className={`star ${star <= rating ? "filled" : ""}`}
+                        onClick={() => handleClick(star)}
+                    >
+                    &#9733;
+                </span>
+                ))}
+            </div>
+        );
     };
 
     return (
@@ -162,8 +191,14 @@ const Detail = () => {
 
             {activeTab === "review" && (
                 <div className="review">
-                    <span>{myId}</span>
+
                     <form className="reviewForm" onSubmit={handleReviewSubmit}>
+
+                        <div className="id-star-div">
+                            <span>{myId}</span>
+                            <StarRating rating={rating} onRatingChange={handleRatingChange} />
+                        </div>
+
                         <textarea
                             className="reviewInput"
                             value={reviewText}
@@ -171,10 +206,9 @@ const Detail = () => {
                             placeholder="리뷰를 작성하세요"
                             rows="2"
                         />
+                        <button type="submit" className="submitReviewButton">리뷰 작성</button>
 
                     </form>
-
-                    <button type="submit" className="submitReviewButton">리뷰 작성</button>
 
                     <div className="reviewList">
                         {reviews.length > 0 ? (
