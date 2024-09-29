@@ -1,6 +1,8 @@
 package com.kibwa.tbti.service;
 
 import com.kibwa.tbti.DTO.LocalcreatorDTO;
+import com.kibwa.tbti.DTO.LocalcreatorSearchDTO;
+import com.kibwa.tbti.DTO.ReviewDTO;
 import com.kibwa.tbti.entity.LikesEntity;
 import com.kibwa.tbti.entity.LocalcreatorEntity;
 import com.kibwa.tbti.entity.ReviewEntity;
@@ -42,8 +44,6 @@ public class LocalcreatorDetailService {
 
     public void save_like(int store_id) {
 
-        //TODO: 회원가입, 로그인 기능 추가 후 하드코딩된 memebrId 수정
-
         if(likesRepository.findByStoreIdAndMemberId(store_id, 1).isPresent()) {
             likesRepository.deleteByStoreIdAndMemberId(store_id, 1);
         }
@@ -53,7 +53,14 @@ public class LocalcreatorDetailService {
         }
     }
 
-    public List<ReviewEntity> getReview(int store_id) {
-        return reviewRepository.findByStoreId(store_id);
+    public List<ReviewDTO> getReview(int store_id) {
+        List<ReviewEntity> reviewEntityList = reviewRepository.findByStoreId(store_id);
+        return reviewEntityList.stream()
+                .map(projection -> {
+                    ReviewDTO dto = ReviewDTO.toreviewDTO(projection);
+                    dto.setMemberName(projection.getMembers().getUserName());
+                    return dto;
+                })
+                .toList();
     }
 }
