@@ -23,6 +23,11 @@ const Detail = () => {
                 setData(result.localcreator);
                 setDescription(result.localcreator.description.description);
                 if(result.uid) setMyId(result.uid+"님 리뷰를 작성해보세요!");
+
+
+                const reviewResponse = await fetch(`/api/get_review?storeId=${storeId}`);
+                const reviewResult = await reviewResponse.json();
+                setReviews(reviewResult.reviewList);
             } catch (error) {
                 console.error('오류:', error);
                 setErrorMessage('데이터를 가져오는 데 실패했습니다.'); // 오류 메시지 설정
@@ -96,6 +101,21 @@ const Detail = () => {
                         key={star}
                         className={`star ${star <= rating ? "filled" : ""}`}
                         onClick={() => handleClick(star)}
+                    >
+                    &#9733;
+                </span>
+                ))}
+            </div>
+        );
+    };
+
+    const StarRated = ({ rating }) => {
+        return (
+            <div className="review-stared-rating">
+                {[1, 2, 3, 4, 5].map((star) => (
+                    <span
+                        key={star}
+                        className={`stared ${star <= rating ? "filled" : ""}`}
                     >
                     &#9733;
                 </span>
@@ -214,7 +234,12 @@ const Detail = () => {
                         {reviews.length > 0 ? (
                             reviews.map((review, index) => (
                                 <div key={index} className="reviewItem">
-                                    {review}
+                                    <div className="review-header">
+                                        <span className="member-name">{review.memberName}</span>
+                                        <StarRated className="review-star" rating={review.rate}></StarRated>
+                                        <span className="review-date">{review.createAt}</span>
+                                    </div>
+                                    <span>{review.reviewContent}</span>
                                 </div>
                             ))
                         ) : (

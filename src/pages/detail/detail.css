@@ -631,3 +631,46 @@
     width: 100%;
     align-items: center;
 }
+
+.reviewItem{
+    padding-bottom: 20px;
+    border-top: 1px solid #878787;
+}
+
+.review-header{
+    display: flex;
+    padding-bottom: 8px;
+    margin-top: 10px;
+    align-items: center;
+}
+
+.member-name{
+    font-weight: bold;
+    width: 15%;
+}
+
+.review-stared-rating {
+    width: 55%;
+    display: flex;
+    gap: 1px;
+    align-self: flex-end;
+}
+
+.review-date{
+    width: 30%;
+    text-align: right;
+}
+
+.stared {
+    font-size: 20px;
+    color: #ccc;
+}
+
+.stared.filled {
+    color: #ffcc00;
+}
+
+.reviewList{
+    width: 100%;
+    margin-top: 8%;
+}
