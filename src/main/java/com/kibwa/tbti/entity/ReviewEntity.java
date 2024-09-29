@@ -3,6 +3,7 @@ package com.kibwa.tbti.entity;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
+import org.hibernate.annotations.CreationTimestamp;
 
 import java.sql.Timestamp;
 
@@ -32,7 +33,12 @@ public class ReviewEntity {
     private int memberId;
 
     @Column
+    @CreationTimestamp
     private Timestamp createAt;
+
+    @ManyToOne
+    @JoinColumn(name = "memberId", referencedColumnName = "memberId", insertable = false, updatable = false)
+    private MembersEntity members;
 
     public static ReviewEntity toReviewEntity(String reviewContent, double rate, int storeId, int memberId) {
         ReviewEntity reviewEntity = new ReviewEntity();
