@@ -1,7 +1,7 @@
 package com.kibwa.tbti.controller;
 
 import com.kibwa.tbti.DTO.LocalcreatorDTO;
-import com.kibwa.tbti.entity.ReviewEntity;
+import com.kibwa.tbti.DTO.ReviewDTO;
 import com.kibwa.tbti.principal.PrincipalDetails;
 import com.kibwa.tbti.service.LocalcreatorDetailService;
 import com.kibwa.tbti.service.StorageS3Service;
@@ -55,22 +55,20 @@ public class LocalcreatorDetailController {
 
     @GetMapping("/api/get_review")
     public HashMap<String, Object> get_review(@RequestParam("storeId") int store_id) {
-        List<ReviewEntity> reviewEntityList = localcreatorDetailService.getReview(store_id);
+        List<ReviewDTO> reviewEntityList = localcreatorDetailService.getReview(store_id);
 
-        System.out.print("get_review get api controller:"+reviewEntityList.toString());
         HashMap<String, Object> response = new HashMap<>();
-        response.put("reviewEntityList", reviewEntityList);
+        response.put("reviewList", reviewEntityList);
 
         return response;
     }
 
 
     @PostMapping("/api/save_like")
-    public HashMap<String, Object> save_like( //@AuthenticationPrincipal UserDetails userDetails,
+    public HashMap<String, Object> save_like( @AuthenticationPrincipal PrincipalDetails principalDetails,
                                                 @RequestParam("storeId") int store_id) {
 
-        //TODO: 로그인, 회원가입 기능 추가 후 AuthenticationPrincipal 주석 해제 및 userDetails.getUsername()으로 사용자 아이디 가져오기
-        localcreatorDetailService.save_like(store_id);
+        localcreatorDetailService.save_like(store_id, principalDetails.getId());
 
         HashMap<String, Object> response = new HashMap<>();
         response.put("status", "success");
