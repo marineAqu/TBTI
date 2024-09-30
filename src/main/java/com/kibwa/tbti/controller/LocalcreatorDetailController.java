@@ -71,6 +71,7 @@ public class LocalcreatorDetailController {
         HashMap<String, Object> response = new HashMap<>();
 
         if(principalDetails == null) {
+            response.put("status", "fail");
             response.put("message", "로그인 후 이용해주세요.");
             return response;
         }
@@ -78,7 +79,6 @@ public class LocalcreatorDetailController {
         localcreatorDetailService.save_like(store_id, principalDetails.getId());
 
         response.put("status", "success");
-
         return response;
     }
 
