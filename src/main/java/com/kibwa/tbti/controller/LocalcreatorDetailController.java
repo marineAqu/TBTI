@@ -68,9 +68,15 @@ public class LocalcreatorDetailController {
     public HashMap<String, Object> save_like( @AuthenticationPrincipal PrincipalDetails principalDetails,
                                                 @RequestParam("storeId") int store_id) {
 
+        HashMap<String, Object> response = new HashMap<>();
+
+        if(principalDetails == null) {
+            response.put("message", "로그인 후 이용해주세요.");
+            return response;
+        }
+
         localcreatorDetailService.save_like(store_id, principalDetails.getId());
 
-        HashMap<String, Object> response = new HashMap<>();
         response.put("status", "success");
 
         return response;
