@@ -2,6 +2,7 @@ import React from "react";
 import { BrowserRouter as Router, Route, Routes, useLocation } from "react-router-dom";
 import './App.css';
 import { Nav } from "./Nav";
+import { Fnb } from "./Fnb";
 
 import Travel from "./pages/Travel";
 import Domestic from "./pages/Domestic";
@@ -20,23 +21,27 @@ function App() {
         <div>
             {location.pathname !== "/login" && location.pathname !== "/sign" && (
                 <header>
-                    <Nav />
+                    <Nav/>
                 </header>
             )}
             <main>
                 <Routes>
-                    <Route path="/" element={<Main />} />
-                    <Route path="/travel" element={<Travel />} />
-                    <Route path="/domestic" element={<Domestic />} />
-                    <Route path="/festival" element={<Festival />} />
-                    <Route path="/login" element={<Login />} />
-                    <Route path="/detail/:storeId" element={<Detail />} />
-                    <Route path="/search" element={<LocalSearch />} />
-                    <Route path="/local" element={<Local />} />
-                    <Route path="/sign" element={<Sign />} />
+                    <Route path="/" element={<Main/>}/>
+                    {/*<Route path="/travel" element={<Travel/>}/>*/}
+                    {/*<Route path="/domestic" element={<Domestic/>}/>*/}
+                    {/*<Route path="/festival" element={<Festival/>}/>*/}
+                    <Route path="/login" element={<Login/>}/>
+                    <Route path="/detail/:storeId" element={<Detail/>}/>
+                    <Route path="/search" element={<LocalSearch/>}/>
+                    <Route path="/local" element={<Local/>}/>
+                    <Route path="/sign" element={<Sign/>}/>
 
                 </Routes>
             </main>
+
+            <footer>
+                <Fnb/>
+            </footer>
         </div>
     );
 }

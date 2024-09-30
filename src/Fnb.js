@@ -11,9 +11,9 @@ export const Fnb = () => {
 
                 <p className="footer-text">© 2024 TraBTI. All rights reserved.</p>
 
-                {/*<Link to="/">*/}
+                <a href="https://github.com/marineAqu/TBTI" target="_blank" rel="noopener noreferrer">
                     <img className="icon" alt="Git icon" src="/image/github.png"/>
-                {/*</Link>*/}
+                </a>
             </div>
         </div>
     );

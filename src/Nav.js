@@ -67,7 +67,7 @@ export const Nav = () => {
         <div className="GNB">
             <div className="LOGO">
                 <Link to="/">
-                    <img className="logo" alt="logo" src="/image/logo.png"/>
+                    <img className="logo" alt="logo" src="/image/tbtilogo.jpg"/>
                 </Link>
             </div>
 
@@ -78,7 +78,7 @@ export const Nav = () => {
 
             </div>
 
-            <div className="div-wrapper">
+            <div className="nav_login">
                 <Link to="/login" className="text-wrapper">로그인</Link>
             </div>
 
@@ -89,7 +89,7 @@ export const Nav = () => {
                         value={searchInput}
                         onChange={handleInputChange}
                         onKeyDown={handleKeyDown}
-                        placeholder="검색어를 입력해주세요."
+                        placeholder="당신의 여행에 로컬을 더하다"
                         ref={inputRef}
                     />
                     <img
