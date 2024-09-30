@@ -1,7 +1,6 @@
 package com.kibwa.tbti.service;
 
 import com.kibwa.tbti.DTO.LocalcreatorDTO;
-import com.kibwa.tbti.DTO.LocalcreatorSearchDTO;
 import com.kibwa.tbti.DTO.ReviewDTO;
 import com.kibwa.tbti.entity.LikesEntity;
 import com.kibwa.tbti.entity.LocalcreatorEntity;
@@ -42,13 +41,13 @@ public class LocalcreatorDetailService {
         reviewRepository.save(reviewEntity);
     }
 
-    public void save_like(int store_id) {
+    public void save_like(int store_id, int member_id) {
 
-        if(likesRepository.findByStoreIdAndMemberId(store_id, 1).isPresent()) {
-            likesRepository.deleteByStoreIdAndMemberId(store_id, 1);
+        if(likesRepository.findByStoreIdAndMemberId(store_id, member_id).isPresent()) {
+            likesRepository.deleteByStoreIdAndMemberId(store_id, member_id);
         }
         else {
-            LikesEntity likesEntity = LikesEntity.toLikesEntity(store_id, 1);
+            LikesEntity likesEntity = LikesEntity.toLikesEntity(store_id, member_id);
             likesRepository.save(likesEntity);
         }
     }
