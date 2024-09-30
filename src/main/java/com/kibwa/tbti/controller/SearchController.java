@@ -1,7 +1,6 @@
 package com.kibwa.tbti.controller;
 
 import com.kibwa.tbti.DTO.LocalcreatorSearchDTO;
-import com.kibwa.tbti.DTO.LocalcreatorSearchProjection;
 import com.kibwa.tbti.service.SearchService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.CrossOrigin;
