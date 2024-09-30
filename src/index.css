@@ -18,27 +18,27 @@ main {
 }
 
 /* header 스타일 */
-header {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 115px;
-  width: 100%;
-  max-width: 1220px; /* 너비 제한 */
-  margin: 0 auto; /* 중앙 정렬 */
-}
+/*header {*/
+/*  display: flex;*/
+/*  justify-content: center;*/
+/*  align-items: center;*/
+/*  height: 115px;*/
+/*  width: 100%;*/
+/*  max-width: 1220px; !* 너비 제한 *!*/
+/*  margin: 0 auto; !* 중앙 정렬 *!*/
+/*}*/
 
 /* footer 스타일 */
-footer {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 115px;
-  width: 100%;
-  position: fixed; /* 화면 하단에 고정 */
-  bottom: 0;
-  left: 0;
-  padding: 20px 0;
-  z-index: 10;
-  background-color: #ffffff; /* 배경색 추가 */
-}
+/*footer {*/
+/*  display: flex;*/
+/*  justify-content: center;*/
+/*  align-items: center;*/
+/*  height: 115px;*/
+/*  width: 100%;*/
+/*  position: fixed; !* 화면 하단에 고정 *!*/
+/*  bottom: 0;*/
+/*  left: 0;*/
+/*  padding: 20px 0;*/
+/*  z-index: 10;*/
+/*  background-color: #ffffff; !* 배경색 추가 *!*/
+/*}*/

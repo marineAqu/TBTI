@@ -41,7 +41,7 @@ const LocalSearch = () => {
 
                     setData(result.localList);
                     setRegionName(query);
-                    setRegionIntro(result.domInt || "소개 정보 없음");
+                    setRegionIntro(result.domInt || "");
 
                     const uniqueCategories = [...new Set(result.localList.map(store => store.category))];
                     setCategories(uniqueCategories);

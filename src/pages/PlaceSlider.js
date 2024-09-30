@@ -1,6 +1,6 @@
 import React from "react";
 import './main.css';
-import { useParams } from "react-router-dom";
+// import { useParams } from "react-router-dom";
 
 const PlaceSlider = ({ places }) => {
     // const { storeId } = useParams(); // URL 파라미터에서 storeId 추출
@@ -29,8 +29,8 @@ const PlaceSlider = ({ places }) => {
                             />
                             <h3>{place.place_name}</h3>
                             <p>{place.description}</p>
-                            <p style={{ margin: '20px 0' }}></p>
-                            <p>{place.location}</p>
+                            {/*<p style={{ margin: '20px 0' }}></p>*/}
+                            {/*<p>{place.location}</p>*/}
                         </div>
                     );
                 })}
