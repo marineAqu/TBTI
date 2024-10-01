@@ -137,13 +137,13 @@ const Detail = () => {
                 <div className="imgBox">
                     <img src={data.img && data.img[currentImageIndex] ? data.img[currentImageIndex] : ''} alt="Detail" className="image" />
                     <div className="arrowBox">
-                        <button className="arrow-button" onClick={handlePrevImage}>
+                        <button className="arrow-button left" onClick={handlePrevImage}>
                             &#9664;
                         </button>
-                        <div className="page-info">
-                            <span>{currentImageIndex + 1} / {data.img ? data.img.length : 1}</span>
-                        </div>
-                        <button className="arrow-button" onClick={handleNextImage}>
+                        {/*<div className="page-info">*/}
+                        {/*    <span>{currentImageIndex + 1} / {data.img ? data.img.length : 1}</span>*/}
+                        {/*</div>*/}
+                        <button className="arrow-button right" onClick={handleNextImage}>
                             &#9654;
                         </button>
                     </div>

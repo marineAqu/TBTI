@@ -1,6 +1,6 @@
 import React, { useState, useRef, useEffect } from "react";
 import ReactMarkdown from "react-markdown";
-import PlaceSlider from "./PlaceSlider";
+import PlaceSlider from "./PlaceSlider"; // PlaceSlider 컴포넌트 가져오기
 import './main.css';
 
 function Chat() {
@@ -77,12 +77,10 @@ function Chat() {
 
             // 장소 데이터가 있을 경우, 각각을 새로운 메시지로 추가
             if (placesData && placesData.length > 0) {
-                placesData.forEach(place => {
-                    setMessages((prevMessages) => [
-                        ...prevMessages,
-                        {sender: "ai", type: "place", placeData: place} // 장소 데이터 메시지 추가
-                    ]);
-                });
+                setMessages((prevMessages) => [
+                    ...prevMessages,
+                    {sender: "ai", type: "place", placesData: placesData} // 여러 장소 데이터 메시지 추가
+                ]);
             }
 
         } catch (error) {
@@ -149,7 +147,7 @@ function Chat() {
                 {messages.map((message, index) => (
                     <div key={index} className={`message ${message.sender}`}>
                         {message.type === "place" ? (
-                            <PlaceSlider places={[message.placeData]} />
+                            <PlaceSlider places={message.placesData} /> // 여러 장소를 슬라이더로 전달
                         ) : message.sender === "ai" ? (
                             <ReactMarkdown>{message.text}</ReactMarkdown>
                         ) : (
