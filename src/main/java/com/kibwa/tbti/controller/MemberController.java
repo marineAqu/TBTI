@@ -1,7 +1,9 @@
 package com.kibwa.tbti.controller;
 
+import com.kibwa.tbti.principal.PrincipalDetails;
 import com.kibwa.tbti.service.MemberService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.HashMap;
@@ -17,6 +19,18 @@ import java.util.HashMap;
 @CrossOrigin(origins = "http://localhost:3000")
 public class MemberController {
     private final MemberService memberService;
+
+
+    @GetMapping("/api/check_login_status")
+    public HashMap<String, Object> checkLoginStatus(@AuthenticationPrincipal PrincipalDetails principalDetails) {
+        HashMap<String, Object> response = new HashMap<>();
+
+        if(principalDetails != null) response.put("login", "true");
+        else response.put("login", "false");
+
+        return response;
+    }
+
 
     @PostMapping("/api/sign-up")
     public HashMap<String, Object> signupFun(@RequestParam("uid") String uid, @RequestParam("password") String password,
