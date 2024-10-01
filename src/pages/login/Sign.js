@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import "./login.css";
+import {useNavigate} from "react-router-dom";
 
 const Login = () => {
     const [uid, setUid] = useState(""); // 아이디
@@ -7,6 +8,7 @@ const Login = () => {
     const [password, setPassword] = useState(""); // 비밀번호
     const [uidCheck, setUidCheck] = useState(""); // 아이디 중복 확인 결과
     const [userNameCheck, setUserNameCheck] = useState(""); // 닉네임 중복 확인 결과
+    const navigate = useNavigate();
 
     const checkUidDuplication = async () => {
         const response = await fetch(`/api/uid_duplication?uid=${uid}`);
@@ -37,6 +39,9 @@ const Login = () => {
                 },
                 body: formData
             });
+
+            navigate("/"); // 회원가입 페이지로 이동
+            alert("회원가입이 완료되었습니다. 환영합니다!");
         }
         else alert("아이디, 혹은 닉네임이 중복됩니다.");
     };
