@@ -10,8 +10,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 public interface MembersRepository extends JpaRepository<MembersEntity, Integer> {
     MembersEntity findByUserName(String userName);
-
+    MembersEntity findByUid(String uid);
     boolean existsByUserName(String userName);
-
     boolean existsByUid(String uid);
 }
