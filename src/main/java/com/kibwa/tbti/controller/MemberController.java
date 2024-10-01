@@ -25,8 +25,8 @@ public class MemberController {
     public HashMap<String, Object> checkLoginStatus(@AuthenticationPrincipal PrincipalDetails principalDetails) {
         HashMap<String, Object> response = new HashMap<>();
 
-        if(principalDetails != null) response.put("login", "true");
-        else response.put("login", "false");
+        if(principalDetails != null) response.put("login", true);
+        else response.put("login", false);
 
         return response;
     }
