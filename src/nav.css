@@ -189,3 +189,12 @@
     justify-content: center;
 }
 
+.GNB .text-wrapper-btn {
+    color: #000000;
+    font-size: 14px; /* 글자 크기 축소 */
+    font-weight: 600;
+    position: relative;
+    width: fit-content;
+    text-decoration: none; /* 링크 스타일 */
+    padding: 0;
+}

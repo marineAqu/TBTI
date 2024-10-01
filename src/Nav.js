@@ -1,4 +1,4 @@
-import React, { useState, useRef } from "react";
+import React, {useState, useRef, useEffect} from "react";
 import { Link, useNavigate } from "react-router-dom";
 import "./nav.css";
 
@@ -8,12 +8,32 @@ export const Nav = () => {
     const [selectedIndex, setSelectedIndex] = useState(-1);
     const inputRef = useRef(null);
     const navigate = useNavigate();
+    const [isLoggedIn, setIsLoggedIn] = useState(false); // 로그인 상태 관리
 
     const regions = [
         "강원특별자치도", "대전광역시", "전라남도", "부산광역시", "서울특별시", "인천광역시",
         "광주광역시", "경상북도", "대구광역시", "제주특별자치도", "충청남도", "충청북도",
         "경상남도", "경기도", "전북특별자치도", "세종특별자치시", "울산광역시"
     ];
+
+    useEffect(() => {
+        // 로그인 상태 확인
+        const checkLoginStatus = async () => {
+            try {
+                const response = await fetch('/api/check_login_status');
+                const result = await response.json();
+                setIsLoggedIn(result.login);
+
+                console.log(isLoggedIn);
+            } catch (error) {
+                console.error('로그인 상태 확인 오류:', error);
+            }
+        };
+
+        checkLoginStatus();
+
+
+    }, []);
 
     const handleSearch = () => {
         if (searchInput.trim()) {
@@ -63,6 +83,16 @@ export const Nav = () => {
         navigate(`/local?query=${region}`);
     };
 
+    const handleLogout = async () => {
+        try {
+            await fetch('/api/logout', { method: 'POST' });
+            setIsLoggedIn(false);
+            {/*navigate('/');*/}
+        } catch (error) {
+            console.error('로그아웃 오류:', error);
+        }
+    };
+
     return (
         <div className="GNB">
             <div className="LOGO">
@@ -79,7 +109,11 @@ export const Nav = () => {
             </div>
 
             <div className="nav_login">
-                <Link to="/login" className="text-wrapper">로그인</Link>
+                {isLoggedIn === true ? (
+                    <button onClick={handleLogout} className="text-wrapper-btn">로그아웃</button>
+                ) : (
+                    <Link to="/login" className="text-wrapper">로그인</Link>
+                )}
             </div>
 
             <div className="group">
