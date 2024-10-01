@@ -27,14 +27,14 @@ public class LocalcreatorDetailController {
     private final StorageS3Service storageS3Service;
 
     @GetMapping("/api/localcreator_detail")
-    public HashMap<String, Object> localcreator_detail(@RequestParam("storeId") int store_id, @AuthenticationPrincipal UserDetails userDetails) {
+    public HashMap<String, Object> localcreator_detail(@RequestParam("storeId") int store_id, @AuthenticationPrincipal PrincipalDetails principalDetails) {
         HashMap<String, Object> response = new HashMap<>();
 
         LocalcreatorDTO localcreatorDTO = localcreatorDetailService.SearchByStoreId(store_id);
         localcreatorDTO.setImg(storageS3Service.getImageURL(localcreatorDTO.getStoreName(), localcreatorDTO.getHiddenCategory()));
 
         response.put("localcreator", localcreatorDTO);
-        if(userDetails != null) response.put("uid", userDetails.getUsername());
+        if(principalDetails != null) response.put("username", principalDetails.getNickName());
 
         return response;
     }

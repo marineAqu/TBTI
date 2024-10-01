@@ -15,15 +15,14 @@ public class PrincipalDetailsService implements UserDetailsService {
     private final MembersRepository membersRepository;
 
     @Override
-    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        MembersEntity membersEntity = membersRepository.findByUserName(username);
+    public UserDetails loadUserByUsername(String uid) throws UsernameNotFoundException {
+        MembersEntity membersEntity = membersRepository.findByUid(uid);
 
         if(membersEntity != null) {
-            System.out.println("User found with username: " + username);
+            System.out.println("User found with username: " + uid);
             return new PrincipalDetails(membersEntity);
         }
 
-        System.out.println("User    N O T   found with username: " + username);
-        throw new UsernameNotFoundException("User not found with username: " + username);
+        throw new UsernameNotFoundException("User not found with username: " + uid);
     }
 }
