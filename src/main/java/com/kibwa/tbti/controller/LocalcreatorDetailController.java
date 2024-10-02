@@ -7,7 +7,6 @@ import com.kibwa.tbti.service.LocalcreatorDetailService;
 import com.kibwa.tbti.service.StorageS3Service;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
-import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.HashMap;
