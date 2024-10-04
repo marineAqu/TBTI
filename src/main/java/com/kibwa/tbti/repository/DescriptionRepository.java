@@ -1,7 +1,6 @@
 package com.kibwa.tbti.repository;
 
 import com.kibwa.tbti.entity.DescriptionEntity;
-import com.kibwa.tbti.entity.LocalcreatorEntity;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.repository.query.Param;
 
