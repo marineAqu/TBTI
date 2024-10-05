@@ -2,6 +2,7 @@ package com.kibwa.tbti.controller;
 
 import com.kibwa.tbti.DTO.LocalcreatorDTO;
 import com.kibwa.tbti.DTO.ReviewDTO;
+import com.kibwa.tbti.entity.InformationEntity;
 import com.kibwa.tbti.principal.PrincipalDetails;
 import com.kibwa.tbti.service.LocalcreatorDetailService;
 import com.kibwa.tbti.service.StorageS3Service;
@@ -11,6 +12,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.HashMap;
 import java.util.List;
+import java.util.Optional;
 
 /**
  * 파일명: localcreatorDetailController
@@ -78,6 +80,21 @@ public class LocalcreatorDetailController {
         localcreatorDetailService.save_like(store_id, principalDetails.getId());
 
         response.put("status", "success");
+        return response;
+    }
+
+    @GetMapping("/api/get_detail_info")
+    public HashMap<String, Object> get_detail(@RequestParam("storeId") int store_id) {
+        HashMap<String, Object> response = new HashMap<>();
+
+        Optional<InformationEntity> information = localcreatorDetailService.getInfo(store_id);
+
+        if(information.isPresent()) {
+            response.put("status", "success");
+            response.put("information", information.get());
+        }
+        else response.put("status", "fail");
+
         return response;
     }
 
