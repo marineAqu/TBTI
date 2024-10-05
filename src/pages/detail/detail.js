@@ -12,7 +12,7 @@ const Detail = () => {
     const [reviews, setReviews] = useState([]);
     const [activeTab, setActiveTab] = useState("info");
     const [errorMessage, setErrorMessage] = useState(null); // 오류 메시지 상태
-    const [myId, setMyId] = useState("로그인 후 이용해주세요.");
+    const [myNickname, setmyNickname] = useState("로그인 후 이용해주세요.");
     const [rating, setRating] = useState(0); // 별점 상태 추가
 
     useEffect(() => {
@@ -22,12 +22,15 @@ const Detail = () => {
                 const result = await response.json();
                 setData(result.localcreator);
                 setDescription(result.localcreator.description.description);
-                if(result.uid) setMyId(result.uid+"님 리뷰를 작성해보세요!");
+                if(result.username) setmyNickname(result.username+" 님 리뷰를 작성해보세요!");
 
 
                 const reviewResponse = await fetch(`/api/get_review?storeId=${storeId}`);
                 const reviewResult = await reviewResponse.json();
                 setReviews(reviewResult.reviewList);
+
+                const infoResponse = await fetch(`/api/get_detail_info?storeId=${storeId}`);
+                const infoResult = await infoResponse.json();
             } catch (error) {
                 console.error('오류:', error);
                 setErrorMessage('데이터를 가져오는 데 실패했습니다.'); // 오류 메시지 설정
@@ -61,7 +64,7 @@ const Detail = () => {
         formData.append('reviewContent', reviewText.trim());
         formData.append('starPoint', rating);
 
-        if (reviewText.trim() && myId !== "로그인 후 이용해주세요.") {
+        if (reviewText.trim() && myNickname !== "로그인 후 이용해주세요.") {
             try {
                 const response = await fetch('/api/post_review', {
                     method: 'POST',
@@ -75,8 +78,9 @@ const Detail = () => {
                     throw new Error('리뷰 제출 실패');
                 }
 
-                setReviews([...reviews, reviewText.trim()]);
-                setReviewText("");
+                const reviewResponse = await fetch(`/api/get_review?storeId=${storeId}`);
+                const reviewResult = await reviewResponse.json();
+                setReviews(reviewResult.reviewList);
 
             } catch (error) {
                 console.error('리뷰 제출 오류:', error);
@@ -215,7 +219,7 @@ const Detail = () => {
                     <form className="reviewForm" onSubmit={handleReviewSubmit}>
 
                         <div className="id-star-div">
-                            <span>{myId}</span>
+                            <span>{myNickname}</span>
                             <StarRating rating={rating} onRatingChange={handleRatingChange} />
                         </div>
 
