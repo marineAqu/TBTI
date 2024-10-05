@@ -2,9 +2,11 @@ package com.kibwa.tbti.service;
 
 import com.kibwa.tbti.DTO.LocalcreatorDTO;
 import com.kibwa.tbti.DTO.ReviewDTO;
+import com.kibwa.tbti.entity.InformationEntity;
 import com.kibwa.tbti.entity.LikesEntity;
 import com.kibwa.tbti.entity.LocalcreatorEntity;
 import com.kibwa.tbti.entity.ReviewEntity;
+import com.kibwa.tbti.repository.InformationRepository;
 import com.kibwa.tbti.repository.LikesRepository;
 import com.kibwa.tbti.repository.LocalcreatorRepository;
 import com.kibwa.tbti.repository.ReviewRepository;
@@ -12,6 +14,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 /**
  * 파일명: LocalcreatorDetailService
@@ -25,6 +28,7 @@ public class LocalcreatorDetailService {
     private final LocalcreatorRepository localcreatorRepository;
     private final ReviewRepository reviewRepository;
     private final LikesRepository likesRepository;
+    private final InformationRepository informationRepository;
 
     public LocalcreatorDTO SearchByStoreId(int store_id) {
         LocalcreatorEntity localcreatorEntity = localcreatorRepository.findByStoreId(store_id);
@@ -61,5 +65,9 @@ public class LocalcreatorDetailService {
                     return dto;
                 })
                 .toList();
+    }
+
+    public Optional<InformationEntity> getInfo(int store_id) {
+        return informationRepository.findByStoreId(store_id);
     }
 }
