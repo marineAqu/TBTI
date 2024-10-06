@@ -32,6 +32,7 @@ public class LocalcreatorDTO {
     private String business_hours;
     private DescriptionEntity description;
     private String[] img;
+    private String reserveLink;
 
     public static LocalcreatorDTO toLocalcreatorDTO(LocalcreatorEntity localcreatorEntity){
         LocalcreatorDTO localcreatorDTO = new LocalcreatorDTO();
@@ -48,6 +49,7 @@ public class LocalcreatorDTO {
         localcreatorDTO.setHiddenCategory(localcreatorEntity.getHiddenCategory());
         localcreatorDTO.setBusiness_hours(localcreatorEntity.getBusiness_hours());
         localcreatorDTO.setDescription(localcreatorEntity.getDescription());
+        localcreatorDTO.setReserveLink(localcreatorEntity.getReserveLink());
 
         return localcreatorDTO;
     }
