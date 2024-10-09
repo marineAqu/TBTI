@@ -99,14 +99,14 @@
     background-color: #cf96e6;
     color: white;
     align-self: flex-end; /* 오른쪽 정렬 */
-    text-align: right;
+    text-align: left;
     font-size: 13px;
     border-radius: 15px 15px 0 15px;
     padding: 8px;
     margin-bottom: 10px;
     width: auto; /* 입력한 글자 수에 따라 자동 조정 */
-    display: inline-block; /* 메시지 크기를 텍스트에 맞게 조정 */
     word-wrap: break-word; /* 긴 단어는 줄 바꿈 처리 */
+
 }
 
 .message.ai {

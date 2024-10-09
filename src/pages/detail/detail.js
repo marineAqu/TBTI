@@ -15,12 +15,22 @@ const Detail = () => {
     const [myNickname, setmyNickname] = useState("로그인 후 이용해주세요.");
     const [rating, setRating] = useState(0); // 별점 상태 추가
 
+    const [detailInfo, setDetailInfo] = useState({}); //상세 정보 저장
+
+    const [reserve, setReserveLink] = useState({});
+
+
     useEffect(() => {
         const fetchData = async () => {
             try {
                 const response = await fetch(`/api/localcreator_detail?storeId=${storeId}`);
                 const result = await response.json();
+
+                console.log("API Response:", result);
+                // console.log("Reserve Link:", result.localcreator?.reserveLink);
+
                 setData(result.localcreator);
+
                 setDescription(result.localcreator.description.description);
                 if(result.username) setmyNickname(result.username+" 님 리뷰를 작성해보세요!");
 
@@ -31,6 +41,9 @@ const Detail = () => {
 
                 const infoResponse = await fetch(`/api/get_detail_info?storeId=${storeId}`);
                 const infoResult = await infoResponse.json();
+                // console.log(infoResult);
+                setDetailInfo(infoResult);
+
             } catch (error) {
                 console.error('오류:', error);
                 setErrorMessage('데이터를 가져오는 데 실패했습니다.'); // 오류 메시지 설정
@@ -39,6 +52,8 @@ const Detail = () => {
 
         fetchData();
     }, [storeId]);
+
+    // console.log(data);
 
     const handlePrevImage = () => {
         setCurrentImageIndex((prevIndex) => (prevIndex > 0 ? prevIndex - 1 : data.img.length - 1));
@@ -167,13 +182,20 @@ const Detail = () => {
                         <p className="rating">평점 : {data.rating}</p>
                     </div>
 
+
+
                     <div className="reservation">
-
-                        <button className="naver-button">
-                            <img src="/image/naver.png" alt="네이버예약"/> 네이버 예약하기
-                        </button>
-
+                        {data.reserveLink ? (
+                            <a href={data.reserveLink} target="_blank" rel="noopener noreferrer">
+                                <button className="naver-button">
+                                    <img src="/image/naver.png" alt="네이버예약"/> 네이버 예약하기
+                                </button>
+                            </a>
+                        ) : (
+                            <p></p> // 예약 링크가 없을 경우에는 빈 태그 대신, 다른 안내 문구를 넣을 수도 있습니다.
+                        )}
                     </div>
+
 
                 </div>
             </div>
@@ -185,7 +207,7 @@ const Detail = () => {
                     className={`tabButton ${activeTab === "info" ? "active" : ""}`}
                     onClick={() => setActiveTab("info")}
                 >
-                    상세정보
+                상세정보
                 </button>
                 <button
                     className={`tabButton ${activeTab === "review" ? "active" : ""}`}
@@ -198,50 +220,135 @@ const Detail = () => {
             {activeTab === "info" && (
                 <div className="infoContent">
 
-                    <p className="infoName">영업시간</p>
-                    <p className="hours">{data.business_hours}</p>
 
-                    <p className="infoName">가게소개</p>
+                    <p className="infoName">상세 정보</p>
+                    <ul>
+                        {detailInfo.allowsReserve ? (
+                            <div>
+                                <img src="/image/detail/no_booking.png" alt="no_reservation"/>
+                                <p>예약 불가</p>
+                            </div>
+                        ) : (
+                            <div>
+                                <img src="/image/detail/booking.png" alt="reservation"/>
+                                <p>예약 가능</p>
+                            </div>
+                        )}
 
-                    <div className="descriptionBox">
+                        {detailInfo.allowsPets ? (
+                            <div>
+                                <img src="/image/detail/pet-friendly.png" alt="Pet Friendly"/>
+                                <p>반려동물 입장 가능</p>
+                            </div>
+                        ) : (
+                            <div>
+                                <img src="/image/detail/no-animals.png" alt="no-animals"/>
+                                <p>반려동물 입장 불가</p>
+                            </div>
+                        )}
 
-                        <div className="description">
-                            {description}
-                        </div>
+                        {detailInfo.kidsAvailable ? (
+                            <div>
+                                <img src="/image/detail/no_kids-zone.png" alt="no_Kids-Zone"/>
+                                <p>아이 입장 불가</p>
+                            </div>
+                        ) : (
+                            <div>
+                                <img src="/image/detail/kids-zone.png" alt="kids-zone"/>
+                                <p>아이 입장 가능</p>
+                            </div>
+                        )}
 
-                    </div>
+                        {detailInfo.hasParking ? (
+                            <div>
+                                <img src="/image/detail/no-parking.png" alt="no-parking"/>
+                                <p>근처 주차 불가</p>
+                            </div>
+                        ) : (
+                            <div>
+                                <img src="/image/detail/parking.png" alt="Parking"/>
+                                <p>근처 주차 가능</p>
+                            </div>
+                        )}
+
+                        {detailInfo.hasWifi ? (
+                            <div>
+                                <img src="/image/detail/no-wifi.png" alt="no-wifi"/>
+                                <p>와이파이 없음</p>
+                            </div>
+                        ) : (
+                            <div>
+                                <img src="/image/detail/wi-fi.png" alt="wifi"/>
+                                <p>와이파이 있음</p>
+                            </div>
+                        )}
+
+                        {detailInfo.wheelchairAccess ? (
+                            <div>
+                                <p>휠체어 접근 어려움</p>
+                            </div>
+                        ) : (
+                            <div>
+                                <img src="/image/detail/ramp.png" alt="ramp"/>
+                                <p>휠체어 이용 가능</p>
+                            </div>
+                        )}
+
+
+                    {/* Other details */}
+                    {/*정류장과의 도보 : {detailInfo.distanceToStation}*/}
+                    {/* 1인 예상 객단가: {detailInfo.perCost}원 */}
+                    {/* 키워드: {detailInfo.tags} */}
+                    {/* 설명: {detailInfo.description} */}
+                </ul>
+
+
+                <p className="infoName">영업시간</p>
+                <p className="hours">{data.business_hours}</p>
+
+    <p className="infoName">가게소개</p>
+
+    <div className="descriptionBox">
+
+        <div className="description">
+            {description}
+        </div>
+
+    </div>
+</div>
+)
+}
+
+{
+    activeTab === "review" && (
+        <div className="review">
+
+            <form className="reviewForm" onSubmit={handleReviewSubmit}>
+
+                <div className="id-star-div">
+                    <span>{myNickname}</span>
+                    <StarRating rating={rating} onRatingChange={handleRatingChange}/>
                 </div>
-            )}
 
-            {activeTab === "review" && (
-                <div className="review">
+                <textarea
+                    className="reviewInput"
+                    value={reviewText}
+                    onChange={handleReviewChange}
+                    placeholder="리뷰를 작성하세요"
+                    rows="2"
+                />
+                <button type="submit" className="submitReviewButton">리뷰 작성</button>
 
-                    <form className="reviewForm" onSubmit={handleReviewSubmit}>
+            </form>
 
-                        <div className="id-star-div">
-                            <span>{myNickname}</span>
-                            <StarRating rating={rating} onRatingChange={handleRatingChange} />
-                        </div>
-
-                        <textarea
-                            className="reviewInput"
-                            value={reviewText}
-                            onChange={handleReviewChange}
-                            placeholder="리뷰를 작성하세요"
-                            rows="2"
-                        />
-                        <button type="submit" className="submitReviewButton">리뷰 작성</button>
-
-                    </form>
-
-                    <div className="reviewList">
-                        {reviews.length > 0 ? (
-                            reviews.map((review, index) => (
-                                <div key={index} className="reviewItem">
-                                    <div className="review-header">
-                                        <span className="member-name">{review.memberName}</span>
-                                        <StarRated className="review-star" rating={review.rate}></StarRated>
-                                        <span className="review-date">{review.createAt}</span>
+            <div className="reviewList">
+                {reviews.length > 0 ? (
+                    reviews.map((review, index) => (
+                        <div key={index} className="reviewItem">
+                            <div className="review-header">
+                                <span className="member-name">{review.memberName}</span>
+                                <StarRated className="review-star" rating={review.rate}></StarRated>
+                                <span className="review-date">{review.createAt}</span>
                                     </div>
                                     <span>{review.reviewContent}</span>
                                 </div>

@@ -168,6 +168,13 @@
     width: 40%;
 }
 
+.hours{
+    font-size: 15px;
+    line-height: 20px;
+    white-space: pre-wrap; /*정렬*/
+    display: -webkit-box; /*정렬*/
+}
+
 .descriptionBox {
     margin-top: 20px;
     line-height: 25px;
@@ -177,32 +184,34 @@
     overflow: hidden;
     white-space: pre-wrap;
     display: -webkit-box;
-
 }
 
-/*.description.show-less {*/
-/*    max-height: 60px;*/
-/*}*/
+ul {
+    display: flex;
+    flex-wrap: wrap; /* 화면 너비에 따라 항목이 줄 바꿈*/
+    list-style-type: none; /* 기본 리스트 스타일 제거 */
+    padding: 0;
+}
 
-/*.description.show-more {*/
-/*    display: block;*/
-/*    max-height: none;*/
-/*}*/
+ul > div {
+    display: flex;
+    flex-direction: column; /* 세로로 정렬 */
+    align-items: center;
+    margin: 10px;
+}
 
-/*.show-more-button {*/
-/*    background-color: #ffffff;*/
-/*    border: 1px solid #cccccc;*/
-/*    border-radius: 15px;*/
-/*    color: #000000;*/
-/*    cursor: pointer;*/
-/*    font-size: 15px;*/
-/*    padding: 3px 10px;*/
-/*    margin-top: 10px;*/
-/*}*/
+ul img {
+    width: 80px;
+    height: auto;
+    margin-bottom: 5px;
+}
 
-/*.show-more-button:hover {*/
-/*    background-color: #818181b2;*/
-/*}*/
+ul div p {
+    text-align: center;
+    margin: 0;
+    font-size: 14px;
+}
+
 
 
 .detailPage .link {
@@ -223,11 +232,6 @@
 
 }
 
-.hours{
-    font-size: 15px;
-    line-height: 20px;
-    width: 10%;
-}
 
 .infoName{
     font-size: 20px;
