@@ -14,10 +14,8 @@ const Detail = () => {
     const [errorMessage, setErrorMessage] = useState(null); // 오류 메시지 상태
     const [myNickname, setmyNickname] = useState("로그인 후 이용해주세요.");
     const [rating, setRating] = useState(0); // 별점 상태 추가
-
     const [detailInfo, setDetailInfo] = useState({}); //상세 정보 저장
 
-    const [reserve, setReserveLink] = useState({});
 
 
     useEffect(() => {
@@ -27,7 +25,8 @@ const Detail = () => {
                 const result = await response.json();
 
                 console.log("API Response:", result);
-                // console.log("Reserve Link:", result.localcreator?.reserveLink);
+                // console.log(data);
+
 
                 setData(result.localcreator);
 
@@ -52,8 +51,6 @@ const Detail = () => {
 
         fetchData();
     }, [storeId]);
-
-    // console.log(data);
 
     const handlePrevImage = () => {
         setCurrentImageIndex((prevIndex) => (prevIndex > 0 ? prevIndex - 1 : data.img.length - 1));
