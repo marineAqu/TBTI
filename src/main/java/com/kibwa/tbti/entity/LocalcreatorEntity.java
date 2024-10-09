@@ -50,6 +50,9 @@ public class LocalcreatorEntity {
     @Column
     private String business_hours;
 
+    @Column
+    private String reserveLink;
+
     @ManyToOne
     @JoinColumn(name = "storeId", referencedColumnName = "storeId", insertable = false, updatable = false)
     private DescriptionEntity description;
