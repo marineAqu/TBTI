@@ -211,6 +211,11 @@ ul div p {
     font-size: 14px;
 }
 
+.infoDetails p {
+    /*font-weight: bold;*/
+    margin-top: 20px;
+}
+
 
 
 .detailPage .link {
@@ -227,9 +232,9 @@ ul div p {
     flex-direction: column;
     display: flex;
     width: 80%;
-    margin-top: 80px;
-
+    margin-top: 40px;
 }
+
 
 
 .infoName{

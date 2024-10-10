@@ -24,7 +24,7 @@ const Detail = () => {
                 const response = await fetch(`/api/localcreator_detail?storeId=${storeId}`);
                 const result = await response.json();
 
-                console.log("API Response:", result);
+                // console.log("API Response:", result);
                 // console.log(data);
 
 
@@ -40,8 +40,10 @@ const Detail = () => {
 
                 const infoResponse = await fetch(`/api/get_detail_info?storeId=${storeId}`);
                 const infoResult = await infoResponse.json();
-                // console.log(infoResult);
-                setDetailInfo(infoResult);
+                setDetailInfo(infoResult.information); //이 문제였음
+
+                console.log(infoResult); //상세정보
+
 
             } catch (error) {
                 console.error('오류:', error);
@@ -100,6 +102,8 @@ const Detail = () => {
         }
         else alert("로그인 후 이용해주세요.");
     };
+
+    // const detailInfo = props.detailInfo || {};
 
     const handleRatingChange = (newRating) => {
         setRating(newRating);
@@ -180,7 +184,6 @@ const Detail = () => {
                     </div>
 
 
-
                     <div className="reservation">
                         {data.reserveLink ? (
                             <a href={data.reserveLink} target="_blank" rel="noopener noreferrer">
@@ -219,143 +222,147 @@ const Detail = () => {
 
 
                     <p className="infoName">상세 정보</p>
-                    <ul>
-                        {detailInfo.allowsReserve ? (
-                            <div>
-                                <img src="/image/detail/no_booking.png" alt="no_reservation"/>
-                                <p>예약 불가</p>
-                            </div>
-                        ) : (
-                            <div>
-                                <img src="/image/detail/booking.png" alt="reservation"/>
-                                <p>예약 가능</p>
-                            </div>
-                        )}
 
-                        {detailInfo.allowsPets ? (
+                    <ul>
+                        {detailInfo.allowsPets === "반려동물 입장 가능" ? (
                             <div>
                                 <img src="/image/detail/pet-friendly.png" alt="Pet Friendly"/>
                                 <p>반려동물 입장 가능</p>
                             </div>
                         ) : (
                             <div>
-                                <img src="/image/detail/no-animals.png" alt="no-animals"/>
+                                <img src="/image/detail/no-animals.png" alt="No Pets Allowed"/>
                                 <p>반려동물 입장 불가</p>
                             </div>
                         )}
 
-                        {detailInfo.kidsAvailable ? (
+                        {detailInfo.allowsReserve === "예약 가능" ? (
                             <div>
-                                <img src="/image/detail/no_kids-zone.png" alt="no_Kids-Zone"/>
-                                <p>아이 입장 불가</p>
+                                <img src="/image/detail/booking.png" alt="Reservation Available"/>
+                                <p>예약 가능</p>
                             </div>
                         ) : (
                             <div>
-                                <img src="/image/detail/kids-zone.png" alt="kids-zone"/>
-                                <p>아이 입장 가능</p>
+                                <img src="/image/detail/no_booking.png" alt="No Reservation"/>
+                                <p>예약 불가</p>
                             </div>
                         )}
 
-                        {detailInfo.hasParking ? (
+                        {detailInfo.hasWifi === "와이파이 이용 가능" ? (
                             <div>
-                                <img src="/image/detail/no-parking.png" alt="no-parking"/>
-                                <p>근처 주차 불가</p>
-                            </div>
-                        ) : (
-                            <div>
-                                <img src="/image/detail/parking.png" alt="Parking"/>
-                                <p>근처 주차 가능</p>
-                            </div>
-                        )}
-
-                        {detailInfo.hasWifi ? (
-                            <div>
-                                <img src="/image/detail/no-wifi.png" alt="no-wifi"/>
-                                <p>와이파이 없음</p>
-                            </div>
-                        ) : (
-                            <div>
-                                <img src="/image/detail/wi-fi.png" alt="wifi"/>
+                                <img src="/image/detail/wi-fi.png" alt="Wi-Fi Available"/>
                                 <p>와이파이 있음</p>
                             </div>
+                        ) : (
+                            <div>
+                                <img src="/image/detail/no-wifi.png" alt="No Wi-Fi"/>
+                                <p>와이파이 없음</p>
+                            </div>
                         )}
 
-                        {detailInfo.wheelchairAccess ? (
+                        {detailInfo.kidsAvailable === "아이 입장 가능" ? (
                             <div>
-                                <p>휠체어 접근 어려움</p>
+                                <img src="/image/detail/kids-zone.png" alt="Kids Allowed"/>
+                                <p>키즈존</p>
                             </div>
                         ) : (
                             <div>
-                                <img src="/image/detail/ramp.png" alt="ramp"/>
+                                <img src="/image/detail/no_kids-zone.png" alt="No Kids Allowed"/>
+                                <p>노키즈존</p>
+                            </div>
+                        )}
+
+                        {detailInfo.hasParking === "근처 주차 가능" ? (
+                            <div>
+                                <img src="/image/detail/parking.png" alt="Parking Available"/>
+                                <p>주차 가능</p>
+                            </div>
+                        ) : (
+                            <div>
+                                <img src="/image/detail/no-parking.png" alt="No Parking"/>
+                                <p>주차 어려움</p>
+                            </div>
+                        )}
+
+                        {detailInfo.wheelchairAccess === "휠체어 이용 가능" ? (
+                            <div>
+                                <img src="/image/detail/ramp.png" alt="Wheelchair Access Available"/>
                                 <p>휠체어 이용 가능</p>
                             </div>
-                        )}
-
-
-                    {/* Other details */}
-                    {/*정류장과의 도보 : {detailInfo.distanceToStation}*/}
-                    {/* 1인 예상 객단가: {detailInfo.perCost}원 */}
-                    {/* 키워드: {detailInfo.tags} */}
-                    {/* 설명: {detailInfo.description} */}
-                </ul>
-
-
-                <p className="infoName">영업시간</p>
-                <p className="hours">{data.business_hours}</p>
-
-    <p className="infoName">가게소개</p>
-
-    <div className="descriptionBox">
-
-        <div className="description">
-            {description}
-        </div>
-
-    </div>
-</div>
-)
-}
-
-{
-    activeTab === "review" && (
-        <div className="review">
-
-            <form className="reviewForm" onSubmit={handleReviewSubmit}>
-
-                <div className="id-star-div">
-                    <span>{myNickname}</span>
-                    <StarRating rating={rating} onRatingChange={handleRatingChange}/>
-                </div>
-
-                <textarea
-                    className="reviewInput"
-                    value={reviewText}
-                    onChange={handleReviewChange}
-                    placeholder="리뷰를 작성하세요"
-                    rows="2"
-                />
-                <button type="submit" className="submitReviewButton">리뷰 작성</button>
-
-            </form>
-
-            <div className="reviewList">
-                {reviews.length > 0 ? (
-                    reviews.map((review, index) => (
-                        <div key={index} className="reviewItem">
-                            <div className="review-header">
-                                <span className="member-name">{review.memberName}</span>
-                                <StarRated className="review-star" rating={review.rate}></StarRated>
-                                <span className="review-date">{review.createAt}</span>
-                                    </div>
-                                    <span>{review.reviewContent}</span>
-                                </div>
-                            ))
                         ) : (
-                            <p className="noReviews">아직 작성된 리뷰가 없습니다.</p>
+                            <div>
+                                <img src="/image/detail/no-wheel.png" alt="No Wheelchair Access"/>
+                                <p>휠체어 이용 어려움</p>
+                            </div>
                         )}
+                    </ul>
+
+
+
+                    <div className="infoDetails">
+                            <p>* 정류장과의 거리: {detailInfo.distanceToStation || "정보 없음"}</p>
+                            <p>* 1인당 비용: {detailInfo.perCost || "정보 없음"}</p>
+                            <p>* 서비스 옵션: {detailInfo.serviceOptions || "정보 없음"}</p>
+                            <p>* {detailInfo.tags || "정보 없음"}</p>
+                    </div>
+
+                    <p className="infoName">영업시간</p>
+                    <p className="hours">{data.business_hours}</p>
+
+
+                    <p className="infoName">가게소개</p>
+
+                    <div className="descriptionBox">
+
+                    <div className="description">
+                            {description}
+                        </div>
+
                     </div>
                 </div>
-            )}
+            )
+            }
+
+            {
+                activeTab === "review" && (
+                    <div className="review">
+
+                        <form className="reviewForm" onSubmit={handleReviewSubmit}>
+
+                            <div className="id-star-div">
+                                <span>{myNickname}</span>
+                                <StarRating rating={rating} onRatingChange={handleRatingChange}/>
+                            </div>
+
+                            <textarea
+                                className="reviewInput"
+                                value={reviewText}
+                                onChange={handleReviewChange}
+                                placeholder="리뷰를 작성하세요"
+                                rows="2"
+                            />
+                            <button type="submit" className="submitReviewButton">리뷰 작성</button>
+
+                        </form>
+
+                        <div className="reviewList">
+                            {reviews.length > 0 ? (
+                                reviews.map((review, index) => (
+                                    <div key={index} className="reviewItem">
+                                        <div className="review-header">
+                                            <span className="member-name">{review.memberName}</span>
+                                            <StarRated className="review-star" rating={review.rate}></StarRated>
+                                            <span className="review-date">{review.createAt}</span>
+                                        </div>
+                                        <span>{review.reviewContent}</span>
+                                    </div>
+                                ))
+                            ) : (
+                                <p className="noReviews">아직 작성된 리뷰가 없습니다.</p>
+                            )}
+                        </div>
+                    </div>
+                )}
         </div>
     );
 };
