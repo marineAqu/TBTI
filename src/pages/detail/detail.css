@@ -102,9 +102,8 @@
 
 .reservation {
     margin-top: 50px;
-    width: 280px;
+    width: 300px;
     height: 200px;
-
     /*border: 1px solid;*/
     display: flex;
 
@@ -112,7 +111,7 @@
 
 .naver-button {
     width: 180px;
-    height: 30px;
+    height: 40px;
 }
 
 .naver-button img {
@@ -212,6 +211,11 @@ ul div p {
     font-size: 14px;
 }
 
+.infoDetails p {
+    /*font-weight: bold;*/
+    margin-top: 20px;
+}
+
 
 
 .detailPage .link {
@@ -228,9 +232,9 @@ ul div p {
     flex-direction: column;
     display: flex;
     width: 80%;
-    margin-top: 80px;
-
+    margin-top: 40px;
 }
+
 
 
 .infoName{
