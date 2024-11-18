@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import './Tbti_test.css';
 
-function Tbti_Test() {
+function TBTITest() {
     // 현재 화면을 관리하는 상태 (초기에는 소개 화면을 표시)
     const [currentStep, setCurrentStep] = useState(-1);
     // 사용자 선택 결과를 저장할 상태
@@ -152,4 +152,4 @@ function Tbti_Test() {
     );
 }
 
-export default Tbti_Test;
+export default TBTITest;
