@@ -23,10 +23,10 @@ public interface LocalcreatorRepository extends JpaRepository<LocalcreatorEntity
     List<LocalcreatorSearchProjection> findByStoreNameLike(@Param("keyword") String keyword);
 
     @Query("SELECT l FROM LocalCreatorWithAvgRatingEntity l WHERE " +
-            "l.storeName LIKE %:keyword% OR " +
+            "(l.storeName LIKE %:keyword% OR " +
             "l.detailAddress LIKE %:keyword% OR " +
-            "l.category LIKE %:keyword%" +
-            "ORDER BY l.avgRating DESC")
+            "l.category LIKE %:keyword%)" +
+            "ORDER BY l.avgRating DESC NULLS LAST")
     List<LocalCreatorWithAvgRatingEntity> findByStoreNameLikeModi(@Param("keyword") String keyword);
 
     List<LocalcreatorSearchProjection> findByAddressCategory1Like(@Param("addressCategory1") String addressCategory1);
