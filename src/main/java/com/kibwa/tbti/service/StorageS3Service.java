@@ -18,7 +18,7 @@ import java.net.URL;
 public class StorageS3Service {
 
     // AWS S3 대신 로컬 파일 경로를 반환하는 방식으로 변경
-    public String[] getImageURL(String imgName, char hiddenCategory) {
+    public String[] getImageURL(String imgName) {
         String[] imgList = new String[3];
 
         // 로컬 파일 시스템 경로 설정
