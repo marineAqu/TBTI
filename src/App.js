@@ -1,5 +1,5 @@
 import React from "react";
-import { BrowserRouter as Router, Route, Routes, useLocation } from "react-router-dom";
+import { Route, Routes, useLocation } from "react-router-dom";
 import './App.css';
 import { Nav } from "./Nav";
 import { Fnb } from "./Fnb";
@@ -13,6 +13,7 @@ import Main from "./pages/Main";
 import LocalSearch from "./pages/detail/LocalSearch";
 import Local from "./pages/detail/local";
 import Sign from "./pages/login/Sign";
+import TBTITest from "./pages/Tbti_test";
 
 function App() {
     const location = useLocation();  // 현재 경로 가져오기
@@ -27,14 +28,15 @@ function App() {
             <main>
                 <Routes>
                     <Route path="/" element={<Main/>}/>
-                    {/*<Route path="/travel" element={<Travel/>}/>*/}
-                    {/*<Route path="/domestic" element={<Domestic/>}/>*/}
-                    {/*<Route path="/festival" element={<Festival/>}/>*/}
+                    <Route path="/travel" element={<Travel/>}/>
+                    <Route path="/domestic" element={<Domestic/>}/>
+                    <Route path="/festival" element={<Festival/>}/>
                     <Route path="/login" element={<Login/>}/>
                     <Route path="/detail/:storeId" element={<Detail/>}/>
                     <Route path="/search" element={<LocalSearch/>}/>
                     <Route path="/local" element={<Local/>}/>
                     <Route path="/sign" element={<Sign/>}/>
+                    <Route path="/tbti-test" element={<TBTITest />} />
 
                 </Routes>
             </main>

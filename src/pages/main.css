@@ -311,3 +311,18 @@ button:hover {
     font-size: 0.9em;
     width: 90%;
 }
+
+.TBTI_TEST{
+    font-size: 15px;
+    text-align: center;
+    font-weight: 500;
+    background-color: rgb(216, 216, 216);
+    transition: background-color 0.3s;
+    border-radius: 8px;
+    padding: 10px;
+
+}
+
+.TBTI_TEST:hover{
+    background-color: rgb(170, 170, 170);
+}

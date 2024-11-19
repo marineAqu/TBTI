@@ -1,5 +1,6 @@
 import React, { useState, useRef, useEffect } from "react";
 import ReactMarkdown from "react-markdown";
+import { useNavigate } from "react-router-dom"; // useNavigate 가져오기
 import PlaceSlider from "./PlaceSlider"; // PlaceSlider 컴포넌트 가져오기
 import './main.css';
 
@@ -10,6 +11,7 @@ function Chat() {
     ]); // 초기 AI 메시지
     const [loading, setLoading] = useState(false); // 로딩 상태
     const chatBoxRef = useRef(null); // 채팅 박스에 대한 참조
+    const navigate = useNavigate(); // 페이지 이동을 위한 useNavigate 훅
 
     const scrollToBottom = () => {
         if (chatBoxRef.current) {
@@ -143,8 +145,13 @@ function Chat() {
                 <div className="chat-name" onClick={scrollToTop}>TBTI</div>
             </div>
 
+            {/* TBTI 테스트 해보기 클릭 시 라우팅 */}
+            <div className="TBTI_TEST" onClick={() => navigate('/tbti-test')}>
+                TBTI 테스트 해보기
+            </div>
+
             <div className="chat-box" ref={chatBoxRef}>
-                {messages.map((message, index) => (
+            {messages.map((message, index) => (
                     <div key={index} className={`message ${message.sender}`}>
                         {message.type === "place" ? (
                             <PlaceSlider places={message.placesData} /> // 여러 장소를 슬라이더로 전달
