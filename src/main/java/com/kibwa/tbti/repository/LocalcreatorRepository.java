@@ -1,5 +1,6 @@
 package com.kibwa.tbti.repository;
 import com.kibwa.tbti.DTO.LocalcreatorSearchProjection;
+import com.kibwa.tbti.entity.LocalCreatorWithAvgRatingEntity;
 import com.kibwa.tbti.entity.LocalcreatorEntity;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
@@ -20,6 +21,13 @@ public interface LocalcreatorRepository extends JpaRepository<LocalcreatorEntity
             "l.detailAddress LIKE %:keyword% OR " +
             "l.category LIKE %:keyword%")
     List<LocalcreatorSearchProjection> findByStoreNameLike(@Param("keyword") String keyword);
+
+    @Query("SELECT l FROM LocalCreatorWithAvgRatingEntity l WHERE " +
+            "l.storeName LIKE %:keyword% OR " +
+            "l.detailAddress LIKE %:keyword% OR " +
+            "l.category LIKE %:keyword%" +
+            "ORDER BY l.avgRating DESC")
+    List<LocalCreatorWithAvgRatingEntity> findByStoreNameLikeModi(@Param("keyword") String keyword);
 
     List<LocalcreatorSearchProjection> findByAddressCategory1Like(@Param("addressCategory1") String addressCategory1);
 
