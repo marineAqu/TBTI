@@ -1,6 +1,7 @@
 package com.kibwa.tbti.controller;
 
 import com.kibwa.tbti.DTO.LocalcreatorSearchDTO;
+import com.kibwa.tbti.entity.LocalCreatorWithAvgRatingEntity;
 import com.kibwa.tbti.service.SearchService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -26,6 +27,17 @@ public class SearchController {
     public HashMap<String, Object> search_localcreator(@RequestParam("searchInput") String searchInput) {
 
         List<LocalcreatorSearchDTO> localcreatorList = searchService.search_localcreator(searchInput);
+
+        HashMap<String, Object> response = new HashMap<>();
+        response.put("localcreatorList", localcreatorList);
+
+        return response;
+    }
+
+    @GetMapping("/api/search_localcreator_modi")
+    public HashMap<String, Object> search_localcreator_modi(@RequestParam("searchInput") String searchInput) {
+
+        List<LocalCreatorWithAvgRatingEntity> localcreatorList = searchService.search_localcreator_modi(searchInput);
 
         HashMap<String, Object> response = new HashMap<>();
         response.put("localcreatorList", localcreatorList);
