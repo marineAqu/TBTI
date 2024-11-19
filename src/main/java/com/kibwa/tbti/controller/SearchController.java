@@ -37,7 +37,7 @@ public class SearchController {
     @GetMapping("/api/search_localcreator_modi")
     public HashMap<String, Object> search_localcreator_modi(@RequestParam("searchInput") String searchInput) {
 
-        List<LocalCreatorWithAvgRatingEntity> localcreatorList = searchService.search_localcreator_modi(searchInput);
+        List<LocalcreatorSearchDTO> localcreatorList = searchService.search_localcreator_modi(searchInput);
 
         HashMap<String, Object> response = new HashMap<>();
         response.put("localcreatorList", localcreatorList);
