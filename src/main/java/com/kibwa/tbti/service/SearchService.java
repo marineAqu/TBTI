@@ -2,11 +2,11 @@ package com.kibwa.tbti.service;
 
 import com.kibwa.tbti.DTO.LocalcreatorSearchDTO;
 import com.kibwa.tbti.DTO.LocalcreatorSearchProjection;
+import com.kibwa.tbti.entity.LocalCreatorWithAvgRatingEntity;
 import com.kibwa.tbti.repository.LocalcreatorRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
-import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 
@@ -34,6 +34,21 @@ public class SearchService {
                 .toList();
 
         return localcreatorSearchDTO;
+    }
+
+    public List<LocalCreatorWithAvgRatingEntity> search_localcreator_modi(String searchInput) {
+
+        List<LocalCreatorWithAvgRatingEntity> localcreatorList = localcreatorRepository.findByStoreNameLikeModi(searchInput);
+        /*List<LocalCreatorWithAvgRatingEntity> localCreatorWithAvgRatingEntities = localcreatorList.stream()
+                .map(projection -> {
+                    LocalcreatorSearchDTO dto = LocalcreatorSearchDTO.toLocalcreatorSearchDTO(projection);
+                    dto.setImg(storageS3Service.getImageURL(projection.getStoreName(), projection.getHiddenCategory()));
+                    return dto;
+                })
+                .toList();
+         */
+
+        return localcreatorList;
     }
 
     public HashMap<String, Object> search_region(int regionCode) {
