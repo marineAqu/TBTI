@@ -17,6 +17,30 @@ import java.net.URL;
 //@RequiredArgsConstructor
 public class StorageS3Service {
 
+    /** AWS 사용 시 사용한 메소드 주석처리 **/
+    /*private final AmazonS3 s3Client;
+
+    public String[] getImageURL(String imgName, char hiddenCategory) {
+        String[] imgList = new String[3];
+
+        *//*
+        if(hiddenCategory == '1') category = "nowlocal/";
+        else if(hiddenCategory == '2') category = "kstartup/";
+        else if(hiddenCategory == '3') category = "kstartup/";
+*//*
+
+        URL url = s3Client.getUrl("tbti-s3-image", (imgName+"_1.jpg"));
+        imgList[0] = ""+url;
+
+        url = s3Client.getUrl("tbti-s3-image", (imgName+"_2.jpg"));
+        imgList[1] = ""+url;
+
+        url = s3Client.getUrl("tbti-s3-image", (imgName+"_3.jpg"));
+        imgList[2] = ""+url;
+
+        return imgList;
+    }*/
+
     // AWS S3 대신 로컬 파일 경로를 반환하는 방식으로 변경
     public String[] getImageURL(String imgName) {
         String[] imgList = new String[3];
