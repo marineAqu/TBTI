@@ -28,7 +28,7 @@ public class SearchService {
         List<LocalcreatorSearchDTO> localcreatorSearchDTO = localcreatorList.stream()
                 .map(projection -> {
                     LocalcreatorSearchDTO dto = LocalcreatorSearchDTO.toLocalcreatorSearchDTO(projection);
-                    dto.setImg(storageS3Service.getImageURL(projection.getStoreName(), projection.getHiddenCategory()));
+                    dto.setImg(storageS3Service.getImageURL(projection.getStoreName()));
                     return dto;
                 })
                 .toList();
@@ -36,19 +36,18 @@ public class SearchService {
         return localcreatorSearchDTO;
     }
 
-    public List<LocalCreatorWithAvgRatingEntity> search_localcreator_modi(String searchInput) {
+    public List<LocalcreatorSearchDTO> search_localcreator_modi(String searchInput) {
 
         List<LocalCreatorWithAvgRatingEntity> localcreatorList = localcreatorRepository.findByStoreNameLikeModi(searchInput);
-        /*List<LocalCreatorWithAvgRatingEntity> localCreatorWithAvgRatingEntities = localcreatorList.stream()
-                .map(projection -> {
-                    LocalcreatorSearchDTO dto = LocalcreatorSearchDTO.toLocalcreatorSearchDTO(projection);
-                    dto.setImg(storageS3Service.getImageURL(projection.getStoreName(), projection.getHiddenCategory()));
+        List<LocalcreatorSearchDTO> localcreatorSearchDTO = localcreatorList.stream()
+                .map(entity -> {
+                    LocalcreatorSearchDTO dto = LocalcreatorSearchDTO.toOrderLocalcreatorSearchDTO(entity);
+                    dto.setImg(storageS3Service.getImageURL(entity.getStoreName()));
                     return dto;
                 })
                 .toList();
-         */
 
-        return localcreatorList;
+        return localcreatorSearchDTO;
     }
 
     public HashMap<String, Object> search_region(int regionCode) {
@@ -157,7 +156,7 @@ public class SearchService {
         List<LocalcreatorSearchDTO> localcreatorSearchDTO = localcreatorList.stream()
                 .map(projection -> {
                     LocalcreatorSearchDTO dto = LocalcreatorSearchDTO.toLocalcreatorSearchDTO(projection);
-                    dto.setImg(storageS3Service.getImageURL(projection.getStoreName(), projection.getHiddenCategory()));
+                    dto.setImg(storageS3Service.getImageURL(projection.getStoreName()));
                     return dto;
                 }).toList();
 
@@ -173,7 +172,7 @@ public class SearchService {
         List<LocalcreatorSearchDTO> localcreatorSearchDTO = localcreatorList.stream()
                 .map(projection -> {
                     LocalcreatorSearchDTO dto = LocalcreatorSearchDTO.toLocalcreatorSearchDTO(projection);
-                    dto.setImg(storageS3Service.getImageURL(projection.getStoreName(), projection.getHiddenCategory()));
+                    dto.setImg(storageS3Service.getImageURL(projection.getStoreName()));
                     return dto;
                 }).toList();
 
