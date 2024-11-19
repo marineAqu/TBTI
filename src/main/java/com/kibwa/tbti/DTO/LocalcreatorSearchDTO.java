@@ -1,4 +1,5 @@
 package com.kibwa.tbti.DTO;
+import com.kibwa.tbti.entity.LocalCreatorWithAvgRatingEntity;
 import lombok.*;
 
 /**
@@ -20,6 +21,8 @@ public class LocalcreatorSearchDTO {
     String AddressCategory1;
     String[] img;
 
+    private Double avgRating;
+
     public static LocalcreatorSearchDTO toLocalcreatorSearchDTO(LocalcreatorSearchProjection localcreatorSearchProjection){
         LocalcreatorSearchDTO localcreatorSearchDTO = new LocalcreatorSearchDTO();
 
@@ -29,6 +32,20 @@ public class LocalcreatorSearchDTO {
         localcreatorSearchDTO.setCategory(localcreatorSearchProjection.getCategory());
         localcreatorSearchDTO.setContact(localcreatorSearchProjection.getContact());
         localcreatorSearchDTO.setAddressCategory1(localcreatorSearchProjection.getAddressCategory1());
+
+        return localcreatorSearchDTO;
+    }
+
+    public static LocalcreatorSearchDTO toOrderLocalcreatorSearchDTO(LocalCreatorWithAvgRatingEntity localCreatorWithAvgRatingEntity){
+        LocalcreatorSearchDTO localcreatorSearchDTO = new LocalcreatorSearchDTO();
+
+        localcreatorSearchDTO.setAvgRating(localCreatorWithAvgRatingEntity.getAvgRating());
+        localcreatorSearchDTO.setStoreId(localCreatorWithAvgRatingEntity.getStoreId());
+        localcreatorSearchDTO.setStoreName(localCreatorWithAvgRatingEntity.getStoreName());
+        localcreatorSearchDTO.setDetailAddress(localCreatorWithAvgRatingEntity.getDetailAddress());
+        localcreatorSearchDTO.setCategory(localCreatorWithAvgRatingEntity.getCategory());
+        localcreatorSearchDTO.setContact(localCreatorWithAvgRatingEntity.getContact());
+        localcreatorSearchDTO.setAddressCategory1(localCreatorWithAvgRatingEntity.getAddressCategory1());
 
         return localcreatorSearchDTO;
     }
