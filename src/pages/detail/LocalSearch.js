@@ -17,7 +17,8 @@ const LocalSearch = () => {
         const fetchData = async () => {
             if (query) {
                 try {
-                    const response = await fetch(`/api/search_localcreator?searchInput=${query}`);
+                    //const response = await fetch(`/api/search_localcreator?searchInput=${query}`);
+                    const response = await fetch(`/api/search_localcreator_modi?searchInput=${query}`);
                     const result = await response.json();
                     setData(result.localcreatorList);
 
