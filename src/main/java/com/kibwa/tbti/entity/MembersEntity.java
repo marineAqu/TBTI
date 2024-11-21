@@ -39,4 +39,10 @@ public class MembersEntity {
 
     @Column
     private Timestamp lastLogin;
+
+    @Column
+    private String tbtiType;
+
+    @Column
+    private String previousTbtiType;
 }
