@@ -67,4 +67,8 @@ public class PrincipalDetails implements UserDetails {
     public boolean isEnabled() {
         return true;
     }
+
+    public String getTbtiType() {
+        return membersEntity.getTbtiType();
+    }
 }
