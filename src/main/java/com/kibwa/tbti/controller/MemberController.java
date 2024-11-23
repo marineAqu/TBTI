@@ -20,7 +20,6 @@ import java.util.HashMap;
 public class MemberController {
     private final MemberService memberService;
 
-
     @GetMapping("/api/check_login_status")
     public HashMap<String, Object> checkLoginStatus(@AuthenticationPrincipal PrincipalDetails principalDetails) {
         HashMap<String, Object> response = new HashMap<>();
@@ -31,6 +30,32 @@ public class MemberController {
         return response;
     }
 
+    @GetMapping("/api/tbti_status")
+    public HashMap<String, Object> tbtiStatus(@AuthenticationPrincipal PrincipalDetails principalDetails) {
+        HashMap<String, Object> response = new HashMap<>();
+
+        if(principalDetails != null) {
+            response.put("login", true);
+            response.put("uid", principalDetails.getUsername());
+            response.put("tbtiType", principalDetails.getTbtiType());
+        }
+        else response.put("login", false);
+
+        return response;
+    }
+
+    @PostMapping("/api/save_tbti")
+    public HashMap<String, Object> save_tbti(@AuthenticationPrincipal PrincipalDetails principalDetails, @RequestParam("tbtitype") String tbtitype) {
+        HashMap<String, Object> response = new HashMap<>();
+
+        if(principalDetails != null) {
+            memberService.tbtiTestSave(principalDetails.getUsername(), tbtitype);
+            response.put("status", "success");
+        }
+        else response.put("login", false);
+
+        return response;
+    }
 
     @PostMapping("/api/sign-up")
     public HashMap<String, Object> signupFun(@RequestParam("uid") String uid, @RequestParam("password") String password,
