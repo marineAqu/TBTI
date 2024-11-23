@@ -29,6 +29,15 @@ public class MemberService {
         membersRepository.save(membersEntity);
     }
 
+    public void tbtiTestSave(String uid, String tbtiType) {
+
+        MembersEntity membersEntity = membersRepository.findByUid(uid);
+        membersEntity.setPreviousTbtiType(membersEntity.getTbtiType());
+        membersEntity.setTbtiType(tbtiType);
+
+        membersRepository.save(membersEntity);
+    }
+
     public boolean uidDuplication(String uid) {
         return membersRepository.existsByUid(uid);
     }
