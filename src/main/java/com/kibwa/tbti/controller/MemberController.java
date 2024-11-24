@@ -45,7 +45,7 @@ public class MemberController {
     }
 
     @PostMapping("/api/save_tbti")
-    public HashMap<String, Object> save_tbti(@AuthenticationPrincipal PrincipalDetails principalDetails, @RequestParam("tbtitype") String tbtitype) {
+    public HashMap<String, Object> save_tbti(@AuthenticationPrincipal PrincipalDetails principalDetails, @RequestBody String tbtitype) {
         HashMap<String, Object> response = new HashMap<>();
 
         if(principalDetails != null) {
