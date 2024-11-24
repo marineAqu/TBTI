@@ -11,7 +11,7 @@ function TBTITest() {
 
 
     useEffect(() => {
-        axios.get("http://localhost:8080/api/tbti_status", { withCredentials: true })
+        axios.get("api/tbti_status", { withCredentials: true })
             .then((response) => {
                 setUserStatus(response.data); // { login: true/false }
             })
@@ -146,7 +146,7 @@ function TBTITest() {
         const resultData = resultMapping[result]; // 결과 매핑 데이터 가져오기
 
         if (resultData) {
-            axios.post("http://localhost:8080/api/save_tbti", { tbtitype: result })
+            axios.post("api/save_tbti", { tbtitype: result })
                 .then(() => {
                     console.log("TBTI 결과 저장 성공");
                 })
@@ -196,7 +196,7 @@ function TBTITest() {
             try {
                 console.log("Sending Data to API:", { tbtitype: result });
 
-                const response = await fetch("http://localhost:8080/api/save_tbti", {
+                const response = await fetch("api/save_tbti", {
                     method: "POST",
                     headers: {
                         "Content-Type": "application/json", // JSON 형식으로 데이터 전송
