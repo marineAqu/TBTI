@@ -35,14 +35,14 @@ function Chat() {
     const sendMessage = async () => {
         if (!input) return; // 입력이 없으면 반환
 
-        const newMessage = {sender: "user", text: input};
+        const newMessage = { sender: "user", text: input };
         setMessages((prevMessages) => [...prevMessages, newMessage]);
 
         // 로딩 시작
         setLoading(true);
         setMessages((prevMessages) => [
             ...prevMessages,
-            {sender: "ai", text: "⏳ AI가 응답 중입니다..."} // 로딩 애니메이션으로 "..." 표시
+            { sender: "ai", text: "⏳ AI가 응답 중입니다..." }
         ]);
 
         try {
@@ -51,47 +51,42 @@ function Chat() {
                 headers: {
                     "Content-Type": "application/json",
                 },
-                body: JSON.stringify({sender: "user", message: input}),
+                body: JSON.stringify({ sender: "user", message: input }),
             });
 
+            console.log("응답 상태:", res.status); // 상태 코드 출력
+
             if (!res.ok) {
-                throw new Error('네트워크 응답이 좋지 않습니다.');
+                throw new Error("네트워크 응답이 좋지 않습니다.");
             }
 
-            let data;
-            try {
-                data = await res.json(); // 서버 응답을 JSON으로 변환
-            } catch (jsonError) {
-                console.error("JSON 파싱 오류:", jsonError);
-                throw new Error("서버 응답이 올바르지 않습니다.");
-            }
+            const data = await res.json(); // 서버 응답을 JSON으로 변환
+            console.log("응답 데이터:", data); // 응답 데이터 출력
 
-            const answer = data.answer; // AI의 응답
-            const placesData = data.place; // 장소 데이터
+            const answer = data.answer;
+            const placesData = data.place;
 
             // 로딩 메시지를 AI 응답으로 대체
             setMessages((prevMessages) => {
                 const updatedMessages = [...prevMessages];
                 updatedMessages.pop(); // 마지막 "..." 메시지 제거
-                updatedMessages.push({sender: "ai", text: answer}); // AI 응답 추가
+                updatedMessages.push({ sender: "ai", text: answer });
                 return updatedMessages;
             });
 
-            // 장소 데이터가 있을 경우, 각각을 새로운 메시지로 추가
             if (placesData && placesData.length > 0) {
                 setMessages((prevMessages) => [
                     ...prevMessages,
-                    {sender: "ai", type: "place", placesData: placesData} // 여러 장소 데이터 메시지 추가
+                    { sender: "ai", type: "place", placesData: placesData }
                 ]);
             }
 
         } catch (error) {
-            console.error("메시지 전송 중 오류 발생:", error);
-            const errorMessage = {sender: "ai", text: "서버와의 통신 중 오류가 발생했습니다."};
+            console.error("에러 발생:", error); // 에러 출력
             setMessages((prevMessages) => {
                 const updatedMessages = [...prevMessages];
                 updatedMessages.pop(); // "..." 메시지 제거
-                updatedMessages.push(errorMessage);
+                updatedMessages.push({ sender: "ai", text: "서버와의 통신 중 오류가 발생했습니다." });
                 return updatedMessages;
             });
         } finally {
@@ -99,6 +94,7 @@ function Chat() {
             setInput(""); // 입력창 비우기
         }
     };
+
 
     const handleKeyDown = (e) => {
         if (e.key === "Enter") {

@@ -17,10 +17,12 @@ import TBTITest from "./pages/Tbti_test";
 
 function App() {
     const location = useLocation();  // 현재 경로 가져오기
+    const excludeNav = ["/login", "/sign"];  // Nav가 보이지 않을 경로
+    const excludeFnb = ["/login", "/sign", "/tbti-test"]; // Fnb가 보이지 않을 경로
 
     return (
         <div>
-            {location.pathname !== "/login" && location.pathname !== "/sign" && (
+            {!excludeNav.includes(location.pathname) && (
                 <header>
                     <Nav/>
                 </header>
@@ -41,9 +43,11 @@ function App() {
                 </Routes>
             </main>
 
-            <footer>
-                <Fnb/>
-            </footer>
+            {!excludeFnb.includes(location.pathname) && (
+                <footer>
+                    <Fnb/>
+                </footer>
+            )}
         </div>
     );
 }

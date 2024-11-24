@@ -394,24 +394,6 @@ ul div p {
     gap: 20px;
 }
 
-/* 화면 크기가 작을 때 열 개수 줄이기 */
-@media (max-width: 1200px) {
-    .grid-container {
-        grid-template-columns: repeat(3, 1fr); /* 열 개수를 3개로 줄임 */
-    }
-}
-
-@media (max-width: 768px) {
-    .grid-container {
-        grid-template-columns: repeat(2, 1fr); /* 열 개수를 2개로 줄임 */
-    }
-}
-
-@media (max-width: 480px) {
-    .grid-container {
-        grid-template-columns: 1fr; /* 작은 화면에서는 한 개의 열 */
-    }
-}
 
 .box {
     display: flex;
@@ -690,4 +672,73 @@ ul div p {
 .reviewList{
     width: 100%;
     margin-top: 8%;
+}
+
+/* 화면 크기가 작을 때 열 개수 줄이기 */
+@media (max-width: 1200px) {
+    .grid-container {
+        grid-template-columns: repeat(3, 1fr); /* 열 개수를 3개로 줄임 */
+    }
+}
+
+@media (max-width: 768px) {
+    .grid-container {
+        grid-template-columns: repeat(2, 1fr); /* 열 개수를 2개로 줄임 */
+    }
+
+    .region-container {
+        justify-content: space-between;
+        align-items: center;
+        width: 400px;
+    }
+
+    .region {
+        height: 130px;
+        width: 70%;
+        text-align: left;
+    }
+
+    .view-toggle {
+        margin-right: 10px;
+    }
+
+    .view-toggle button {
+        font-size: 13px;
+    }
+
+    .category-buttons {
+        flex-wrap: wrap;
+    }
+
+    .header {
+        padding-left: 0px;
+        box-sizing: border-box;
+    }
+
+    .arrow {
+        height: 10px;
+        width: 10px;
+    }
+
+    .before {
+        font-size: 20px;
+    }
+
+    .imageContainer {
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .storeInfo {
+        text-align: left;
+        padding-top: 30px;
+    }
+
+
+    ul img {
+        width: 50px;
+        height: auto;
+        margin-bottom: 5px;
+    }
 }

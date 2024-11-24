@@ -13,7 +13,7 @@ public class ChatService {
 
     @Autowired
     public ChatService(WebClient.Builder webClientBuilder) {
-        this.webClient = webClientBuilder.baseUrl("http://localhost:8001").build(); // FastAPI 서버의 URL 설정
+        this.webClient = webClientBuilder.baseUrl("http://172.20.10.2:8001/").build();
     }
 
     public String sendMessageToAI(String userMessage) {

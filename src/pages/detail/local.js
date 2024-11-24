@@ -170,8 +170,8 @@ const LocalSearch = () => {
                             <div className="name">
                                 <p className="storename">{store.storeName}</p>
                                 <p className="store">
-                                    {store.addressCategory1}
-                                    <br/>
+                                    {/*{store.addressCategory1}*/}
+                                    {/*<br/>*/}
                                     {store.detailAddress}
                                     <br/>
                                     {store.contact}

@@ -10,7 +10,6 @@
     width: 100%;
     max-width: 800px;
     padding: 50px 20px;
-    box-sizing: border-box;
 }
 
 /* 배너 이미지 스타일 */
@@ -56,7 +55,7 @@
 
 /* 설명 텍스트 스타일 */
 /* 설명 텍스트 스타일 */
-.description {
+.tbti_description {
     font-size: 1.2rem;
     font-weight: 700;
     margin-bottom: 30px;
@@ -79,13 +78,11 @@
 }
 
 /* 버튼 스타일 */
-.start-button,
-.question-button,
-.restart-button {
+.start-button{
     display: flex; /* 버튼 내부 요소를 정렬하기 위해 flexbox 사용 */
     flex-direction: column; /* 내부 요소를 세로로 정렬 */
     align-items: center; /* 이미지와 텍스트를 가운데 정렬 */
-    justify-content: center; /* 이미지와 텍스트를 수직 가운데 정렬 */
+    justify-content: center; /* 이미지와F 텍스트를 수직 가운데 정렬 */
     background-color: #cf96e6;
     color: white;
     border: none;
@@ -96,17 +93,16 @@
     transition: background-color 0.3s, transform 0.2s;
     margin: 10px;
     text-align: center; /* 텍스트 가운데 정렬 */
+    width: 40%;
 }
 
-.start-button:hover,
-.restart-button:hover {
+.start-button:hover{
     background-color: #995eb5;
 }
 
 
 /* 버튼 내부 이미지 */
-.start-button img,
-.restart-button img {
+.start-button img{
     margin-bottom: 10px; /* 이미지와 텍스트 사이 간격 */
 }
 
@@ -115,7 +111,7 @@
 .question-button {
     background-color: #d1e8ff;
     color: #333;
-    margin: 20px; /* 질문 버튼 사이의 간격을 넓힘 */
+    margin: 20px;
 }
 
 .question-button:hover {
@@ -131,4 +127,16 @@
     text-align: center;
 }
 
+.login-warning {
+    color: #ff4d4f;
+    font-size: 18px;
+    font-weight: bold;
+    text-align: center;
+    margin: 100px auto;
+    padding: 10px 20px;
+    border: 1px solid #ff4d4f;
+    border-radius: 8px;
+    background-color: #fff5f5;
+    max-width: 500px;
+}
 

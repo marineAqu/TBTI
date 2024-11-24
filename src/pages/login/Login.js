@@ -11,33 +11,31 @@ const Login = () => {
 
     const handleLogin = async () => {
         // 로그인 로직 (예: API 호출) 추가
-        // 김도연 작성
-        try{
+        try {
             const formData = new FormData();
+            formData.append("uid", username);
+            formData.append("password", password);
 
-            formData.append('uid', username);
-            formData.append('password', password);
-
-            const response = await fetch('http://localhost:8080/login_process', {
-                method: 'POST',
+            const response = await fetch("http://localhost:8080/login_process", {
+                method: "POST",
                 headers: {
-                    'Accept': 'application/json'
+                    Accept: "application/json",
                 },
                 body: formData,
                 withCredentials: true,
-                credentials: 'include',
+                credentials: "include",
             });
 
             const result = await response.json();
 
-            result.message === "Login successful" ? navigate("/") : alert("아이디 또는 비밀번호가 일치하지 않습니다.");
-            /*
-
-             */
-        }catch (error){
-            console.error('로그인 오류:', error);
+            if (result.message === "Login successful") {
+                navigate("/");
+            } else {
+                alert("아이디 또는 비밀번호가 일치하지 않습니다.");
+            }
+        } catch (error) {
+            console.error("로그인 오류:", error);
         }
-
     };
 
     const handleCheckboxChange = () => {
@@ -62,15 +60,16 @@ const Login = () => {
         }
     }, []);
 
+    // Enter 키 처리 함수
+    const handleKeyDown = (e) => {
+        if (e.key === "Enter") {
+            handleLogin(); // 로그인 함수 호출
+        }
+    };
+
     return (
         <div className="login">
-
-            {/*<div className="image">*/}
-            {/*    <img src="/image/busanimg.jpg" alt="login" />*/}
-            {/*</div>*/}
-
             <div className="loginForm">
-
                 <div className="title">로그인</div>
 
                 <div className="form">
@@ -80,6 +79,7 @@ const Login = () => {
                             type="text"
                             value={username}
                             onChange={(e) => setUsername(e.target.value)}
+                            onKeyDown={handleKeyDown} // Enter 키 처리
                             placeholder="아이디를 입력하세요."
                         />
                     </div>
@@ -92,6 +92,7 @@ const Login = () => {
                             type={showPassword ? "text" : "password"}
                             value={password}
                             onChange={(e) => setPassword(e.target.value)}
+                            onKeyDown={handleKeyDown} // Enter 키 처리
                             placeholder="비밀번호를 입력하세요."
                         />
                         <img
