@@ -7,6 +7,7 @@ import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.HashMap;
+import java.util.Map;
 
 /**
  * 파일명: MemberController
@@ -45,11 +46,11 @@ public class MemberController {
     }
 
     @PostMapping("/api/save_tbti")
-    public HashMap<String, Object> save_tbti(@AuthenticationPrincipal PrincipalDetails principalDetails, @RequestBody String tbtitype) {
+    public HashMap<String, Object> save_tbti(@AuthenticationPrincipal PrincipalDetails principalDetails, @RequestBody Map<String, String> tbtitype) {
         HashMap<String, Object> response = new HashMap<>();
 
         if(principalDetails != null) {
-            memberService.tbtiTestSave(principalDetails.getUsername(), tbtitype);
+            memberService.tbtiTestSave(principalDetails.getUsername(), tbtitype.get("tbtitype"));
             response.put("status", "success");
         }
         else response.put("login", false);
