@@ -87,11 +87,12 @@ export const Nav = () => {
         try {
             await fetch('/api/logout', { method: 'POST' });
             setIsLoggedIn(false);
-            {/*navigate('/');*/}
+            window.location.reload(); // 페이지 새로 고침
         } catch (error) {
             console.error('로그아웃 오류:', error);
         }
     };
+
 
     return (
         <div className="GNB">

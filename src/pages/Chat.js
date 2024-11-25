@@ -21,7 +21,7 @@ function Chat() {
                 if (res.ok) {
                     const data = await res.json();
                     console.log("TBTI 상태 데이터:", data); // 데이터를 콘솔에 출력
-                    setTbtiType(data.tbtitype || null); // TBTI 타입 설정
+                    setTbtiType(data.tbtiType || null); // TBTI 타입 설정
                 } else {
                     console.error("TBTI 상태 가져오기 실패:", res.status);
                 }
@@ -30,14 +30,10 @@ function Chat() {
             }
         };
 
-        // 비동기적으로 데이터를 처리하되, 동기적인 흐름처럼 기다리게 함
-        (async () => {
-            await fetchTbtiStatus(); // fetchTbtiStatus 함수 비동기 호출
-            console.log("TBTI 타입:", tbtiType); // tbtiType 값이 잘 설정되었는지 확인
-        })();
+        fetchTbtiStatus().then(
+            console.log("TBTI 타입:", tbtiType));    // fetchTbtiStatus 함수 비동기 호출
+        // tbtiType 값이 잘 설정되었는지 확인
     }, []);
-
-
 
 
     const scrollToBottom = () => {
@@ -122,6 +118,11 @@ function Chat() {
         }
     };
 
+    const handleRestartTest = () => {
+        setTbtiType(""); // tbtiType 초기화
+        navigate('/tbti-test'); // '/tbti-test'로 이동
+    };
+
 
     const handleKeyDown = (e) => {
         if (e.key === "Enter") {
@@ -168,25 +169,22 @@ function Chat() {
                 <div className="chat-name" onClick={scrollToTop}>TBTI</div>
             </div>
 
+
             <div className="TBTI_TEST">
-                {tbtiType && (
-                    <p>당신의 여행 유형은 <b>{tbtiType}</b>입니다.</p>
+                {tbtiType ? (
+                    <>
+                        <p>당신의 여행 유형은 <b>{tbtiType}</b>입니다.</p>
+                        <p className="restart" onClick={handleRestartTest}>
+                            tbti 테스트 다시하기
+                        </p>                    </>
+                ) : (
+                    <div className="return_tbti"
+                        onClick={() => navigate('/tbti-test')}>
+                        TBTI 테스트 해보기
+                    </div>
                 )}
+
             </div>
-
-            {/*<div className="TBTI_TEST">*/}
-            {/*    {tbtiType ? (*/}
-            {/*        <>*/}
-            {/*            <p>당신의 여행 유형은 <b>{tbtiType}</b>입니다.</p>*/}
-            {/*            <button onClick={() => navigate('/tbti-test')}>tbti 테스트 다시하기</button>*/}
-            {/*        </>*/}
-            {/*    ) : (*/}
-            {/*        <div onClick={() => navigate('/tbti-test')}>*/}
-            {/*            TBTI 테스트 해보기*/}
-            {/*        </div>*/}
-            {/*    )}*/}
-
-            {/*</div>*/}
 
             <div className="chat-box" ref={chatBoxRef}>
                 {messages.map((message, index) => (
