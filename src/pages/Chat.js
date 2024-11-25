@@ -12,6 +12,26 @@ function Chat() {
     const [loading, setLoading] = useState(false); // 로딩 상태
     const chatBoxRef = useRef(null); // 채팅 박스에 대한 참조
     const navigate = useNavigate(); // 페이지 이동을 위한 useNavigate 훅
+    const [tbtiType, setTbtiType] = useState(null); // TBTI 타입 상태
+
+    useEffect(() => {
+        const fetchTbtiStatus = async () => {
+            try {
+                const res = await fetch("/api/tbti_status");
+                if (res.ok) {
+                    const data = await res.json();
+                    setTbtiType(data.tbtitype || null); // TBTI 타입 설정
+                } else {
+                    console.error("TBTI 상태 가져오기 실패:", res.status);
+                }
+            } catch (error) {
+                console.error("에러 발생:", error);
+            }
+        };
+
+        fetchTbtiStatus();
+    }, []);
+
 
     const scrollToBottom = () => {
         if (chatBoxRef.current) {
@@ -141,16 +161,24 @@ function Chat() {
                 <div className="chat-name" onClick={scrollToTop}>TBTI</div>
             </div>
 
-            {/* TBTI 테스트 해보기 클릭 시 라우팅 */}
-            <div className="TBTI_TEST" onClick={() => navigate('/tbti-test')}>
-                TBTI 테스트 해보기
+            <div className="TBTI_TEST">
+                {tbtiType ? (
+                    <>
+                        <p>당신의 여행 유형은 <b>{tbtiType}</b>입니다.</p>
+                        <button onClick={() => navigate('/tbti-test')}>tbti 테스트 다시하기</button>
+                    </>
+                ) : (
+                    <div onClick={() => navigate('/tbti-test')}>
+                        TBTI 테스트 해보기
+                    </div>
+                )}
             </div>
 
             <div className="chat-box" ref={chatBoxRef}>
-            {messages.map((message, index) => (
+                {messages.map((message, index) => (
                     <div key={index} className={`message ${message.sender}`}>
                         {message.type === "place" ? (
-                            <PlaceSlider places={message.placesData} /> // 여러 장소를 슬라이더로 전달
+                            <PlaceSlider places={message.placesData}/> // 여러 장소를 슬라이더로 전달
                         ) : message.sender === "ai" ? (
                             <ReactMarkdown>{message.text}</ReactMarkdown>
                         ) : (
