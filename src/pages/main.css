@@ -315,17 +315,21 @@ button:hover {
     font-size: 14px;
     text-align: center;
     font-weight: 500;
-    background-color: rgb(216, 216, 216);
+    background-color: rgb(161, 93, 197);
+    color: white;
     /*transition: background-color 0.3s;*/
     border-radius: 8px;
-    padding: 5px;
+    padding: 1px;
     cursor: pointer;
+    flex-wrap: wrap;
+    line-height: 13px;
 }
 
 .restart,
 .return_tbti {
     text-decoration: underline;
     cursor: pointer;
+    padding: 10px;
 }
 
 .return_tbti:hover,
@@ -384,6 +388,6 @@ button:hover {
     background-color: #995eb5;  /* 버튼 hover 효과 */
 }
 
-.tbti_bold{
-    color: #8a2db1;
-}
+/*.tbti_bold{*/
+/*    color: #8a2db1;*/
+/*}*/
