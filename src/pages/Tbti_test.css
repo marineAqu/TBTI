@@ -118,6 +118,12 @@
     background-color: #86c5f4;
 }
 
+.result-container {
+    display: block; /* 또는 적절한 display 속성 */
+    visibility: visible;
+}
+
+
 /* 결과 화면 텍스트 스타일 */
 .result-text {
     font-size: 1.5rem;

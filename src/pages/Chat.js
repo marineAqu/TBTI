@@ -179,7 +179,7 @@ function Chat() {
                         </p>                    </>
                 ) : (
                     <div className="return_tbti"
-                        onClick={() => navigate('/tbti-test')}>
+                         onClick={() => navigate('/tbti-test')}>
                         TBTI 테스트 해보기
                     </div>
                 )}
