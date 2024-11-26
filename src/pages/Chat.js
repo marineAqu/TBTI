@@ -42,6 +42,59 @@ function Chat() {
         fetchTbtiStatus();
     }, [tbtiType]); // 의존성 배열 비어 있음 → 컴포넌트 마운트 시 한 번만 실행
 
+    const resultMapping = {
+        "AIEU": {
+            name: "자유로운 매"
+        },
+        "AIEP": {
+            name: "신중한 올빼미"
+        },
+        "AIFU": {
+            name: "질주하는 치타"
+        },
+        "AIFP": {
+            name: "고독한 늑대"
+        },
+        "ASEU": {
+            name: "활기찬 원숭이"
+        },
+        "ASEP": {
+            name: "체계적인 비버"
+        },
+        "ASFU": {
+            name: "사교적인 돌고래"
+        },
+        "ASFP": {
+            name: "충직한 개"
+        },
+        "CIEU": {
+            name: "호기심 많은 고양이"
+        },
+        "CIEP": {
+            name: "느긋한 거북이"
+        },
+        "CIFU": {
+            name: "은밀한 스라소니"
+        },
+        "CIFP": {
+            name: "신뢰받는 곰"
+        },
+        "CSEU": {
+            name: "유쾌한 팬더"
+        },
+        "CSEP": {
+            name: "현명한 코끼리"
+        },
+        "CSFU": {
+            name: "유연한 여우"
+        },
+        "CSFP": {
+            name: "협력적인 펭귄"
+        },
+    };
+
+    const result = tbtiType ? resultMapping[tbtiType] : null;
+
 
 
     const scrollToBottom = () => {
@@ -184,7 +237,7 @@ function Chat() {
             <div className="TBTI_TEST">
                 {tbtiType ? (
                     <>
-                        <p>당신의 여행 유형은 <b>{tbtiType}</b>입니다.</p>
+                        <p>당신의 여행 유형은 <b className="tbti_bold">{result.name}</b> <b className="tbti_bold">({tbtiType})</b> 입니다.</p>
                         <p className="restart" onClick={handleRestartTest}>
                             tbti 테스트 다시하기
                         </p>                    </>

@@ -383,3 +383,7 @@ button:hover {
 .animal_result .buttons button:hover {
     background-color: #995eb5;  /* 버튼 hover 효과 */
 }
+
+.tbti_bold{
+    color: #8a2db1;
+}

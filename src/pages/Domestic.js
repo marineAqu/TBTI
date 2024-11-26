@@ -15,6 +15,7 @@ const Domestic = () => {
                 if (res.ok) {
                     const data = await res.json();
                     console.log("TBTI 상태 데이터:", data); // 데이터를 콘솔에 출력
+                    console.log(data.tbtiType)
                     setTbtiType(data.tbtiType || null); // TBTI 타입 설정
                 } else {
                     console.error("TBTI 상태 가져오기 실패:", res.status);

@@ -155,6 +155,7 @@ function TBTITest() {
     };
 
     // TBTI 결과 저장 성공 후 페이지 이동
+    // TBTI 결과 저장 성공 후 페이지 이동
     const calculateResult = async (answers) => {
         const result = Object.values(answers).join(""); // 사용자 답변 조합
         const resultData = resultMapping[result]; // 결과 매핑 데이터 가져오기
@@ -179,8 +180,11 @@ function TBTITest() {
                     setError("TBTI 결과 저장 중 오류가 발생했습니다.");
                 } else {
                     console.log("TBTI 결과 저장 성공");
-                    // 결과 저장 후 'domestic.js'로 리디렉션
-                    window.location.href = '/domestic';  // 또는 'domestic'이 경로라면 '/domestic'
+
+                    // 5초 대기 후 'domestic.js'로 리디렉션
+                    setTimeout(() => {
+                        window.location.href = '/domestic'; // 또는 'domestic'이 경로라면 '/domestic'
+                    }, 2000); // 5초 (5000ms)
                 }
             } catch (error) {
                 console.error("Request failed", error);
@@ -195,6 +199,7 @@ function TBTITest() {
             };
         }
     };
+
 
 
 

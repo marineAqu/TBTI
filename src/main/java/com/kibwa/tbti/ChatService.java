@@ -14,7 +14,8 @@
         @Autowired
         public ChatService(WebClient.Builder webClientBuilder) {
             this.webClient = WebClient.builder()
-                    .baseUrl("http://localhost:8001/")  // FastAPI 서버의 URL
+                    .baseUrl("http://localhost:8001/")
+//                    .baseUrl("http://172.20.10.13:8001/")  // FastAPI 서버의 URL
                     .build();
         }
 
