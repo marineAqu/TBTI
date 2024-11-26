@@ -12,16 +12,25 @@ function Chat() {
     const [loading, setLoading] = useState(false); // 로딩 상태
     const chatBoxRef = useRef(null); // 채팅 박스에 대한 참조
     const navigate = useNavigate(); // 페이지 이동을 위한 useNavigate 훅
-    const [tbtiType, setTbtiType] = useState(null); // TBTI 타입 상태
+
+
+    const [userId, setUserId] = useState(null);
+    const [tbtiType, setTbtiType] = useState(null);
 
     useEffect(() => {
+        if (tbtiType) {
+            console.log("TBTI 타입이 설정되었습니다:", tbtiType);
+        }
         const fetchTbtiStatus = async () => {
             try {
                 const res = await fetch("/api/tbti_status");
                 if (res.ok) {
                     const data = await res.json();
-                    console.log("TBTI 상태 데이터:", data); // 데이터를 콘솔에 출력
-                    setTbtiType(data.tbtiType || null); // TBTI 타입 설정
+                    console.log("TBTI 상태 데이터:", data);
+
+                    // 상태로 설정
+                    setUserId(data.uid);
+                    setTbtiType(data.tbtiType);
                 } else {
                     console.error("TBTI 상태 가져오기 실패:", res.status);
                 }
@@ -30,10 +39,9 @@ function Chat() {
             }
         };
 
-        fetchTbtiStatus().then(
-            console.log("TBTI 타입:", tbtiType));    // fetchTbtiStatus 함수 비동기 호출
-        // tbtiType 값이 잘 설정되었는지 확인
-    }, []);
+        fetchTbtiStatus();
+    }, [tbtiType]); // 의존성 배열 비어 있음 → 컴포넌트 마운트 시 한 번만 실행
+
 
 
     const scrollToBottom = () => {
@@ -61,7 +69,6 @@ function Chat() {
         const newMessage = { sender: "user", text: input };
         setMessages((prevMessages) => [...prevMessages, newMessage]);
 
-        // 로딩 시작
         setLoading(true);
         setMessages((prevMessages) => [
             ...prevMessages,
@@ -74,25 +81,29 @@ function Chat() {
                 headers: {
                     "Content-Type": "application/json",
                 },
-                body: JSON.stringify({ sender: "user", message: input }),
+                body: JSON.stringify({
+                    userId, // 상태로부터 가져온 userId
+                    tbtiType, // 상태로부터 가져온 tbtiType
+                    message: input
+                }),
             });
 
-            console.log("응답 상태:", res.status); // 상태 코드 출력
+            console.log("응답 상태:", res.status);
+            console.log("전송 데이터:", { userId, tbtiType, message: input });
 
             if (!res.ok) {
                 throw new Error("네트워크 응답이 좋지 않습니다.");
             }
 
-            const data = await res.json(); // 서버 응답을 JSON으로 변환
-            console.log("응답 데이터:", data); // 응답 데이터 출력
+            const data = await res.json();
+            console.log("응답 데이터:", data);
 
             const answer = data.answer;
             const placesData = data.place;
 
-            // 로딩 메시지를 AI 응답으로 대체
             setMessages((prevMessages) => {
                 const updatedMessages = [...prevMessages];
-                updatedMessages.pop(); // 마지막 "..." 메시지 제거
+                updatedMessages.pop();
                 updatedMessages.push({ sender: "ai", text: answer });
                 return updatedMessages;
             });
@@ -100,23 +111,23 @@ function Chat() {
             if (placesData && placesData.length > 0) {
                 setMessages((prevMessages) => [
                     ...prevMessages,
-                    { sender: "ai", type: "place", placesData: placesData }
+                    { sender: "ai", type: "place", placesData }
                 ]);
             }
-
         } catch (error) {
-            console.error("에러 발생:", error); // 에러 출력
+            console.error("에러 발생:", error);
             setMessages((prevMessages) => {
                 const updatedMessages = [...prevMessages];
-                updatedMessages.pop(); // "..." 메시지 제거
+                updatedMessages.pop();
                 updatedMessages.push({ sender: "ai", text: "서버와의 통신 중 오류가 발생했습니다." });
                 return updatedMessages;
             });
         } finally {
-            setLoading(false); // 로딩 종료
-            setInput(""); // 입력창 비우기
+            setLoading(false);
+            setInput("");
         }
     };
+
 
     const handleRestartTest = () => {
         setTbtiType(""); // tbtiType 초기화
@@ -223,3 +234,5 @@ function Chat() {
 }
 
 export default Chat;
+
+

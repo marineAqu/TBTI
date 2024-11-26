@@ -16,7 +16,7 @@ const PlaceSlider = ({ places }) => {
                         onClick={() => handlePlaceClick(place.redirection_url)}
                     >
                         <img
-                            src={`https://tbti-s3-image.s3.ap-northeast-2.amazonaws.com/${place.place_name}_1.jpg`}
+                            src={`https://223.195.109.34/${place.place_name}_1.jpg`}
                             alt={place.place_name}
                             className="place-image"
                         />
