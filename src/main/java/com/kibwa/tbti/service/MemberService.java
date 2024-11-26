@@ -7,6 +7,13 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+/**
+ * 파일명: MemberService
+ * 작성자: 김도연
+ * 설명: 로그인, 로그아웃, 회원가입 등 서비스
+ **/
+
+
 @Service
 @RequiredArgsConstructor
 public class MemberService {
