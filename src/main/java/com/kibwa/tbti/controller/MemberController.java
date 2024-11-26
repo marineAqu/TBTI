@@ -38,7 +38,8 @@ public class MemberController {
         if(principalDetails != null) {
             response.put("login", true);
             response.put("uid", principalDetails.getUsername());
-            response.put("tbtiType", principalDetails.getTbtiType());
+            //response.put("tbtiType", principalDetails.getTbtiType());
+            response.put("tbtiType", memberService.getTbtiType(principalDetails.getUsername()));
         }
         else response.put("login", false);
 
