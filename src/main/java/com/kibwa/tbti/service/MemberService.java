@@ -32,6 +32,10 @@ public class MemberService {
         membersRepository.save(membersEntity);
     }
 
+    public String getTbtiType(String uid) {
+        return membersRepository.findByUid(uid).getTbtiType();
+    }
+
     // 아이디 중복 검사
     public boolean uidDuplication(String uid) {
         return membersRepository.existsByUid(uid);
