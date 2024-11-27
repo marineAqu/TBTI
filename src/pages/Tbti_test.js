@@ -184,7 +184,7 @@ function TBTITest() {
                     // 5초 대기 후 'domestic.js'로 리디렉션
                     setTimeout(() => {
                         window.location.href = '/domestic'; // 또는 'domestic'이 경로라면 '/domestic'
-                    }, 2000); // 5초 (5000ms)
+                    }); // 5초 (5000ms)
                 }
             } catch (error) {
                 console.error("Request failed", error);
