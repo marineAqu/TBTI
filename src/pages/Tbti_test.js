@@ -210,11 +210,11 @@ function TBTITest() {
         setCurrentStep(0);
     };
 
-    const restartTest = () => {
-        setCurrentStep(-1);
-        setAnswers({});
-        setError(null);
-    };
+    // const restartTest = () => {
+    //     setCurrentStep(-1);
+    //     setAnswers({});
+    //     setError(null);
+    // };
 
     if (error) {
         return <div className="error">{error}</div>;
@@ -227,10 +227,10 @@ function TBTITest() {
     return (
         <div className="tbti-container">
             {/* 상단 배너 */}
-            <div className="banner">
-                <img className="arrow" alt="left Arrow" src="/image/left-arrow.png" />
-                이전으로 돌아가기
-            </div>
+            {/*<div className="banner">*/}
+            {/*    <img className="arrow" alt="left Arrow" src="/image/left-arrow.png" />*/}
+            {/*    이전으로 돌아가기*/}
+            {/*</div>*/}
 
             {/* 초기 화면 */}
             {currentStep === -1 ? (

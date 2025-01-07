@@ -265,8 +265,8 @@ button:hover {
 
 .place-item {
     flex: 0 0 auto; /* 축소 방지 */
-    width: 170px;
-    height: 200px;
+    width: 190px;
+    height: 230px;
     margin-right: 10px;
     cursor: pointer;
     transition: background-color 0.3s;

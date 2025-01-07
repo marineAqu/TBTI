@@ -14,6 +14,8 @@ import LocalSearch from "./pages/detail/LocalSearch";
 import Local from "./pages/detail/local";
 import Sign from "./pages/login/Sign";
 import TBTITest from "./pages/Tbti_test";
+import Plan from "./pages/plan";
+import Mypage from "./pages/login/Mypage";
 
 function App() {
     const location = useLocation();  // 현재 경로 가져오기
@@ -39,6 +41,9 @@ function App() {
                     <Route path="/local" element={<Local/>}/>
                     <Route path="/sign" element={<Sign/>}/>
                     <Route path="/tbti-test" element={<TBTITest />} />
+                    <Route path="/plan" element={<Plan />} />
+                    <Route path="/mypage" element={<Mypage />} />
+
 
                 </Routes>
             </main>
