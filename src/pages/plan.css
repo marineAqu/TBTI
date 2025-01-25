@@ -1,38 +1,71 @@
+/* plan.css */
+
 .plan-container {
     display: flex;
-    height: 80vh;
+    flex-direction: row;
+    width: 100%;
+    height: 100vh;
 }
 
 .map-section {
     flex: 1;
-    background-color: #f5f5f5;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    border-right: 1px solid #ccc;
+    height: 100%;
+    background-color: #f1f1f1;
 }
 
-.plan-section {
+#map {
+    width: 100%;
+    height: 100%;
+}
+
+.plan-container {
     flex: 1;
-    padding: 20px;
-    overflow-y: auto;
-    background-color: #fff;
-}
-
-.day-plan {
-    margin-bottom: 20px;
-}
-
-.day-plan h2 {
-    margin-bottom: 10px;
-    color: #333;
-}
-
-.location-box {
     padding: 10px;
-    margin-bottom: 10px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    background-color: #f9f9f9;
-    color: #333;
+    box-sizing: border-box;
+    overflow-y: auto;
+    background-color: #ffffff;
+}
+
+.ex {
+    max-width: 800px;  /* 또는 원하는 너비 */
+    margin: 0 auto;    /* 가운데 정렬 */
+    padding: 20px;     /* 내부 여백 */
+}
+
+.plan-container h1 {
+    margin-bottom: 20px;
+    font-size: 24px;
+    color: #333333;
+    text-align: center;
+}
+
+.plan-item {
+    border-bottom: 1px solid #eaeaea;
+    padding: 15px 0;
+    margin-bottom: 15px;
+}
+
+.plan-item h2 {
+    margin: 0 0 10px;
+    font-size: 18px;
+    color: #444444;
+}
+
+.plan-item p {
+    margin: 5px 0;
+    font-size: 14px;
+    color: #666666;
+}
+
+.plan-container::-webkit-scrollbar {
+    width: 8px;
+}
+
+/*.plan-container::-webkit-scrollbar-thumb {*/
+/*    background-color: #cccccc;*/
+/*    border-radius: 4px;*/
+/*}*/
+
+.plan-container::-webkit-scrollbar-track {
+    background-color: #ffffff;
 }

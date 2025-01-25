@@ -1,7 +1,10 @@
 import React, {useEffect, useState} from "react";
+import { useLocation } from "react-router-dom";
 import "./plan.css";
 
 const Plan = () => {
+    const [dayPlans, setDayPlans] = useState([]);
+    const [loading, setLoading] = useState(true);
     const [locations, setLocations] = useState([
         "대전 중구 대종로480번길 15",
         "대전 중구 목중로 29",
@@ -9,6 +12,40 @@ const Plan = () => {
     ]);
 
     const [coordinates, setCoordinates] = useState([]);
+    const location = useLocation();
+    const planData = location.state?.planData || null; // 초기값 null 설정
+
+    useEffect(() => {
+        if (!planData) {
+            console.error("여행 계획 데이터를 찾을 수 없습니다.");
+            return;
+        }
+
+        const fetchData = async () => {
+            try {
+                const res = await fetch("/chat/message", {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json",
+                    },
+                    body: JSON.stringify({ query: "fetch day plans" }),
+                });
+
+                if (!res.ok) {
+                    throw new Error("데이터를 가져오는 데 실패했습니다.");
+                }
+
+                const data = await res.json();
+                setDayPlans(data.place || []);
+            } catch (error) {
+                console.error("데이터를 가져오는 중 오류 발생:", error);
+            } finally {
+                setLoading(false);
+            }
+        };
+
+        fetchData();
+    }, [planData]);
 
     useEffect(() => {
         if (!window.kakao) {
@@ -18,7 +55,6 @@ const Plan = () => {
 
         const geocoder = new window.kakao.maps.services.Geocoder();
 
-        //주소에서 좌표로 변환
         const fetchCoordinates = async () => {
             const coords = await Promise.all(
                 locations.map((address) =>
@@ -49,16 +85,13 @@ const Plan = () => {
 
         const container = document.getElementById('map');
         const options = {
-            center: new window.kakao.maps.LatLng(37.5665, 126.9780), // 기본값 (서울 시청)
+            center: new window.kakao.maps.LatLng(37.5665, 126.9780),
             level: 5,
         };
 
         const map = new window.kakao.maps.Map(container, options);
         const bounds = new window.kakao.maps.LatLngBounds();
-        const linePath = []; // 폴리라인 경로 저장
 
-
-        //지도에 마커 표시 및 범위 설정
         coordinates.forEach((location) => {
             const markerPosition = new window.kakao.maps.LatLng(location.latitude, location.longitude);
             const marker = new window.kakao.maps.Marker({
@@ -66,58 +99,50 @@ const Plan = () => {
                 map: map,
             });
 
-            const infowindow = new window.kakao.maps.InfoWindow({
-                content: `<div style="padding:5px;">${location.address}</div>`,
-            });
-
-            window.kakao.maps.event.addListener(marker, 'mouseover', () => {
-                infowindow.open(map, marker);
-            });
-
-            window.kakao.maps.event.addListener(marker, 'mouseout', () => {
-                infowindow.close();
-            });
-
-            //마커 위치를 LatLngBounds에 포함
             bounds.extend(markerPosition);
-
-            // TODO: 길찾기 코드 수정 필요, 폴리라인 경로 추가
-            //linePath.push(markerPosition);
         });
 
-        //모든 마커가 보이도록 지도 영역 조정
         map.setBounds(bounds);
-
-        const polyline = new window.kakao.maps.Polyline({
-            path: linePath,
-            strokeWeight: 5,
-            strokeColor: '#638fd7',
-            strokeOpacity: 0.8,
-            strokeStyle: 'solid'
-        });
-
-        //TODO: 길찾기 코드 수정 필요
-        //polyline.setMap(map);
-
     }, [coordinates]);
+
+    if (!planData) {
+        return <div>여행 계획 데이터를 찾을 수 없습니다.</div>;
+    }
+
+    if (loading) {
+        return <div>데이터를 불러오는 중...</div>;
+    }
+
+    // 데이터를 3개씩 나누기
+    const groupedPlans = planData.reduce((result, plan, index) => {
+        const groupIndex = Math.floor(index / 3);
+        if (!result[groupIndex]) result[groupIndex] = [];
+        result[groupIndex].push(plan);
+        return result;
+    }, []);
 
     return (
         <div className="plan-container">
             <div className="map-section">
-                <div id="map" style={{width: '100%', height: '100%'}}></div>
+                <div id="map" style={{ width: '100%', height: '100%' }}></div>
             </div>
 
-            <div className="plan-section">
-                <div className="day-plan">
-                    <h2>1일차</h2>
-                    <div className="location-box">장소 1</div>
-                    <div className="location-box">장소 2</div>
-                    <div className="location-box">장소 3</div>
-                </div>
-                <div className="day-plan">
-                    <h2>2일차</h2>
-                    <div className="location-box">장소 1</div>
-                    <div className="location-box">장소 2</div>
+            <div className="plan-container">
+                <div className="ex">
+                    <h1>여행 계획</h1>
+                    {groupedPlans.map((group, dayIndex) => (
+                        <div key={dayIndex} className="day-group">
+                            <h2>{dayIndex + 1}일차</h2>
+                            {group.map((plan, index) => (
+                                <div key={index} className="plan-item">
+                                    <h3>{plan.place_name}</h3>
+                                    <p>{plan.description}</p>
+                                    <p>위치: {plan.location}</p>
+                                    <p>예상 소비: {plan.consumption}</p>
+                                </div>
+                            ))}
+                        </div>
+                    ))}
                 </div>
             </div>
         </div>

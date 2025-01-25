@@ -7,12 +7,11 @@ import './main.css';
 function Chat() {
     const [input, setInput] = useState(""); // 입력 메시지 상태
     const [messages, setMessages] = useState([
-        {sender: "ai", text: "안녕하세요. TBTI입니다😊"},
+        { sender: "ai", text: "안녕하세요. TBTI입니다😊" },
     ]); // 초기 AI 메시지
     const [loading, setLoading] = useState(false); // 로딩 상태
     const chatBoxRef = useRef(null); // 채팅 박스에 대한 참조
     const navigate = useNavigate(); // 페이지 이동을 위한 useNavigate 훅
-
 
     const [userId, setUserId] = useState(null);
     const [tbtiType, setTbtiType] = useState(null);
@@ -95,8 +94,6 @@ function Chat() {
 
     const result = tbtiType ? resultMapping[tbtiType] : null;
 
-
-
     const scrollToBottom = () => {
         if (chatBoxRef.current) {
             chatBoxRef.current.scrollTop = chatBoxRef.current.scrollHeight; // 스크롤을 가장 아래로 이동
@@ -149,6 +146,7 @@ function Chat() {
             }
 
             const data = await res.json();
+            const { place, typeNum } = data;
             console.log("응답 데이터:", data);
 
             const answer = data.answer;
@@ -158,8 +156,26 @@ function Chat() {
                 const updatedMessages = [...prevMessages];
                 updatedMessages.pop();
                 updatedMessages.push({ sender: "ai", text: answer });
+
+
+                if (typeNum === 1) {
+                    updatedMessages.push({ sender: "ai", text: answer });
+                    if (place && place.length > 0) {
+                        updatedMessages.push({ sender: "ai", type: "place", placesData: place });
+                    }
+                } else if (typeNum === 2) {
+                    console.log("Plan Data:", place); // 전달하려는 데이터를 로그로 확인
+                    updatedMessages.push({
+                        sender: "ai",
+                        text: "여행 계획 자세히 보기",
+                        type: "plan",
+                        planData: place,
+                    });
+                }
+
                 return updatedMessages;
             });
+
 
             if (placesData && placesData.length > 0) {
                 setMessages((prevMessages) => [
@@ -181,12 +197,15 @@ function Chat() {
         }
     };
 
+    const handlePlanView = (planData) => {
+        navigate("/plan", { state: { planData } }); //plan.js로 이동
+    };
+
 
     const handleRestartTest = () => {
         setTbtiType(""); // tbtiType 초기화
         navigate('/tbti-test'); // '/tbti-test'로 이동
     };
-
 
     const handleKeyDown = (e) => {
         if (e.key === "Enter") {
@@ -203,7 +222,7 @@ function Chat() {
         // user 쪽 메시지 추가
         setMessages((prevMessages) => [
             ...prevMessages,
-            {sender: "user", text: buttonText}
+            { sender: "user", text: buttonText }
         ]);
 
         // AI 쪽 메시지 생성
@@ -223,7 +242,7 @@ function Chat() {
         // AI 응답 추가
         setMessages((prevMessages) => [
             ...prevMessages,
-            {sender: "ai", text: responseMessage}
+            { sender: "ai", text: responseMessage }
         ]);
     };
 
@@ -233,33 +252,37 @@ function Chat() {
                 <div className="chat-name" onClick={scrollToTop}>TBTI</div>
             </div>
 
-
             <div className="TBTI_TEST">
                 {tbtiType ? (
                     <>
                         <p>당신의 여행 유형은 <b className="tbti_bold">{result.name}</b> <b className="tbti_bold">({tbtiType})</b> 입니다.</p>
                         <p className="restart" onClick={handleRestartTest}>
                             tbti 테스트 다시하기
-                        </p>                    </>
+                        </p>
+                    </>
                 ) : (
                     <div className="return_tbti"
                          onClick={() => navigate('/tbti-test')}>
                         TBTI 테스트 해보기
                     </div>
                 )}
-
             </div>
 
             <div className="chat-box" ref={chatBoxRef}>
                 {messages.map((message, index) => (
                     <div key={index} className={`message ${message.sender}`}>
                         {message.type === "place" ? (
-                            <PlaceSlider places={message.placesData}/> // 여러 장소를 슬라이더로 전달
+                            <PlaceSlider places={message.placesData} />
+                        ) : message.type === "plan" ? (
+                            <button onClick={() => handlePlanView(message.planData)}>
+                                {message.text}
+                            </button>
                         ) : message.sender === "ai" ? (
                             <ReactMarkdown>{message.text}</ReactMarkdown>
                         ) : (
                             <div>{message.text}</div>
                         )}
+
                     </div>
                 ))}
             </div>
@@ -276,10 +299,10 @@ function Chat() {
                     onChange={(e) => setInput(e.target.value)}
                     onKeyDown={handleKeyDown}
                     placeholder="AI에게 물어보세요~"
-                    style={{resize: 'none'}}
+                    style={{ resize: 'none' }}
                 />
                 <button onClick={sendMessage}>
-                    <img src={'./image/send.png'} alt="전송" className="send-icon"/>
+                    <img src={'./image/send.png'} alt="전송" className="send-icon" />
                 </button>
             </div>
         </div>
@@ -287,5 +310,3 @@ function Chat() {
 }
 
 export default Chat;
-
-
