@@ -9,8 +9,6 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.*;
 
-import java.io.File;
-import java.net.URI;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Optional;
@@ -28,16 +26,14 @@ import java.util.Optional;
 public class LocalcreatorDetailController {
     private final LocalcreatorDetailService localcreatorDetailService;
 
-    // 로컬 이미지 경로에서 이미지를 가져오는 메서드
-    public String[] getImageURLsFromLocal(String imgName) {
+    // 새로운 S3 경로에서 이미지를 가져오는 메서드
+    private String[] getImageURLs(String storeName) {
+        String basePath = "\n" + "https://tbti-img.s3.ap-northeast-2.amazonaws.com/"; // S3 버킷 URL
         String[] imgList = new String[3];
 
-        // 로컬 경로 예시
-        String basePath = "http://223.195.109.34/images/";
-
-        imgList[0] = basePath + imgName + "_1.jpg";
-        imgList[1] = basePath + imgName + "_2.jpg";
-        imgList[2] = basePath + imgName + "_3.jpg";
+        for (int i = 0; i < 3; i++) {
+            imgList[i] = basePath + storeName + "_" + (i + 1) + ".jpg";
+        }
 
         return imgList;
     }
@@ -47,8 +43,8 @@ public class LocalcreatorDetailController {
         HashMap<String, Object> response = new HashMap<>();
 
         LocalcreatorDTO localcreatorDTO = localcreatorDetailService.SearchByStoreId(store_id);
-        // 로컬 이미지 URL로 변경
-        localcreatorDTO.setImg(getImageURLsFromLocal(localcreatorDTO.getStoreName()));
+        // S3 이미지 URL로 변경
+        localcreatorDTO.setImg(getImageURLs(localcreatorDTO.getStoreName()));
 
         response.put("localcreator", localcreatorDTO);
         if (principalDetails != null) response.put("username", principalDetails.getNickName());

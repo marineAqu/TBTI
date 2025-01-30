@@ -61,13 +61,13 @@ public class StorageS3Service {
     public String[] getImageURL(String imgName) {
         String[] imgList = new String[3];
 
-        URL url = s3Client.getUrl("tbti-s3-image", (imgName+"_1.jpg"));
+        URL url = s3Client.getUrl("tbti-img", (imgName+"_1.jpg"));
         imgList[0] = ""+url;
 
-        url = s3Client.getUrl("tbti-s3-image", (imgName+"_2.jpg"));
+        url = s3Client.getUrl("tbti-img", (imgName+"_2.jpg"));
         imgList[1] = ""+url;
 
-        url = s3Client.getUrl("tbti-s3-image", (imgName+"_3.jpg"));
+        url = s3Client.getUrl("tbti-img", (imgName+"_3.jpg"));
         imgList[2] = ""+url;
 
         return imgList;
