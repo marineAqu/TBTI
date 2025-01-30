@@ -27,7 +27,7 @@ public class LocalcreatorDetailController {
     private final LocalcreatorDetailService localcreatorDetailService;
 
     // 새로운 S3 경로에서 이미지를 가져오는 메서드
-    private String[] getImageURLs(String storeName) {
+    private String[] getImageURLsFromLocal(String storeName) {
         String basePath = "\n" + "https://tbti-img.s3.ap-northeast-2.amazonaws.com/"; // S3 버킷 URL
         String[] imgList = new String[3];
 
@@ -44,7 +44,7 @@ public class LocalcreatorDetailController {
 
         LocalcreatorDTO localcreatorDTO = localcreatorDetailService.SearchByStoreId(store_id);
         // S3 이미지 URL로 변경
-        localcreatorDTO.setImg(getImageURLs(localcreatorDTO.getStoreName()));
+        localcreatorDTO.setImg(getImageURLsFromLocal(localcreatorDTO.getStoreName()));
 
         response.put("localcreator", localcreatorDTO);
         if (principalDetails != null) response.put("username", principalDetails.getNickName());
